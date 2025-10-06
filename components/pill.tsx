@@ -18,7 +18,7 @@ export const Pill = ({ children, className }: { children: React.ReactNode, class
       <span style={{ "--h": px(hypotenuse), "--hh": px(hypotenuseHalf) } as React.CSSProperties} className="absolute w-[var(--h)] bottom-[var(--hh)] left-[var(--hh)] h-[2px] bg-border rotate-45 -translate-x-1/2" />
       <span style={{ "--h": px(hypotenuse), "--hh": px(hypotenuseHalf) } as React.CSSProperties} className="absolute w-[var(--h)] bottom-[var(--hh)] right-[var(--hh)] h-[2px] bg-border -rotate-45 translate-x-1/2" />
 
-      <span className="inline-block size-2.5 rounded-full bg-primary mr-2 shadow-glow shadow-primary/50" />
+      <span className="inline-block size-2.5 rounded-full bg-primary mr-2 shadow-glow shadow-primary/50 animate-pulse-green" />
 
       {children}
     </div>
