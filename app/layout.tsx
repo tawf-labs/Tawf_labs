@@ -21,7 +21,7 @@ const jetbrainsMono = JetBrains_Mono({
 
 export const metadata: Metadata = {
   title: "Tawf Labs",
-  description: "Bridging the Ummah to Web3 with halal-first zk dapps",
+  description: "Bridging the Ummah to Web3 with Sharia-first zk dapps",
   generator: "v0.app",
 }
 

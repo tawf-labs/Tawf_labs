@@ -17,7 +17,7 @@ export function GovernanceSection() {
             <ul className="list-disc pl-5 text-sm sm:text-base text-foreground/80 space-y-2 text-soft-glow">
               <li>Privacy-preserving eligibility proofs</li>
               <li>Transparent tallying and audit trails</li>
-              <li>Community-first, halal-by-design</li>
+              <li>Community-first, Sharia-by-design</li>
             </ul>
           </div>
         </div>
