@@ -13,7 +13,7 @@ export function Hero() {
       <GL hovering={hovering} />
 
       <div className="text-center relative z-10 w-full max-w-4xl mx-auto">
-        <Pill className="mb-6">TAWF LABS</Pill>
+        {/* <Pill className="mb-6">TAWF LABS</Pill> */}
         <h1 className="text-5xl sm:text-6xl md:text-7xl font-display font-bold text-balance leading-tight bg-gradient-to-r from-white to-[#ffe38a] bg-clip-text text-transparent drop-shadow-2xl">
           Bridging the Ummah <br />
           <i className="font-semibold">to Web3</i>
@@ -22,7 +22,9 @@ export function Hero() {
           {/* We build halal-first zk dapps: blockchain-based zakat at zkt.app, Tawf Sharia governance using zero-knowledge
           proofs, and blockchain-based qurbani at qrbn.app. */}
         {/* </p> */}
-        <p className="text-sm sm:text-base text-white mt-6 sm:mt-8 max-w-[640px] mx-auto">Sharia-first zk dapps: zakat (zkt.app), Sharia governance, and qurbani (qrbn.app).</p>
+        {/* <p className="text-sm sm:text-base text-white mt-6 sm:mt-8 max-w-[640px] mx-auto">Sharia-first zk dapps: zakat (zkt.app), Sharia governance, and qurbani (qrbn.app).</p> */}
+        <p className="text-sm sm:text-base text-white mt-6 sm:mt-8 max-w-[640px] mx-auto">Sharia-led DEX. Governed by community</p>
+
 
 
         <div className="mt-8 sm:mt-14">
