@@ -9,7 +9,11 @@ export function middleware(request: NextRequest) {
   const subdomain = hostname.split('.')[0]
 
   // If accessing portal subdomain, rewrite to portal page
-  if (subdomain === 'portal' || subdomain === 'portal.localhost') {
+  // Handle both production and localhost portal subdomain
+  if (
+    (subdomain === 'portal' && (hostname.endsWith('.localhost') || hostname.endsWith('.tawf.xyz')))
+    || hostname === 'portal.localhost'
+  ) {
     url.pathname = `/portal${url.pathname}`
     return NextResponse.rewrite(url)
   }
