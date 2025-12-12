@@ -29,10 +29,10 @@ export const Header = () => {
             <Logo className="w-[100px] md:w-[120px]" />
           </Link> */}
           <nav className="flex max-lg:hidden absolute left-1/2 -translate-x-1/2 items-center justify-center gap-x-10">
-            {["About", "Dapps", "Governance", "Labs", "Contact"].map((item) => (
+            {["About", "Dapps", "Governance", "Team", "Contact"].map((item) => (
               <Link
                 className="uppercase inline-block font-sans font-medium text-foreground/60 hover:text-foreground/100 duration-150 transition-colors ease-out"
-                href={item === "Labs" ? "/labs" : `/#${item.toLowerCase()}`}
+                href={item === "Team" ? "/team" : `/#${item.toLowerCase()}`}
                 key={item}
               >
                 {item}
