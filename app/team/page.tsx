@@ -4,6 +4,7 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/com
 import { Header } from "@/components/header"
 import { Github, Twitter, Linkedin, Mail } from "lucide-react"
 import Link from "next/link"
+import Image from "next/image"
 
 interface TeamMember {
   name: string
@@ -25,16 +26,17 @@ export default function LabsPage() {
       name: "Muhammad Zidan Fatonie",
       role: "Founder & CEO",
       bio: "Cryptography researcher specializing in zero-knowledge proofs and privacy-preserving protocols for Islamic finance.",
-      initials: "AH",
+      initials: "MZ",
+      image: "/zidan.jpg",
       socials: {
-        github: "https://github.com",
-        twitter: "https://twitter.com",
+        github: "https://github.com/mzf11125",
+        twitter: "https://x.com/DeDanzi",
         linkedin: "https://linkedin.com/in/mzidanfatonie",
       },
     },
     {
-      name: "Fatima Al-Rashid",
-      role: "Head of Sharia Compliance",
+      name: "Brehmada",
+      role: "CTO & Co-Founder",
       bio: "Islamic scholar and blockchain consultant ensuring all protocols align with Sharia principles and contemporary fiqh.",
       initials: "FR",
       socials: {
@@ -43,28 +45,30 @@ export default function LabsPage() {
       },
     },
     {
-      name: "Omar Khan",
-      role: "Lead Protocol Engineer",
+      name: "Marcellino Asanuddin",
+      role: "Relations and Operations",
       bio: "Full-stack blockchain developer building secure, scalable infrastructure for decentralized Islamic applications.",
       initials: "OK",
+      image: "/marcel.jpg",
       socials: {
         github: "https://github.com",
         twitter: "https://twitter.com",
       },
     },
     {
-      name: "Zainab Ibrahim",
-      role: "Smart Contract Developer",
+      name: "Maulana Asykari Muhammad",
+      role: "CBO",
       bio: "Solidity expert focused on developing auditable and transparent smart contracts for zakat and qurbani distribution.",
       initials: "ZI",
+      image: "/maul.jpg",
       socials: {
         github: "https://github.com",
-        linkedin: "https://linkedin.com",
+        linkedin: "https://www.linkedin.com/in/maulanasykari",
       },
     },
     {
-      name: "Yusuf Martinez",
-      role: "ZK Circuit Designer",
+      name: "Abdul Latif",
+      role: "Lead Designer",
       bio: "Specialized in designing efficient zero-knowledge circuits for private wealth verification and compliance attestations.",
       initials: "YM",
       socials: {
@@ -73,14 +77,14 @@ export default function LabsPage() {
       },
     },
     {
-      name: "Aisha Osman",
-      role: "Community & Governance Lead",
-      bio: "Building inclusive governance systems that empower the Ummah to participate in protocol decisions transparently.",
-      initials: "AO",
+      name: "Riyan Ainur Rahman",
+      role: "Lead Developer",
+      bio: "Full-stack blockchain developer building secure, scalable infrastructure for decentralized Islamic applications.",
+      initials: "RR",
+      image: "/riyan.jpg",
       socials: {
-        twitter: "https://twitter.com",
-        linkedin: "https://linkedin.com",
-        email: "mailto:aisha@tawf.app",
+        github: "https://github.com/riyqnn",
+        linkedin: "https://www.linkedin.com/in/riyanarhm",
       },
     },
   ]
@@ -111,13 +115,25 @@ export default function LabsPage() {
                 {teamMembers.map((member) => (
                   <Card key={member.name} className="border-border/60 bg-black/30 backdrop-blur hover:bg-black/40 transition-colors duration-300">
                     <CardHeader>
-                      {/* Avatar with initials */}
+                      {/* Avatar with image or initials */}
                       <div className="mb-4">
-                        <div className="w-20 h-20 rounded-full bg-gradient-to-br from-[#FFC700] to-[#ebb800] flex items-center justify-center">
-                          <span className="font-display text-2xl font-bold text-black">
-                            {member.initials}
-                          </span>
-                        </div>
+                        {member.image ? (
+                          <div className="w-20 h-20 rounded-full overflow-hidden ring-2 ring-[#FFC700]/30">
+                            <Image
+                              src={member.image}
+                              alt={member.name}
+                              width={80}
+                              height={80}
+                              className="w-full h-full object-cover"
+                            />
+                          </div>
+                        ) : (
+                          <div className="w-20 h-20 rounded-full bg-gradient-to-br from-[#FFC700] to-[#ebb800] flex items-center justify-center">
+                            <span className="font-display text-2xl font-bold text-black">
+                              {member.initials}
+                            </span>
+                          </div>
+                        )}
                       </div>
                       
                       <CardTitle className="font-display text-xl sm:text-2xl text-foreground">
@@ -202,4 +218,4 @@ export default function LabsPage() {
       </div>
     </main>
   )
-}
+}   
