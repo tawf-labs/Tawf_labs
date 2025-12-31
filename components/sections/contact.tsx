@@ -10,10 +10,10 @@ export function ContactSection() {
           <div className="rounded-lg border border-border/60 bg-black/30 p-6 sm:p-8 md:p-10 backdrop-blur">
             <h3 className="font-display text-2xl sm:text-3xl md:text-4xl mb-3 sm:mb-4">Build with Tawf Labs</h3>
             <p className="font-sans text-base sm:text-lg text-foreground/80 mb-6 sm:mb-8 max-w-2xl text-soft-glow leading-relaxed">
-              Looking to launch a Sharia-first application or partner on governance design? Let's connect.
+              Looking to launch a Sharia-aligned application or partner on governance design? Let's connect.
             </p>
             <a href="mailto:mzidanfatonie@tawf.xyz">
-              <Button>[Email Us]</Button>
+              <Button>[Chat with us]</Button>
             </a>
           </div>
         </div>

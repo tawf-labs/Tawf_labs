@@ -20,9 +20,9 @@ export function DappsSection() {
       href: "https://zkt.app",
     },
     {
-      name: "Tawf Sharia Governance",
+      name: "Tawf Stewardship Layer",
       title: "ZK Governance",
-      desc: "Sharia-compliant governance with zero-knowledge attestations and transparent outcomes.",
+      desc: "A stewardship layer validating community governance outcomes for Sharia alignment using zero-knowledge attestations.",
       href: "#governance",
     },
     {

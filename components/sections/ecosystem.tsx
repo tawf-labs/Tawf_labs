@@ -124,8 +124,11 @@ export function EcosystemSection() {
             style={{
               width: "fit-content",
               margin: "0 auto",
-              overflow: "hidden",
+              overflowX: "hidden",
+              overflowY: "hidden",
+              // overflowY: "visible",
               maxWidth: "100%",
+              // maxHeight: "120%",
             }}
           >
             {visiblePartners.map((partner, index) => (

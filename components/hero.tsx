@@ -23,7 +23,7 @@ export function Hero() {
           proofs, and blockchain-based qurbani at qrbn.app. */}
         {/* </p> */}
         {/* <p className="text-sm sm:text-base text-white mt-6 sm:mt-8 max-w-[640px] mx-auto">Sharia-first zk dapps: zakat (zkt.app), Sharia governance, and qurbani (qrbn.app).</p> */}
-        <p className="text-sm sm:text-base text-white mt-6 sm:mt-8 max-w-[640px] mx-auto">Sharia-led Layer 3 ecosystem of dApps. Governed by community</p>
+        <p className="text-sm sm:text-base text-white mt-6 sm:mt-8 max-w-[640px] mx-auto">A Sharia-aligned ecosystem of dApps, coordinated by the community.</p>
 
 
 
