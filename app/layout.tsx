@@ -21,7 +21,7 @@ const jetbrainsMono = JetBrains_Mono({
 
 export async function generateMetadata(): Promise<Metadata> {
   return {
-    title: "Tawf — Sharia-First Web3 Governance Layer",
+    title: "Sharia-First Web3 Governance Layer",
     description:
       "Tawf is a Sharia-first Web3 ecosystem providing on-chain zakat, waqf, and qurban infrastructure, governed by a dual-layer DAO with zero-knowledge Sharia oversight.",
     icons: {
@@ -30,7 +30,7 @@ export async function generateMetadata(): Promise<Metadata> {
       apple: "/tawflogo.png",
     },
     openGraph: {
-      title: "Tawf — Sharia-First Web3 Governance Layer",
+      title: "Sharia-First Web3 Governance Layer",
       description:
         "A Sharia-first Web3 governance layer for zakat, waqf, qurban, and community-led applications, secured by zero-knowledge Sharia oversight.",
       images: [
@@ -38,7 +38,7 @@ export async function generateMetadata(): Promise<Metadata> {
           url: "/og-image.svg",
           width: 1200,
           height: 630,
-          alt: "Tawf — Sharia-First Web3 Governance Layer",
+          alt: "Sharia-First Web3 Governance Layer",
         },
       ],
       type: "website",
@@ -46,7 +46,7 @@ export async function generateMetadata(): Promise<Metadata> {
     },
     twitter: {
       card: "summary_large_image",
-      title: "Tawf — Sharia-First Web3 Governance Layer",
+      title: "Sharia-First Web3 Governance Layer",
       description:
         "Sharia-first governance infrastructure for zakat, waqf, qurban, and ethical Web3 applications.",
       images: ["/og-image.svg"],
