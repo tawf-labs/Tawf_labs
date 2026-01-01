@@ -15,7 +15,7 @@ export function AboutSection() {
           </div>
 
           <p className="max-w-3xl font-sans text-foreground/80 text-soft-glow text-base sm:text-lg leading-relaxed">
-            Tawf Labs advances financial inclusion for the Ummah by delivering
+            Tawf advances financial inclusion for the Ummah by delivering
             transparent, privacy-preserving Web3 applications. We apply
             zero-knowledge cryptography to uphold Sharia compliance while
             enabling global participation in digital giving and governance.
