@@ -19,10 +19,39 @@ const jetbrainsMono = JetBrains_Mono({
   subsets: ["latin"],
 })
 
-export const metadata: Metadata = {
-  title: "Tawf",
-  description: "Bridging the ummah to Web3 with Sharia-first dapps",
-  generator: "v0.app",
+export async function generateMetadata(): Promise<Metadata> {
+  return {
+    title: "Tawf - Shariah-First Web3 Ecosystem",
+    description: "Bridging the ummah to Web3 with Sharia-compliant dApps. Explore zakat, waqf, qurban, and governance on-chain.",
+    icons: {
+      icon: [
+        { url: "/tawflogo.png", type: "image/png" },
+      ],
+      shortcut: "/tawflogo.png",
+      apple: "/tawflogo.png",
+    },
+    openGraph: {
+      title: "Tawf - Shariah-First Web3 Ecosystem",
+      description: "Bridging the ummah to Web3 with Sharia-compliant dApps. Explore zakat, waqf, qurban, and governance on-chain.",
+      images: [
+        {
+          url: "/og-image.svg",
+          width: 1200,
+          height: 630,
+          alt: "Tawf - Shariah-First Web3 Ecosystem",
+        },
+      ],
+      type: "website",
+      siteName: "Tawf",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: "Tawf - Shariah-First Web3 Ecosystem",
+      description: "Bridging the ummah to Web3 with Sharia-compliant dApps",
+      images: ["/og-image.svg"],
+    },
+    keywords: ["Web3", "Shariah-compliant", "Zakat", "Waqf", "Qurban", "Governance", "DeFi", "Islamic Finance"],
+  }
 }
 
 export default function RootLayout({
