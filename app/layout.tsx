@@ -35,7 +35,7 @@ export async function generateMetadata(): Promise<Metadata> {
         "A Sharia-first Web3 governance layer for zakat, waqf, qurban, and community-led applications, secured by zero-knowledge Sharia oversight.",
       images: [
         {
-          url: "/og-image.svg",
+          url: "/tawflogo.png",
           width: 1200,
           height: 630,
           alt: "Sharia-First Web3 Governance Layer",
@@ -49,7 +49,7 @@ export async function generateMetadata(): Promise<Metadata> {
       title: "Sharia-First Web3 Governance Layer",
       description:
         "Sharia-first governance infrastructure for zakat, waqf, qurban, and ethical Web3 applications.",
-      images: ["/og-image.svg"],
+      images: ["/tawflogo.png"],
     },
     keywords: [
       "Sharia Governance",
