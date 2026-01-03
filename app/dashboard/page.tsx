@@ -1,6 +1,8 @@
 "use client"
 
 import { useState } from "react"
+import { useAccount, useConnect, useDisconnect } from "wagmi"
+import { ConnectButton } from "@xellar/kit"
 import { Button } from "@/components/ui/button"
 import {
   Sidebar,
@@ -16,46 +18,46 @@ import {
 export default function DashboardPage() {
   const [activePanel, setActivePanel] = useState<PanelType>("swap")
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false)
-  const [connected, setConnected] = useState(false)
-  const [account, setAccount] = useState<string | null>(null)
 
-  const toggleConnect = () => {
-    if (!connected) {
-      // mock connect
-      const mock = "0xDEADbeefC0FFEE123456"
-      setAccount(mock)
-      setConnected(true)
-    } else {
-      setAccount(null)
-      setConnected(false)
+  const { address, isConnected } = useAccount()
+  const { connect, connectors } = useConnect()
+  const { disconnect } = useDisconnect()
+
+  const handleConnect = () => {
+    if (!isConnected && connectors.length > 0) {
+      connect({ connector: connectors[0] })
     }
+  }
+
+  const handleDisconnect = () => {
+    disconnect()
   }
 
   const renderContent = () => {
     switch (activePanel) {
       case "swap":
-        return <SwapPanel connected={connected} onConnect={toggleConnect} />
+        return <SwapPanel connected={isConnected} onConnect={handleConnect} />
       case "bridge":
-        return <BridgePanel connected={connected} onConnect={toggleConnect} />
+        return <BridgePanel connected={isConnected} onConnect={handleConnect} />
       case "staking":
-        return <StakingPanel connected={connected} onConnect={toggleConnect} />
+        return <StakingPanel connected={isConnected} onConnect={handleConnect} />
       case "portfolio":
-        return <PortfolioPanel connected={connected} onConnect={toggleConnect} />
+        return <PortfolioPanel connected={isConnected} onConnect={handleConnect} />
       case "settings":
         return (
           <SettingsPanel
-            connected={connected}
-            account={account}
-            onDisconnect={toggleConnect}
+            connected={isConnected}
+            account={address || null}
+            onDisconnect={handleDisconnect}
           />
         )
       default:
-        return <SwapPanel connected={connected} onConnect={toggleConnect} />
+        return <SwapPanel connected={isConnected} onConnect={handleConnect} />
     }
   }
 
   // Show connect screen if not connected (optional - can remove if you want access without connection)
-  if (!connected) {
+  if (!isConnected) {
     return (
       <div className="min-h-screen bg-black/95 flex flex-col items-center justify-center p-6 text-center">
         <div className="max-w-md w-full bg-gray-900/80 backdrop-blur-sm rounded-2xl p-8 border border-gray-800 shadow-2xl">
@@ -72,12 +74,7 @@ export default function DashboardPage() {
             Shariah-compliant DeFi
           </p>
           <div className="flex justify-center">
-            <Button
-              onClick={toggleConnect}
-              className="bg-gradient-to-r from-[#FFC700] to-[#ffe38a] text-black hover:opacity-90 font-semibold px-8 py-3 h-12"
-            >
-              Connect Wallet
-            </Button>
+            <ConnectButton />
           </div>
         </div>
       </div>
@@ -114,24 +111,18 @@ export default function DashboardPage() {
               </span>
             </div>
             <Button
-              onClick={toggleConnect}
+              onClick={handleDisconnect}
               variant="outline"
               size="sm"
               className="bg-transparent border-gray-700 hover:bg-gray-800 text-white text-xs"
             >
-              {account?.slice(0, 6)}...
+              {address?.slice(0, 6)}...
             </Button>
           </div>
 
           {/* Desktop Header */}
           <div className="hidden md:flex items-center justify-end p-4 border-b border-gray-800">
-            <Button
-              onClick={toggleConnect}
-              variant="outline"
-              className="bg-transparent border-gray-700 hover:bg-gray-800 text-white text-sm"
-            >
-              {account?.slice(0, 6)}...{account?.slice(-4)}
-            </Button>
+            <ConnectButton />
           </div>
 
           {/* Panel Content */}
