@@ -11,11 +11,11 @@ interface BridgePanelProps {
   onConnect: () => void
 }
 
-const chains = ["Ethereum", "Base", "Haqq", "Polygon", "Arbitrum"]
+const chains = ["Base Sepolia", "Lisk Sepolia"]
 
 export function BridgePanel({ connected, onConnect }: BridgePanelProps) {
-  const [bridgeFrom, setBridgeFrom] = useState("Ethereum")
-  const [bridgeTo, setBridgeTo] = useState("Haqq")
+  const [bridgeFrom, setBridgeFrom] = useState("Base Sepolia")
+  const [bridgeTo, setBridgeTo] = useState("Lisk Sepolia")
   const [bridgeAmount, setBridgeAmount] = useState("")
   const [bridgeMessage, setBridgeMessage] = useState<string | null>(null)
 

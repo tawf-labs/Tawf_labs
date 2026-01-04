@@ -27,19 +27,35 @@ export function Hero() {
 
 
 
-        <div className="mt-8 sm:mt-14">
-          <Link className="max-sm:hidden" href="/#dapps">
+        <div className="mt-8 sm:mt-14 flex flex-col sm:flex-row gap-4 justify-center">
+          <Link className="max-sm:hidden" href="/dashboard">
             <Button onMouseEnter={() => setHovering(true)} onMouseLeave={() => setHovering(false)}>
-              [Explore Dapps]
+              [Launch Dashboard]
             </Button>
           </Link>
-          <Link className="sm:hidden" href="/#dapps">
+          <Link className="sm:hidden" href="/dashboard">
             <Button
               size="sm"
               onMouseEnter={() => setHovering(true)}
               onMouseLeave={() => setHovering(false)}
             >
-              [Explore Dapps]
+              [Launch Dashboard]
+            </Button>
+          </Link>
+
+          <Link className="max-sm:hidden" href="/transparency">
+            <Button variant="outline" onMouseEnter={() => setHovering(true)} onMouseLeave={() => setHovering(false)}>
+              [View Transparency]
+            </Button>
+          </Link>
+          <Link className="sm:hidden" href="/transparency">
+            <Button
+              size="sm"
+              variant="outline"
+              onMouseEnter={() => setHovering(true)}
+              onMouseLeave={() => setHovering(false)}
+            >
+              [View Transparency]
             </Button>
           </Link>
         </div>

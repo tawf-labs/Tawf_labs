@@ -1,0 +1,5 @@
+export { GovernanceHeader } from "./GovernanceHeader"
+export { GovernanceSidebar } from "./GovernanceSidebar"
+export { ProposalCard } from "./ProposalCard"
+export { ShariaProposalCard } from "./ShariaProposalCard"
+export { DIDConnectPrompt } from "./DIDConnectPrompt"
