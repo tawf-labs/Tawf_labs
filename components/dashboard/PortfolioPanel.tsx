@@ -165,19 +165,23 @@ export function PortfolioPanel({ connected, onConnect }: PortfolioPanelProps) {
         </Card>
       </div>
 
-      {/* Staking Positions */}
+      {/* Network Staking Positions */}
       <Card className="bg-black/95 border border-gray-800 mt-6">
         <CardHeader>
-          <CardTitle className="text-white">Staking Positions</CardTitle>
+          <div className="flex items-center justify-between">
+            <CardTitle className="text-white">Network Staking Positions</CardTitle>
+            <span className="text-xs text-gray-500">External Networks</span>
+          </div>
         </CardHeader>
         <CardContent>
           <div className="text-center py-8 text-gray-400">
             <p>No active staking positions</p>
+            <p className="text-xs text-gray-500 mt-2">Staking occurs on external networks. Tawf does not custody funds.</p>
             <Button
               variant="outline"
               className="mt-4 border-gray-700 text-white hover:bg-gray-800"
             >
-              Explore Staking Pools
+              Explore Network Staking
             </Button>
           </div>
         </CardContent>

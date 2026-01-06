@@ -12,6 +12,7 @@ import {
   StakingPanel,
   PortfolioPanel,
   SettingsPanel,
+  ZakatCalculatorPanel,
   type PanelType,
 } from "@/components/dashboard"
 
@@ -43,6 +44,8 @@ export default function DashboardPage() {
         return <StakingPanel connected={isConnected} onConnect={handleConnect} />
       case "portfolio":
         return <PortfolioPanel connected={isConnected} onConnect={handleConnect} />
+      case "zakat calculator":
+        return <ZakatCalculatorPanel connected={isConnected} onConnect={handleConnect} />
       case "settings":
         return (
           <SettingsPanel

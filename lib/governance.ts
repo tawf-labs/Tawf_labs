@@ -64,6 +64,47 @@ export interface FundVault {
   lastUpdated: string
 }
 
+// Treasury Policy Types
+export interface TreasuryPolicy {
+  allowedSources: TreasurySource[]
+  prohibitedSources: string[]
+  spendingCategories: SpendingCategory[]
+  lastUpdated: string
+}
+
+export interface TreasurySource {
+  id: string
+  name: string
+  description: string
+  isActive: boolean
+}
+
+export interface SpendingCategory {
+  id: string
+  name: string
+  description: string
+  maxAllocation: number // percentage
+}
+
+// DAO Stats for Tally-style header
+export interface DAOStats {
+  totalMembers: number
+  tokenHolders: number
+  activeProposals: number
+  totalProposals: number
+  treasuryBalance: number
+  treasuryCurrency: string
+}
+
+// Top Contributors / Voters
+export interface TopContributor {
+  address: string
+  displayName: string
+  avatar?: string
+  tawfPoints: number
+  role: UserRole
+}
+
 // ============ MOCK DATA ============
 
 export const mockCurrentUser: GovernanceUser = {
@@ -310,6 +351,127 @@ export const mockFundVaults: FundVault[] = [
     currency: "USDC",
     percentage: 9.7,
     lastUpdated: "2026-01-04",
+  },
+]
+
+// Mock Treasury Policy
+export const mockTreasuryPolicy: TreasuryPolicy = {
+  allowedSources: [
+    {
+      id: "platform-fees",
+      name: "Platform Fees (Ujrah)",
+      description: "Service fees collected from platform transactions",
+      isActive: true,
+    },
+    {
+      id: "subscriptions",
+      name: "Subscriptions",
+      description: "Premium feature subscriptions from users and organizations",
+      isActive: true,
+    },
+    {
+      id: "infaq",
+      name: "Optional Infaq",
+      description: "Voluntary donations from community members",
+      isActive: true,
+    },
+    {
+      id: "grants",
+      name: "Ecosystem Grants",
+      description: "Grants from partner blockchain ecosystems",
+      isActive: true,
+    },
+  ],
+  prohibitedSources: [
+    "Yield from DeFi protocols or lending",
+    "Token inflation or minting",
+    "Staking rewards or protocol emissions",
+    "Interest from any source (riba)",
+    "Gambling or speculation profits",
+    "Revenue from haram activities",
+  ],
+  spendingCategories: [
+    {
+      id: "operations",
+      name: "Operations",
+      description: "Day-to-day operational costs, infrastructure, and maintenance",
+      maxAllocation: 30,
+    },
+    {
+      id: "development",
+      name: "Development",
+      description: "Protocol development, security audits, and improvements",
+      maxAllocation: 25,
+    },
+    {
+      id: "community",
+      name: "Community Initiatives",
+      description: "Education, outreach, and community-approved projects",
+      maxAllocation: 20,
+    },
+    {
+      id: "partnerships",
+      name: "Partnerships",
+      description: "Strategic partnerships with NGOs and Islamic institutions",
+      maxAllocation: 15,
+    },
+    {
+      id: "reserve",
+      name: "Emergency Reserve",
+      description: "Reserve fund for unexpected expenses",
+      maxAllocation: 10,
+    },
+  ],
+  lastUpdated: "2026-01-04",
+}
+
+// Mock DAO Stats
+export const mockDAOStats: DAOStats = {
+  totalMembers: 7842,
+  tokenHolders: 8820,
+  activeProposals: 2,
+  totalProposals: 12,
+  treasuryBalance: 2747000, // Sum of all vaults
+  treasuryCurrency: "USDC",
+}
+
+// Mock Top Contributors (Tally-style "Rising Delegates")
+export const mockTopContributors: TopContributor[] = [
+  {
+    address: "0x1234...5678",
+    displayName: "Tawf Team",
+    tawfPoints: 10330000,
+    role: "maintainer",
+  },
+  {
+    address: "0xabcd...efgh",
+    displayName: "@karmacrypto",
+    tawfPoints: 6660000,
+    role: "user",
+  },
+  {
+    address: "0x5678...9abc",
+    displayName: "@maxkordek",
+    tawfPoints: 4730000,
+    role: "user",
+  },
+  {
+    address: "0x9012...3456",
+    displayName: "przemer",
+    tawfPoints: 3200000,
+    role: "ngo",
+  },
+  {
+    address: "0xdef0...1234",
+    displayName: "grumlin",
+    tawfPoints: 2670000,
+    role: "user",
+  },
+  {
+    address: "0x378F...4fE9",
+    displayName: "0x378F...4fE9",
+    tawfPoints: 1800000,
+    role: "user",
   },
 ]
 
