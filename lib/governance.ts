@@ -33,7 +33,6 @@ export interface Discussion {
   authorRole: UserRole
   content: string
   createdAt: string
-  replies: Discussion[]
 }
 
 export interface ShariaReview {
@@ -162,7 +161,6 @@ export const mockProposals: Proposal[] = [
         authorRole: "ngo",
         content: "This aligns perfectly with our mission. We can partner with local mosques to distribute these materials.",
         createdAt: "2025-12-29",
-        replies: [],
       },
     ],
   },
@@ -181,7 +179,22 @@ export const mockProposals: Proposal[] = [
     votesAbstain: 234,
     totalVoters: 3280,
     requiredQuorum: 3000,
-    discussions: [],
+    discussions: [
+      {
+        id: "disc-002",
+        author: "0xfedc...ba98",
+        authorRole: "user",
+        content: "Dr. Hassan has excellent credentials. His work on Islamic derivatives was groundbreaking.",
+        createdAt: "2025-12-26",
+      },
+      {
+        id: "disc-003",
+        author: "0x8765...4321",
+        authorRole: "maintainer",
+        content: "I second this nomination. His publications on Sharia-compliant finance are widely respected.",
+        createdAt: "2025-12-27",
+      },
+    ],
   },
   {
     id: "prop-003",
@@ -198,7 +211,22 @@ export const mockProposals: Proposal[] = [
     votesAbstain: 45,
     totalVoters: 3624,
     requiredQuorum: 3000,
-    discussions: [],
+    discussions: [
+      {
+        id: "disc-004",
+        author: "0x1234...abcd",
+        authorRole: "maintainer",
+        content: "Privacy is crucial for Zakat donors. This ZKP implementation could really help adoption.",
+        createdAt: "2025-12-21",
+      },
+      {
+        id: "disc-005",
+        author: "0x5678...efgh",
+        authorRole: "user",
+        content: "Will this affect the transparency requirements for fund distribution?",
+        createdAt: "2025-12-22",
+      },
+    ],
     shariaReview: {
       status: "pending",
     },
@@ -292,7 +320,6 @@ export const mockShariaProposals: Proposal[] = [
         authorRole: "sharia_council",
         content: "Based on contemporary scholarly consensus, cryptocurrency should be treated as tradable assets (urud al-tijarah) and zakatable at 2.5% after holding for one lunar year.",
         createdAt: "2025-12-31",
-        replies: [],
       },
     ],
   },
@@ -569,13 +596,23 @@ export function formatCurrency(amount: number, currency: string = "USDC"): strin
   return `${formatNumber(amount)} ${currency}`
 }
 
+export function addDiscussion(proposalId: string, author: string, authorRole: UserRole, content: string): Discussion {
+  return {
+    id: `disc-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`,
+    author,
+    authorRole,
+    content,
+    createdAt: new Date().toISOString().split("T")[0],
+  }
+}
+
 // ============ TEST ADDRESSES ============
 
 export const TEST_ADDRESSES = {
   USER: "0x742d35Cc6634C0532925a3b844Bc9e7595f42E7E",
   NGO: "0xABCDEFABCDEFABCDEFABCDEFABCDEFABCDEFABCD",
   MAINTAINER: "0x8ba1f109551bD432803012645Ac136ddd64DBA72",
-  SHARIA_COUNCIL: "0x1234567890123456789012345678901234567890",
+  SHARIA_COUNCIL: "0xeF4DB09D536439831FEcaA33fE4250168976535E",
 }
 
 // ============ MOCK USER LOOKUP ============

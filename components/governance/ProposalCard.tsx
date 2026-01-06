@@ -3,14 +3,18 @@
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import { Input } from "@/components/ui/input"
 import { Progress } from "@/components/ui/progress"
+import { MessageSquare } from "lucide-react"
 import {
   Proposal,
   getStatusBadgeColor,
   getStatusDisplayName,
   calculateVotePercentage,
+  UserRole,
 } from "@/lib/governance"
 import { formatDistanceToNow } from "date-fns"
+import { useState } from "react"
 
 interface ProposalCardProps {
   proposal: Proposal
@@ -18,6 +22,14 @@ interface ProposalCardProps {
   userVote?: "for" | "against" | "abstain" | null
   canVote?: boolean
   onShowDetails?: (proposalId: string) => void
+}
+
+interface DiscussionSectionProps {
+  proposal: Proposal
+  currentUserRole: UserRole
+  userDID: string | null
+  isShariaCouncil?: boolean
+  onAddDiscussion?: (proposalId: string, content: string) => void
 }
 
 export function ProposalCard({
@@ -197,3 +209,86 @@ export function ProposalCard({
     </Card>
   )
 }
+
+function DiscussionSection({
+  proposal,
+  currentUserRole,
+  userDID,
+  isShariaCouncil = false,
+  onAddDiscussion,
+}: DiscussionSectionProps) {
+  const [newComment, setNewComment] = useState("")
+  const [isPosting, setIsPosting] = useState(false)
+
+  const canPost = isShariaCouncil
+    ? currentUserRole === "sharia_council" && userDID !== null
+    : userDID !== null // For general governance, require DID to post
+
+  const handlePostComment = async () => {
+    if (!newComment.trim() || !userDID) return
+    setIsPosting(true)
+    await onAddDiscussion?.(proposal.id, newComment.trim())
+    setNewComment("")
+    setIsPosting(false)
+  }
+
+  return (
+    <div className="space-y-4">
+      <h4 className="text-lg font-semibold text-white">Discussions</h4>
+      {proposal.discussions.length === 0 ? (
+        <p className="text-gray-400 text-sm">No discussions yet. Be the first to comment!</p>
+      ) : (
+        <div className="space-y-3">
+          {proposal.discussions.map((discussion) => (
+            <div key={discussion.id} className="bg-gray-800/50 p-3 rounded-lg border border-gray-700">
+              <div className="flex items-center gap-2 mb-2">
+                <span className="text-sm font-medium text-white">{discussion.author}</span>
+                <Badge className="text-xs" variant="outline">
+                  {discussion.authorRole.replace("_", " ")}
+                </Badge>
+                <span className="text-xs text-gray-400">
+                  {formatDistanceToNow(new Date(discussion.createdAt), { addSuffix: true })}
+                </span>
+              </div>
+              <p className="text-sm text-gray-300">{discussion.content}</p>
+            </div>
+          ))}
+        </div>
+      )}
+      {canPost && (
+        <div className="pt-4 border-t border-gray-700">
+          <h4 className="text-sm font-medium text-gray-400 mb-3 flex items-center gap-2">
+            <MessageSquare className="w-4 h-4" />
+            Add Discussion
+          </h4>
+          <div className="space-y-3">
+            <textarea
+              placeholder="Share your thoughts on this proposal..."
+              value={newComment}
+              onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => setNewComment(e.target.value)}
+              className="w-full px-3 py-2 bg-gray-800/50 border border-gray-700 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-amber-500 resize-none text-sm"
+              rows={3}
+            />
+            <Button
+              onClick={handlePostComment}
+              disabled={!newComment.trim() || isPosting}
+              className="bg-amber-600 hover:bg-amber-700 text-white"
+              size="sm"
+            >
+              {isPosting ? "Posting..." : "Post Comment"}
+            </Button>
+          </div>
+        </div>
+      )}
+      {!canPost && (
+        <p className="text-xs text-amber-400">
+          {isShariaCouncil
+            ? "Only Sharia Council members can comment on this proposal."
+            : "Connect your DID to participate in discussions."}
+        </p>
+      )}
+    </div>
+  )
+}
+
+export { DiscussionSection }

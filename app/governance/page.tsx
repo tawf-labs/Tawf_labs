@@ -9,12 +9,13 @@ import {
   ProposalCard,
   DIDConnectPrompt,
   ShariaProposalCard,
+  DiscussionSection,
 } from "@/components/governance"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
-import { Users, FileText, Landmark, ChevronRight, ExternalLink } from "lucide-react"
+import { Users, FileText, Landmark, ChevronRight, ChevronDown, ChevronUp, ExternalLink, Shield, MessageSquare, CheckCircle, XCircle, Clock } from "lucide-react"
 import Link from "next/link"
 import {
   mockProposals,
@@ -31,6 +32,8 @@ import {
   mockFundVaults,
   formatNumber,
   calculateVotePercentage,
+  getStatusBadgeColor,
+  getStatusDisplayName,
 } from "@/lib/governance"
 
 export default function GovernancePage() {
@@ -44,6 +47,8 @@ export default function GovernancePage() {
   const [userVotes, setUserVotes] = useState<Record<string, "for" | "against" | "abstain">>({})
   const [didConnected, setDidConnected] = useState(false)
   const [showDIDPrompt, setShowDIDPrompt] = useState(true)
+  const [expandedProposal, setExpandedProposal] = useState<string | null>(null)
+  const [newDiscussionContent, setNewDiscussionContent] = useState<Record<string, string>>({})
 
   // Simulate user based on connected address
   useEffect(() => {
@@ -92,6 +97,29 @@ export default function GovernancePage() {
       ...prev,
       [proposalId]: vote,
     }))
+  }
+
+  const handleAddDiscussion = (proposalId: string) => {
+    if (!didConnected) {
+      alert("Please connect your DID to participate in discussions")
+      return
+    }
+    const content = newDiscussionContent[proposalId]?.trim()
+    if (!content) return
+
+    // In a real app, this would be an API call
+    // For now, we'll just log it
+    console.log(`Adding discussion to ${proposalId}: ${content}`)
+    
+    // Clear the input
+    setNewDiscussionContent(prev => ({
+      ...prev,
+      [proposalId]: "",
+    }))
+  }
+
+  const handleToggleDetails = (proposalId: string) => {
+    setExpandedProposal(prev => prev === proposalId ? null : proposalId)
   }
 
   const handleShariaApprove = (proposalId: string) => {
@@ -323,41 +351,53 @@ export default function GovernancePage() {
                     proposal.votesAbstain
                   )
                   const totalVotes = proposal.votesFor + proposal.votesAgainst + proposal.votesAbstain
+                  const isExpanded = expandedProposal === proposal.id
+                  const isActive = proposal.status === "active"
                   
                   return (
                     <Card 
                       key={proposal.id}
-                      className="bg-gray-900/80 border border-gray-800 hover:border-gray-700 transition-colors cursor-pointer"
+                      className="bg-gray-900/80 border border-gray-800 hover:border-gray-700 transition-colors"
                     >
-                      <CardContent className="p-4">
+                      {/* Proposal Header - Clickable */}
+                      <div 
+                        className="p-4 cursor-pointer"
+                        onClick={() => handleToggleDetails(proposal.id)}
+                      >
                         <div className="flex items-start justify-between gap-4">
                           <div className="flex-1">
                             <div className="flex items-center gap-2 mb-1">
-                              <h3 className="font-semibold text-white hover:text-amber-400 transition-colors">
-                                {proposal.title}
-                              </h3>
-                            </div>
-                            <div className="flex items-center gap-2 text-xs text-gray-500">
                               <Badge 
-                                className={`${
-                                  proposal.status === 'active' ? 'bg-green-600' :
-                                  proposal.status === 'passed' ? 'bg-blue-600' :
-                                  proposal.status === 'rejected' ? 'bg-red-600' :
-                                  'bg-yellow-600'
-                                } text-white text-xs`}
+                                className={`${getStatusBadgeColor(proposal.status)} text-white text-xs`}
                               >
-                                {proposal.status === 'active' ? 'ACTIVE' : 
-                                 proposal.status === 'passed' ? 'EXECUTED' :
-                                 proposal.status === 'rejected' ? 'REJECTED' : 
-                                 'PENDING'}
+                                {getStatusDisplayName(proposal.status)}
                               </Badge>
+                              {proposal.shariaReview && (
+                                <Badge className={`text-xs ${
+                                  proposal.shariaReview.status === "approved" 
+                                    ? "bg-green-600/30 text-green-400" 
+                                    : proposal.shariaReview.status === "pending"
+                                      ? "bg-yellow-600/30 text-yellow-400"
+                                      : "bg-red-600/30 text-red-400"
+                                }`}>
+                                  {proposal.shariaReview.status === "approved" ? "Sharia ✓" : 
+                                   proposal.shariaReview.status === "pending" ? "Sharia Review" : "Sharia ✗"}
+                                </Badge>
+                              )}
+                            </div>
+                            <h3 className="font-semibold text-white hover:text-amber-400 transition-colors text-lg">
+                              {proposal.title}
+                            </h3>
+                            <div className="flex items-center gap-2 text-xs text-gray-500 mt-1">
                               <span>{new Date(proposal.endDate).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}</span>
+                              <span>•</span>
+                              <span>{proposal.discussions.length} discussions</span>
                             </div>
                           </div>
                           
                           {/* Vote Bar - Tally Style */}
-                          <div className="text-right min-w-[200px]">
-                            <div className="flex items-center gap-2 text-xs mb-1">
+                          <div className="text-right min-w-[180px]">
+                            <div className="flex items-center gap-2 text-xs mb-1 justify-end">
                               <span className="text-green-400">{formatNumber(proposal.votesFor)}</span>
                               <span className="text-gray-500">·</span>
                               <span className="text-red-400">{formatNumber(proposal.votesAgainst)}</span>
@@ -379,55 +419,159 @@ export default function GovernancePage() {
                                 style={{ width: `${votePercentages.abstain}%` }}
                               />
                             </div>
-                            <div className="text-xs text-gray-500 mt-1">
-                              {formatNumber(totalVotes)}
-                              <span className="ml-1">{proposal.totalVoters} addresses</span>
+                            <div className="flex items-center justify-end gap-2 mt-1">
+                              <span className="text-xs text-gray-500">
+                                {formatNumber(totalVotes)} votes
+                              </span>
+                              {isExpanded ? (
+                                <ChevronUp className="w-4 h-4 text-gray-400" />
+                              ) : (
+                                <ChevronDown className="w-4 h-4 text-gray-400" />
+                              )}
                             </div>
                           </div>
                         </div>
+                      </div>
 
-                        {/* Voting buttons for active proposals */}
-                        {proposal.status === 'active' && canVote && (
-                          <div className="flex gap-2 mt-4 pt-3 border-t border-gray-800">
-                            <Button
-                              onClick={() => handleVote(proposal.id, "for")}
-                              variant={userVotes[proposal.id] === "for" ? "default" : "outline"}
-                              size="sm"
-                              className={`flex-1 ${
-                                userVotes[proposal.id] === "for"
-                                  ? "bg-green-600 hover:bg-green-700 text-white"
-                                  : "border-gray-600 text-gray-300 hover:border-green-500"
-                              }`}
-                            >
-                              For
-                            </Button>
-                            <Button
-                              onClick={() => handleVote(proposal.id, "against")}
-                              variant={userVotes[proposal.id] === "against" ? "default" : "outline"}
-                              size="sm"
-                              className={`flex-1 ${
-                                userVotes[proposal.id] === "against"
-                                  ? "bg-red-600 hover:bg-red-700 text-white"
-                                  : "border-gray-600 text-gray-300 hover:border-red-500"
-                              }`}
-                            >
-                              Against
-                            </Button>
-                            <Button
-                              onClick={() => handleVote(proposal.id, "abstain")}
-                              variant={userVotes[proposal.id] === "abstain" ? "default" : "outline"}
-                              size="sm"
-                              className={`flex-1 ${
-                                userVotes[proposal.id] === "abstain"
-                                  ? "bg-gray-600 hover:bg-gray-700 text-white"
-                                  : "border-gray-600 text-gray-300 hover:border-gray-500"
-                              }`}
-                            >
-                              Abstain
-                            </Button>
+                      {/* Expanded Details */}
+                      {isExpanded && (
+                        <div className="border-t border-gray-800 p-4 space-y-4">
+                          {/* Description */}
+                          <div>
+                            <h4 className="text-sm font-medium text-gray-400 mb-2">Description</h4>
+                            <p className="text-sm text-gray-300">{proposal.description}</p>
                           </div>
-                        )}
-                      </CardContent>
+
+                          {/* Proposal Info */}
+                          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 p-3 bg-gray-800/50 rounded-lg">
+                            <div>
+                              <p className="text-xs text-gray-500">Author</p>
+                              <p className="text-sm text-white">{proposal.author}</p>
+                            </div>
+                            <div>
+                              <p className="text-xs text-gray-500">Role</p>
+                              <p className="text-sm text-white">{getRoleDisplayName(proposal.authorRole)}</p>
+                            </div>
+                            <div>
+                              <p className="text-xs text-gray-500">Created</p>
+                              <p className="text-sm text-white">{proposal.createdAt}</p>
+                            </div>
+                            <div>
+                              <p className="text-xs text-gray-500">Quorum</p>
+                              <p className="text-sm text-white">{formatNumber(proposal.totalVoters)}/{formatNumber(proposal.requiredQuorum)}</p>
+                            </div>
+                          </div>
+
+                          {/* Sharia Review (if applicable) */}
+                          {proposal.shariaReview && proposal.shariaReview.ruling && (
+                            <div className="p-3 bg-amber-900/20 rounded-lg border border-amber-600/30">
+                              <div className="flex items-center gap-2 mb-2">
+                                <Shield className="w-4 h-4 text-amber-400" />
+                                <h4 className="text-sm font-medium text-amber-400">Sharia Council Ruling</h4>
+                              </div>
+                              <p className="text-sm text-gray-300">{proposal.shariaReview.ruling}</p>
+                              {proposal.shariaReview.reviewer && (
+                                <p className="text-xs text-gray-500 mt-2">
+                                  Reviewed by: {proposal.shariaReview.reviewer} • {proposal.shariaReview.createdAt}
+                                </p>
+                              )}
+                            </div>
+                          )}
+
+                          {/* Discussions */}
+                          <DiscussionSection
+                            proposal={proposal}
+                            currentUserRole={user.role}
+                            userDID={user.did}
+                            isShariaCouncil={false}
+                            onAddDiscussion={(proposalId: string, content: string) => {
+                              console.log(`Adding discussion to ${proposalId}: ${content}`)
+                              // In real app, add to state or API
+                            }}
+                          />
+
+                          {/* Add Discussion */}
+                          {/* {didConnected && (
+                            <div className="pt-4 border-t border-gray-700">
+                              <h4 className="text-sm font-medium text-gray-400 mb-3 flex items-center gap-2">
+                                <MessageSquare className="w-4 h-4" />
+                                Add Discussion
+                              </h4>
+                              <div className="space-y-3">
+                                <textarea
+                                  value={newDiscussionContent[proposal.id] || ""}
+                                  onChange={(e) => setNewDiscussionContent(prev => ({
+                                    ...prev,
+                                    [proposal.id]: e.target.value
+                                  }))}
+                                  placeholder="Share your thoughts on this proposal..."
+                                  className="w-full px-3 py-2 bg-gray-800/50 border border-gray-700 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-amber-500 resize-none"
+                                  rows={3}
+                                />
+                                <Button
+                                  onClick={(e) => { e.stopPropagation(); handleAddDiscussion(proposal.id); }}
+                                  disabled={!newDiscussionContent[proposal.id]?.trim()}
+                                  className="bg-amber-600 hover:bg-amber-700 text-white"
+                                  size="sm"
+                                >
+                                  Post Comment
+                                </Button>
+                              </div>
+                            </div>
+                          )} */}
+
+                          {/* Voting Actions */}
+                          {isActive && canVote && (
+                            <div className="pt-4 border-t border-gray-700">
+                              <h4 className="text-sm font-medium text-gray-400 mb-3">Cast Your Vote</h4>
+                              <div className="flex gap-3">
+                                <Button
+                                  onClick={(e) => { e.stopPropagation(); handleVote(proposal.id, "for"); }}
+                                  variant={userVotes[proposal.id] === "for" ? "default" : "outline"}
+                                  className={`flex-1 ${
+                                    userVotes[proposal.id] === "for" 
+                                      ? "bg-green-600 hover:bg-green-700 text-white" 
+                                      : "border-green-600 text-green-400 hover:bg-green-600/20"
+                                  }`}
+                                >
+                                  <CheckCircle className="w-4 h-4 mr-2" />
+                                  For
+                                </Button>
+                                <Button
+                                  onClick={(e) => { e.stopPropagation(); handleVote(proposal.id, "against"); }}
+                                  variant={userVotes[proposal.id] === "against" ? "default" : "outline"}
+                                  className={`flex-1 ${
+                                    userVotes[proposal.id] === "against" 
+                                      ? "bg-red-600 hover:bg-red-700 text-white" 
+                                      : "border-red-600 text-red-400 hover:bg-red-600/20"
+                                  }`}
+                                >
+                                  <XCircle className="w-4 h-4 mr-2" />
+                                  Against
+                                </Button>
+                                <Button
+                                  onClick={(e) => { e.stopPropagation(); handleVote(proposal.id, "abstain"); }}
+                                  variant={userVotes[proposal.id] === "abstain" ? "default" : "outline"}
+                                  className={`flex-1 ${
+                                    userVotes[proposal.id] === "abstain" 
+                                      ? "bg-gray-600 hover:bg-gray-700 text-white" 
+                                      : "border-gray-600 text-gray-400 hover:bg-gray-600/20"
+                                  }`}
+                                >
+                                  <Clock className="w-4 h-4 mr-2" />
+                                  Abstain
+                                </Button>
+                              </div>
+                            </div>
+                          )}
+
+                          {isActive && !canVote && (
+                            <div className="p-3 bg-amber-900/20 rounded-lg border border-amber-600/30 text-center">
+                              <p className="text-sm text-amber-400">Connect your DID to vote on this proposal</p>
+                            </div>
+                          )}
+                        </div>
+                      )}
                     </Card>
                   )
                 })

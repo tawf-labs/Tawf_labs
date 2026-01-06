@@ -15,9 +15,15 @@ import {
   XCircle, 
   Clock,
   AlertTriangle,
-  Scale
+  Scale,
+  ChevronDown,
+  ChevronUp,
+  MessageSquare,
 } from "lucide-react"
 import Link from "next/link"
+import {
+  DiscussionSection,
+} from "@/components/governance"
 import {
   mockShariaProposals,
   mockShariaCouncilMember,
@@ -36,6 +42,8 @@ export default function ShariaCouncilPage() {
   const { address, isConnected } = useAccount()
   const [user, setUser] = useState(mockCurrentUser)
   const [reviewNotes, setReviewNotes] = useState<Record<string, string>>({})
+  const [expandedProposal, setExpandedProposal] = useState<string | null>(null)
+  const [newDiscussionContent, setNewDiscussionContent] = useState<Record<string, string>>({})
 
   // Simulate user based on connected address
   useEffect(() => {
@@ -63,6 +71,29 @@ export default function ShariaCouncilPage() {
 
   const handleRequestRevision = (proposalId: string) => {
     alert(`Revision requested for proposal ${proposalId}. The proposer will be notified.`)
+  }
+
+  const handleToggleDetails = (proposalId: string) => {
+    setExpandedProposal(prev => prev === proposalId ? null : proposalId)
+  }
+
+  const handleAddDiscussion = (proposalId: string) => {
+    if (user.role !== "sharia_council") {
+      alert("Only Sharia Council members can participate in discussions")
+      return
+    }
+    const content = newDiscussionContent[proposalId]?.trim()
+    if (!content) return
+
+    // In a real app, this would be an API call
+    // For now, we'll just log it
+    console.log(`Adding discussion to ${proposalId}: ${content}`)
+    
+    // Clear the input
+    setNewDiscussionContent(prev => ({
+      ...prev,
+      [proposalId]: "",
+    }))
   }
 
   // Show access denied if not Sharia Council
@@ -245,99 +276,169 @@ export default function ShariaCouncilPage() {
                 </CardContent>
               </Card>
             ) : (
-              mockShariaProposals.map(proposal => (
-                <Card 
-                  key={proposal.id}
-                  className="bg-gray-900/80 border border-gray-800"
-                >
-                  <CardHeader>
-                    <div className="flex items-start justify-between">
-                      <div>
-                        <div className="flex items-center gap-2 mb-2">
-                          <Badge className={`${getStatusBadgeColor(proposal.status)} text-white text-xs`}>
-                            {getStatusDisplayName(proposal.status)}
-                          </Badge>
-                          <Badge className="bg-amber-600/30 text-amber-400 text-xs">
-                            Sharia Ruling Required
-                          </Badge>
+              mockShariaProposals.map(proposal => {
+                const isExpanded = expandedProposal === proposal.id
+                const votePercentages = calculateVotePercentage(
+                  proposal.votesFor,
+                  proposal.votesAgainst,
+                  proposal.votesAbstain
+                )
+
+                return (
+                  <Card 
+                    key={proposal.id}
+                    className="bg-gray-900/80 border border-gray-800"
+                  >
+                    {/* Proposal Header - Clickable */}
+                    <div 
+                      className="p-4 cursor-pointer"
+                      onClick={() => handleToggleDetails(proposal.id)}
+                    >
+                      <div className="flex items-start justify-between gap-4">
+                        <div className="flex-1">
+                          <div className="flex items-center gap-2 mb-2">
+                            <Badge className={`${getStatusBadgeColor(proposal.status)} text-white text-xs`}>
+                              {getStatusDisplayName(proposal.status)}
+                            </Badge>
+                            <Badge className="bg-amber-600/30 text-amber-400 text-xs">
+                              Sharia Ruling Required
+                            </Badge>
+                          </div>
+                          <h3 className="text-lg font-semibold text-white">{proposal.title}</h3>
+                          
+                          {/* Vote Progress Bar */}
+                          <div className="flex items-center gap-2 mt-3">
+                            <div className="flex-1 h-2 bg-gray-700 rounded-full overflow-hidden flex">
+                              <div 
+                                className="bg-green-500 h-full" 
+                                style={{ width: `${votePercentages.for}%` }}
+                              />
+                              <div 
+                                className="bg-red-500 h-full" 
+                                style={{ width: `${votePercentages.against}%` }}
+                              />
+                              <div 
+                                className="bg-gray-500 h-full" 
+                                style={{ width: `${votePercentages.abstain}%` }}
+                              />
+                            </div>
+                            <span className="text-xs text-gray-400 whitespace-nowrap">
+                              {formatNumber(proposal.totalVoters)} votes
+                            </span>
+                          </div>
                         </div>
-                        <CardTitle className="text-lg">{proposal.title}</CardTitle>
-                      </div>
-                      <div className="text-right text-xs text-gray-500">
-                        <p>Created: {proposal.createdAt}</p>
-                        <p>Ends: {proposal.endDate}</p>
+
+                        <div className="flex flex-col items-end gap-2">
+                          <div className="text-right text-xs text-gray-500">
+                            <p>Created: {proposal.createdAt}</p>
+                            <p>Ends: {proposal.endDate}</p>
+                          </div>
+                          {isExpanded ? (
+                            <ChevronUp className="w-5 h-5 text-gray-400" />
+                          ) : (
+                            <ChevronDown className="w-5 h-5 text-gray-400" />
+                          )}
+                        </div>
                       </div>
                     </div>
-                  </CardHeader>
-                  <CardContent className="space-y-4">
-                    <p className="text-gray-400 text-sm">{proposal.description}</p>
 
-                    {/* Community Vote Summary (if applicable) */}
-                    {proposal.totalVoters > 0 && (
-                      <div className="p-4 bg-gray-800/50 rounded-lg">
-                        <h4 className="text-sm font-medium text-white mb-2">Community Vote Summary</h4>
-                        <div className="grid grid-cols-3 gap-4 text-center">
-                          <div>
-                            <p className="text-green-400 font-bold">{proposal.votesFor}</p>
+                    {/* Expanded Details */}
+                    {isExpanded && (
+                      <div className="border-t border-gray-800 p-4 space-y-4">
+                        {/* Description */}
+                        <div>
+                          <h4 className="text-sm font-medium text-gray-400 mb-2">Description</h4>
+                          <p className="text-sm text-gray-300">{proposal.description}</p>
+                        </div>
+
+                        {/* Community Vote Stats */}
+                        <div className="grid grid-cols-4 gap-4 p-3 bg-gray-800/50 rounded-lg">
+                          <div className="text-center">
                             <p className="text-xs text-gray-500">For</p>
+                            <p className="text-lg font-bold text-green-400">
+                              {formatNumber(proposal.votesFor)}
+                            </p>
                           </div>
-                          <div>
-                            <p className="text-red-400 font-bold">{proposal.votesAgainst}</p>
+                          <div className="text-center">
                             <p className="text-xs text-gray-500">Against</p>
+                            <p className="text-lg font-bold text-red-400">
+                              {formatNumber(proposal.votesAgainst)}
+                            </p>
                           </div>
-                          <div>
-                            <p className="text-gray-400 font-bold">{proposal.votesAbstain}</p>
+                          <div className="text-center">
                             <p className="text-xs text-gray-500">Abstain</p>
+                            <p className="text-lg font-bold text-gray-400">
+                              {formatNumber(proposal.votesAbstain)}
+                            </p>
                           </div>
+                          <div className="text-center">
+                            <p className="text-xs text-gray-500">Quorum</p>
+                            <p className="text-lg font-bold text-white">
+                              {formatNumber(proposal.totalVoters)}/{formatNumber(proposal.requiredQuorum)}
+                            </p>
+                          </div>
+                        </div>
+
+                        {/* Discussions */}
+                        <DiscussionSection
+                          proposal={proposal}
+                          currentUserRole={user.role}
+                          userDID={user.did}
+                          isShariaCouncil={true}
+                          onAddDiscussion={(proposalId: string, content: string) => {
+                            console.log(`Adding council discussion to ${proposalId}: ${content}`)
+                            // In real app, add to state or API
+                          }}
+                        />
+
+                        {/* Review Notes */}
+                        <div>
+                          <label className="block text-sm font-medium text-gray-300 mb-2">
+                            Ruling Notes & Evidence
+                          </label>
+                          <textarea
+                            placeholder="Provide your ruling with evidence from Quran, Sunnah, or established fiqh..."
+                            value={reviewNotes[proposal.id] || ""}
+                            onChange={(e) => setReviewNotes(prev => ({
+                              ...prev,
+                              [proposal.id]: e.target.value
+                            }))}
+                            onClick={(e) => e.stopPropagation()}
+                            className="w-full h-32 px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-amber-600 text-sm"
+                          />
+                        </div>
+
+                        {/* Action Buttons */}
+                        <div className="flex gap-3 pt-4 border-t border-gray-700">
+                          <Button
+                            onClick={(e) => { e.stopPropagation(); handleApprove(proposal.id); }}
+                            className="flex-1 bg-green-600 hover:bg-green-700 text-white"
+                          >
+                            <CheckCircle className="w-4 h-4 mr-2" />
+                            Approve - Sharia Compliant
+                          </Button>
+                          <Button
+                            onClick={(e) => { e.stopPropagation(); handleRequestRevision(proposal.id); }}
+                            variant="outline"
+                            className="flex-1 border-amber-600 text-amber-400 hover:bg-amber-600/20"
+                          >
+                            <AlertTriangle className="w-4 h-4 mr-2" />
+                            Request Revision
+                          </Button>
+                          <Button
+                            onClick={(e) => { e.stopPropagation(); handleReject(proposal.id); }}
+                            variant="outline"
+                            className="flex-1 border-red-600 text-red-400 hover:bg-red-600/20"
+                          >
+                            <XCircle className="w-4 h-4 mr-2" />
+                            Reject - Not Compliant
+                          </Button>
                         </div>
                       </div>
                     )}
-
-                    {/* Review Notes */}
-                    <div>
-                      <label className="block text-sm font-medium text-gray-300 mb-2">
-                        Ruling Notes & Evidence
-                      </label>
-                      <textarea
-                        placeholder="Provide your ruling with evidence from Quran, Sunnah, or established fiqh..."
-                        value={reviewNotes[proposal.id] || ""}
-                        onChange={(e) => setReviewNotes(prev => ({
-                          ...prev,
-                          [proposal.id]: e.target.value
-                        }))}
-                        className="w-full h-32 px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-amber-600 text-sm"
-                      />
-                    </div>
-
-                    {/* Action Buttons */}
-                    <div className="flex gap-3 pt-4 border-t border-gray-700">
-                      <Button
-                        onClick={() => handleApprove(proposal.id)}
-                        className="flex-1 bg-green-600 hover:bg-green-700 text-white"
-                      >
-                        <CheckCircle className="w-4 h-4 mr-2" />
-                        Approve - Sharia Compliant
-                      </Button>
-                      <Button
-                        onClick={() => handleRequestRevision(proposal.id)}
-                        variant="outline"
-                        className="flex-1 border-amber-600 text-amber-400 hover:bg-amber-600/20"
-                      >
-                        <AlertTriangle className="w-4 h-4 mr-2" />
-                        Request Revision
-                      </Button>
-                      <Button
-                        onClick={() => handleReject(proposal.id)}
-                        variant="outline"
-                        className="flex-1 border-red-600 text-red-400 hover:bg-red-600/20"
-                      >
-                        <XCircle className="w-4 h-4 mr-2" />
-                        Reject - Not Compliant
-                      </Button>
-                    </div>
-                  </CardContent>
-                </Card>
-              ))
+                  </Card>
+                )
+              })
             )}
           </TabsContent>
 
