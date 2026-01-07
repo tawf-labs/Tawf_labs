@@ -28,12 +28,12 @@ export function Hero() {
 
 
         <div className="mt-8 sm:mt-14 flex flex-col sm:flex-row gap-4 justify-center">
-          <Link className="max-sm:hidden" href="/dashboard">
+          <Link className="max-sm:hidden" href={process.env.NODE_ENV === 'production' ? 'https://dashboard.tawf.xyz' : 'http://dashboard.localhost:3000'}>
             <Button onMouseEnter={() => setHovering(true)} onMouseLeave={() => setHovering(false)}>
               [Launch Dashboard]
             </Button>
           </Link>
-          <Link className="sm:hidden" href="/dashboard">
+          <Link className="sm:hidden" href={process.env.NODE_ENV === 'production' ? 'https://dashboard.tawf.xyz' : 'http://dashboard.localhost:3000'}>
             <Button
               size="sm"
               onMouseEnter={() => setHovering(true)}
@@ -43,12 +43,12 @@ export function Hero() {
             </Button>
           </Link>
 
-          <Link className="max-sm:hidden" href="/transparency">
+          <Link className="max-sm:hidden" href={process.env.NODE_ENV === 'production' ? 'https://transparency.tawf.xyz' : 'http://transparency.localhost:3000'}>
             <Button variant="outline" onMouseEnter={() => setHovering(true)} onMouseLeave={() => setHovering(false)}>
               [View Transparency]
             </Button>
           </Link>
-          <Link className="sm:hidden" href="/transparency">
+          <Link className="sm:hidden" href={process.env.NODE_ENV === 'production' ? 'https://transparency.tawf.xyz' : 'http://transparency.localhost:3000'}>
             <Button
               size="sm"
               variant="outline"

@@ -1,27 +1,68 @@
 "use client"
 
+import { useEffect, useState } from "react"
+import { useAccount, useChainId } from "wagmi"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
+import { RefreshCw, Loader2 } from "lucide-react"
+import { fetchAllTokens, getNetworkName, clearTokenCache } from "@/lib/tokenService"
+import type { PortfolioToken } from "@/lib/types"
 
 interface PortfolioPanelProps {
   connected: boolean
   onConnect: () => void
 }
 
-const assets = [
-  { asset: "TWF", balance: "0.00", value: "0.00", color: "from-[#FFC700] to-[#ffe38a]" },
-  { asset: "USDC", balance: "0.00", value: "0.00", color: "from-gray-400 to-gray-500" },
-  { asset: "ETH", balance: "0.00", value: "0.00", color: "from-gray-500 to-gray-600" },
-  { asset: "ISLM", balance: "0.00", value: "0.00", color: "from-amber-500 to-amber-600" },
-]
-
 const recentActivity = [
-  { type: "Swap", description: "ETH → TWF", amount: "+250 TWF", time: "2 hours ago" },
-  { type: "Stake", description: "Haqq Network", amount: "-100 TWF", time: "1 day ago" },
-  { type: "Bridge", description: "Ethereum → Haqq", amount: "500 TWF", time: "3 days ago" },
+  { type: "Swap", description: "ETH → USDC", amount: "+250 USDC", time: "2 hours ago" },
+  { type: "Stake", description: "Haqq Network", amount: "-100 ISLM", time: "1 day ago" },
+  { type: "Bridge", description: "Ethereum → Base", amount: "0.5 ETH", time: "3 days ago" },
 ]
 
 export function PortfolioPanel({ connected, onConnect }: PortfolioPanelProps) {
+  const { address } = useAccount()
+  const chainId = useChainId()
+
+  const [tokens, setTokens] = useState<PortfolioToken[]>([])
+  const [isLoading, setIsLoading] = useState(false)
+  const [error, setError] = useState<string | null>(null)
+
+  // Fetch tokens when address or chainId changes
+  useEffect(() => {
+    if (connected && address) {
+      loadTokens()
+    } else {
+      setTokens([])
+      setError(null)
+    }
+  }, [connected, address, chainId])
+
+  const loadTokens = async () => {
+    if (!address) return
+
+    setIsLoading(true)
+    setError(null)
+
+    try {
+      const fetchedTokens = await fetchAllTokens(address, chainId)
+      setTokens(fetchedTokens)
+    } catch (err) {
+      console.error("Error loading tokens:", err)
+      setError("Failed to load portfolio data. Please try again.")
+      setTokens([])
+    } finally {
+      setIsLoading(false)
+    }
+  }
+
+  const handleRefresh = () => {
+    clearTokenCache()
+    loadTokens()
+  }
+
+  // Calculate total portfolio value
+  const totalValue = tokens.reduce((sum, token) => sum + (token.usdValue || 0), 0)
+
   if (!connected) {
     return (
       <div className="max-w-xl mx-auto flex flex-col items-center justify-center min-h-[60vh] text-center">
@@ -47,13 +88,28 @@ export function PortfolioPanel({ connected, onConnect }: PortfolioPanelProps) {
 
   return (
     <div className="max-w-4xl mx-auto">
-      <div className="mb-6">
-        <h1 className="text-2xl font-bold bg-gradient-to-r from-[#FFC700] to-[#ffe38a] bg-clip-text text-transparent">
-          Portfolio
-        </h1>
-        <p className="text-gray-400 text-sm mt-1">
-          Track and manage your assets
-        </p>
+      <div className="mb-6 flex justify-between items-start">
+        <div>
+          <h1 className="text-2xl font-bold bg-gradient-to-r from-[#FFC700] to-[#ffe38a] bg-clip-text text-transparent">
+            Portfolio
+          </h1>
+          <p className="text-gray-400 text-sm mt-1">
+            Track and manage your assets on {getNetworkName(chainId)}
+          </p>
+        </div>
+        <Button
+          onClick={handleRefresh}
+          disabled={isLoading}
+          variant="outline"
+          size="sm"
+          className="border-gray-700 text-white hover:bg-gray-800"
+        >
+          {isLoading ? (
+            <RefreshCw className="w-4 h-4 animate-spin" />
+          ) : (
+            <RefreshCw className="w-4 h-4" />
+          )}
+        </Button>
       </div>
 
       {/* Portfolio Value Card */}
@@ -61,21 +117,12 @@ export function PortfolioPanel({ connected, onConnect }: PortfolioPanelProps) {
         <CardHeader>
           <CardTitle className="text-white">Total Portfolio Value</CardTitle>
           <div className="text-4xl font-bold bg-gradient-to-r from-[#FFC700] to-[#ffe38a] bg-clip-text text-transparent">
-            $0.00
+            ${totalValue.toFixed(2)}
           </div>
-          <div className="text-sm text-gray-400">0.00 TWF</div>
+          <div className="text-sm text-gray-400">
+            {tokens.length} {tokens.length === 1 ? 'asset' : 'assets'} on {getNetworkName(chainId)}
+          </div>
         </CardHeader>
-        <CardContent className="flex space-x-3">
-          <Button className="flex-1 bg-gradient-to-r from-[#FFC700] to-[#ffe38a] text-black hover:opacity-90 font-medium">
-            Deposit
-          </Button>
-          <Button
-            variant="outline"
-            className="flex-1 border-gray-700 text-white hover:bg-gray-800"
-          >
-            Withdraw
-          </Button>
-        </CardContent>
       </Card>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
@@ -88,33 +135,67 @@ export function PortfolioPanel({ connected, onConnect }: PortfolioPanelProps) {
             </div>
           </CardHeader>
           <CardContent>
-            <div className="space-y-3">
-              {assets.map((item, index) => (
-                <div
-                  key={index}
-                  className="flex justify-between items-center p-3 hover:bg-gray-800/50 rounded-lg transition-colors"
+            {isLoading ? (
+              <div className="flex items-center justify-center py-8">
+                <Loader2 className="w-6 h-6 animate-spin text-amber-500" />
+              </div>
+            ) : error ? (
+              <div className="text-center py-8">
+                <p className="text-red-400 mb-2">{error}</p>
+                <Button
+                  onClick={handleRefresh}
+                  variant="outline"
+                  size="sm"
+                  className="border-gray-700 text-white hover:bg-gray-800"
                 >
-                  <div className="flex items-center space-x-3">
-                    <div
-                      className={`w-10 h-10 rounded-full bg-gradient-to-r ${item.color} flex items-center justify-center`}
-                    >
-                      <span className="text-xs font-bold text-black">
-                        {item.asset}
-                      </span>
-                    </div>
-                    <div>
-                      <div className="font-medium">{item.asset}</div>
-                      <div className="text-xs text-gray-400">
-                        ${item.value}
+                  Retry
+                </Button>
+              </div>
+            ) : tokens.length === 0 ? (
+              <div className="text-center py-8 text-gray-400">
+                <p>No assets found</p>
+                <p className="text-xs text-gray-500 mt-2">
+                  Your wallet is empty on {getNetworkName(chainId)}
+                </p>
+              </div>
+            ) : (
+              <div className="space-y-3">
+                {tokens.map((token, index) => (
+                  <div
+                    key={index}
+                    className="flex justify-between items-center p-3 hover:bg-gray-800/50 rounded-lg transition-colors"
+                  >
+                    <div className="flex items-center space-x-3">
+                      {token.logo ? (
+                        <img
+                          src={token.logo}
+                          alt={token.symbol}
+                          className="w-10 h-10 rounded-full"
+                        />
+                      ) : (
+                        <div
+                          className={`w-10 h-10 rounded-full bg-gradient-to-r ${token.color} flex items-center justify-center`}
+                        >
+                          <span className="text-xs font-bold text-black">
+                            {token.symbol.slice(0, 2)}
+                          </span>
+                        </div>
+                      )}
+                      <div>
+                        <div className="font-medium">{token.symbol}</div>
+                        <div className="text-xs text-gray-400">
+                          {token.usdValue ? `$${token.usdValue.toFixed(2)}` : "$0.00"}
+                        </div>
                       </div>
                     </div>
+                    <div className="text-right">
+                      <div className="font-medium">{token.formattedBalance}</div>
+                      <div className="text-xs text-gray-400">{token.name}</div>
+                    </div>
                   </div>
-                  <div className="text-right">
-                    <div className="font-medium">{item.balance}</div>
-                  </div>
-                </div>
-              ))}
-            </div>
+                ))}
+              </div>
+            )}
           </CardContent>
         </Card>
 

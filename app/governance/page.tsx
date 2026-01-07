@@ -220,7 +220,7 @@ export default function GovernancePage() {
               <div className="text-xs text-gray-500">{mockDAOStats.activeProposals} active proposals</div>
             </div>
 
-            <Link href="/governance/treasury" className="bg-gray-800/50 rounded-lg p-4 border border-gray-700 hover:border-amber-500/50 transition-colors cursor-pointer">
+            <Link href="/treasury" className="bg-gray-800/50 rounded-lg p-4 border border-gray-700 hover:border-amber-500/50 transition-colors cursor-pointer">
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-2 text-gray-400 text-sm">
                   <Landmark className="w-4 h-4" />
@@ -288,12 +288,12 @@ export default function GovernancePage() {
             {/* Quick Links */}
             <Card className="bg-gray-900/80 border border-gray-800">
               <CardContent className="p-4 space-y-2">
-                <Link href="/governance/treasury" className="flex items-center justify-between p-2 hover:bg-gray-800 rounded-lg transition-colors">
+                <Link href="/treasury" className="flex items-center justify-between p-2 hover:bg-gray-800 rounded-lg transition-colors">
                   <span className="text-gray-300 text-sm">Treasury Policy</span>
                   <ChevronRight className="w-4 h-4 text-gray-500" />
                 </Link>
                 {isShariaCouncil && (
-                  <Link href="/governance/sharia" className="flex items-center justify-between p-2 hover:bg-gray-800 rounded-lg transition-colors">
+                  <Link href="/sharia" className="flex items-center justify-between p-2 hover:bg-gray-800 rounded-lg transition-colors">
                     <span className="text-amber-400 text-sm">Sharia Council Panel</span>
                     <ChevronRight className="w-4 h-4 text-amber-500" />
                   </Link>

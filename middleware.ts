@@ -19,9 +19,9 @@ export default function middleware(req: NextRequest) {
 
   // Get the subdomain from the hostname
   // Examples:
-  // - governance.tawf.app -> governance
-  // - dashboard.tawf.app -> dashboard
-  // - transparency.tawf.app -> transparency
+  // - governance.tawf.xyz -> governance
+  // - dashboard.tawf.xyz -> dashboard
+  // - transparency.tawf.xyz -> transparency
   // - localhost:3000 -> (none)
   // - governance.localhost:3000 -> governance
 
@@ -35,7 +35,7 @@ export default function middleware(req: NextRequest) {
       subdomain = parts[0]
     }
   } else {
-    // For production domains (e.g., governance.tawf.app)
+    // For production domains (e.g., governance.tawf.xyz)
     const parts = hostname.split(".")
     // Check if it's a subdomain (more than 2 parts for .app, or more than 3 for .co.uk etc)
     if (parts.length > 2) {
