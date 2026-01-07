@@ -150,7 +150,7 @@ export async function fetchAllTokens(
   // Filter out tokens with zero balance
   return allTokens.filter((token) => {
     const balance = BigInt(token.balance)
-    return balance > 0n
+    return balance > BigInt(0)
   })
 }
 
