@@ -13,34 +13,38 @@ interface StakingPanelProps {
 const stakingPools = [
   {
     name: "Haqq Network",
-    apy: "12.5%",
+    estimatedYield: "12.5%",
     tvl: "$4.2M",
     chain: "Haqq",
-    halal: true,
+    shariaReviewed: true,
+    stakingType: "Proof of Stake",
     link: "https://haqq.network",
   },
   {
     name: "Base Network",
-    apy: "8.9%",
+    estimatedYield: "8.9%",
     tvl: "$12.7M",
     chain: "Base",
-    halal: true,
+    shariaReviewed: true,
+    stakingType: "Proof of Stake",
     link: "https://base.org",
   },
   {
     name: "Inshallah Finance",
-    apy: "15.2%",
+    estimatedYield: "15.2%",
     tvl: "$6.8M",
     chain: "Ethereum",
-    halal: true,
+    shariaReviewed: true,
+    stakingType: "Protocol Staking",
     link: "https://inshallah.fi",
   },
   {
     name: "Islamic Coin Staking",
-    apy: "10.3%",
+    estimatedYield: "10.3%",
     tvl: "$8.5M",
     chain: "Haqq",
-    halal: true,
+    shariaReviewed: true,
+    stakingType: "Proof of Stake",
     link: "https://islamiccoin.net",
   },
 ]
@@ -50,11 +54,26 @@ export function StakingPanel({ connected, onConnect }: StakingPanelProps) {
     <div className="max-w-4xl mx-auto">
       <div className="mb-6">
         <h1 className="text-2xl font-bold bg-gradient-to-r from-[#FFC700] to-[#ffe38a] bg-clip-text text-transparent">
-          Halal Staking Pools
+          Sharia-Reviewed Network Staking
         </h1>
         <p className="text-gray-400 text-sm mt-1">
-          Stake your assets in Shariah-compliant pools
+          Protocol staking on external networks (No Lending, No Debt)
         </p>
+      </div>
+
+      {/* External Custody Disclaimer */}
+      <div className="mb-6 p-4 bg-amber-900/20 border border-amber-600/30 rounded-lg">
+        <div className="flex items-start gap-3">
+          <div className="w-5 h-5 mt-0.5 rounded-full bg-amber-500/20 flex items-center justify-center flex-shrink-0">
+            <span className="text-amber-400 text-xs">!</span>
+          </div>
+          <div>
+            <p className="text-amber-200 text-sm font-medium">External Network Staking</p>
+            <p className="text-amber-200/70 text-xs mt-1">
+              Staking occurs on external networks. Tawf does not custody funds. Returns are non-guaranteed protocol issuance rates, not interest or yield from lending.
+            </p>
+          </div>
+        </div>
       </div>
 
       {/* Stats Overview */}
@@ -69,8 +88,9 @@ export function StakingPanel({ connected, onConnect }: StakingPanelProps) {
         </Card>
         <Card className="bg-black/95 border border-gray-800">
           <CardContent className="p-4">
-            <div className="text-sm text-gray-400">Average APY</div>
+            <div className="text-sm text-gray-400">Avg. Estimated Yield</div>
             <div className="text-2xl font-bold text-green-400">11.7%</div>
+            <div className="text-xs text-gray-500 mt-1">Non-guaranteed</div>
           </CardContent>
         </Card>
         <Card className="bg-black/95 border border-gray-800">
@@ -91,23 +111,24 @@ export function StakingPanel({ connected, onConnect }: StakingPanelProps) {
             <CardContent className="p-5">
               <div className="flex justify-between items-start">
                 <div>
-                  <div className="flex items-center space-x-2">
+                  <div className="flex items-center space-x-2 flex-wrap gap-1">
                     <h3 className="text-lg font-semibold">{pool.name}</h3>
-                    {pool.halal && (
+                    {pool.shariaReviewed && (
                       <Badge className="bg-green-500/20 text-green-400 border-green-500/30 text-xs">
-                        Halal Certified
+                        Sharia-Reviewed
                       </Badge>
                     )}
                   </div>
                   <div className="flex items-center mt-1 text-sm text-gray-400">
                     <span className="w-2 h-2 rounded-full bg-green-400 mr-2"></span>
-                    {pool.chain}
+                    {pool.chain} • {pool.stakingType}
                   </div>
                 </div>
                 <div className="text-right">
                   <div className="text-2xl font-bold bg-gradient-to-r from-[#FFC700] to-[#ffe38a] bg-clip-text text-transparent">
-                    {pool.apy} APY
+                    {pool.estimatedYield}
                   </div>
+                  <div className="text-xs text-gray-500">Est. Network Yield</div>
                   <div className="text-xs text-gray-400">TVL: {pool.tvl}</div>
                 </div>
               </div>
@@ -159,15 +180,37 @@ export function StakingPanel({ connected, onConnect }: StakingPanelProps) {
       {/* Info Card */}
       <Card className="bg-black/95 border border-gray-800 mt-6">
         <CardContent className="p-6">
-          <h3 className="text-lg font-semibold mb-3">About Halal Staking</h3>
-          <p className="text-gray-400 text-sm leading-relaxed">
-            All staking pools listed on TAWF have been reviewed for
-            Shariah-compliance. We partner with certified Islamic finance
-            scholars to ensure that staking mechanisms do not involve riba
-            (interest), gharar (excessive uncertainty), or haram activities.
-            Each pool displays its certification status and audit reports for
-            full transparency.
-          </p>
+          <h3 className="text-lg font-semibold mb-3">About Protocol Staking</h3>
+          <div className="space-y-4 text-gray-400 text-sm leading-relaxed">
+            <p>
+              Protocol staking involves locking tokens to help secure a blockchain network through Proof of Stake consensus. 
+              This is fundamentally different from lending or yield farming.
+            </p>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
+              <div className="p-3 bg-green-900/20 border border-green-600/30 rounded-lg">
+                <h4 className="text-green-400 font-medium text-sm mb-2">What Protocol Staking IS:</h4>
+                <ul className="text-xs text-gray-300 space-y-1">
+                  <li>• Network validation participation</li>
+                  <li>• Token issuance from protocol (not interest)</li>
+                  <li>• No lending or borrowing involved</li>
+                  <li>• No counterparty debt relationship</li>
+                </ul>
+              </div>
+              <div className="p-3 bg-red-900/20 border border-red-600/30 rounded-lg">
+                <h4 className="text-red-400 font-medium text-sm mb-2">What Protocol Staking is NOT:</h4>
+                <ul className="text-xs text-gray-300 space-y-1">
+                  <li>• Lending your tokens for interest</li>
+                  <li>• Yield farming or liquidity provision</li>
+                  <li>• Guaranteed returns (APY)</li>
+                  <li>• Custodied by Tawf platform</li>
+                </ul>
+              </div>
+            </div>
+            <p className="text-xs text-gray-500 mt-3">
+              Note: Sharia scholars have varying opinions on staking. The pools listed here have been reviewed, 
+              but users should consult their own scholars for personal guidance.
+            </p>
+          </div>
         </CardContent>
       </Card>
     </div>

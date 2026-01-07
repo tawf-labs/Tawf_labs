@@ -1,9 +1,10 @@
 "use client"
 
-import React from "react"
+import React, { useState } from "react"
 import { Config, WagmiProvider } from "wagmi"
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query"
 import { XellarKitProvider, defaultConfig, darkTheme } from "@xellar/kit"
+import { baseSepolia, liskSepolia } from "viem/chains"
 
 const config = defaultConfig({
   appName: "Tawf",
@@ -11,15 +12,16 @@ const config = defaultConfig({
   xellarAppId: process.env.NEXT_PUBLIC_XELLAR_APP_ID || "",
   xellarEnv: "sandbox",
   ssr: true,
+  chains: [baseSepolia, liskSepolia],
 }) as Config
-
-const queryClient = new QueryClient()
 
 export const Web3Provider = ({
   children,
 }: {
   children: React.ReactNode
 }) => {
+  const [queryClient] = useState(() => new QueryClient())
+
   return (
     <WagmiProvider config={config}>
       <QueryClientProvider client={queryClient}>

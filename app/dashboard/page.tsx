@@ -12,6 +12,7 @@ import {
   StakingPanel,
   PortfolioPanel,
   SettingsPanel,
+  ZakatCalculatorPanel,
   type PanelType,
 } from "@/components/dashboard"
 
@@ -43,6 +44,8 @@ export default function DashboardPage() {
         return <StakingPanel connected={isConnected} onConnect={handleConnect} />
       case "portfolio":
         return <PortfolioPanel connected={isConnected} onConnect={handleConnect} />
+      case "zakat calculator":
+        return <ZakatCalculatorPanel connected={isConnected} onConnect={handleConnect} />
       case "settings":
         return (
           <SettingsPanel
@@ -62,15 +65,13 @@ export default function DashboardPage() {
       <div className="min-h-screen bg-black/95 flex flex-col items-center justify-center p-6 text-center">
         <div className="max-w-md w-full bg-gray-900/80 backdrop-blur-sm rounded-2xl p-8 border border-gray-800 shadow-2xl">
           <div className="flex justify-center mb-6">
-            <div className="w-16 h-16 rounded-full bg-gradient-to-br from-amber-400 to-amber-600 shadow-lg shadow-amber-500/20 flex items-center justify-center">
-              <span className="text-amber-100 font-bold text-2xl">T</span>
-            </div>
+            <img src="/tawflogo.png" alt="TAWF Logo" className="w-16 h-16 rounded-full shadow-lg shadow-amber-500/20" />
           </div>
           <h2 className="text-2xl md:text-3xl font-bold text-white mb-2">
             Welcome to TAWF
           </h2>
           <p className="text-gray-400 mb-8">
-            Connect your wallet to access the portal and start exploring
+            Connect your wallet to access the dashboard and start exploring
             Shariah-compliant DeFi
           </p>
           <div className="flex justify-center">

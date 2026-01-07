@@ -57,7 +57,7 @@ export function SettingsPanel({
                 <div>
                   <Label className="text-gray-300">Network</Label>
                   <div className="text-sm text-gray-400 mt-1">
-                    Haqq Mainnet
+                    Base Sepolia / Lisk Sepolia
                   </div>
                 </div>
                 <Button

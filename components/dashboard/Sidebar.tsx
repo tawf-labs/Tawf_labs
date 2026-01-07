@@ -11,8 +11,10 @@ import {
   ChevronLeft,
   ChevronRight,
   Menu,
-  type LucideIcon,
+  Calculator,
+  HandHeart,
 } from "lucide-react"
+import type { LucideIcon } from "lucide-react"
 import {
   Sheet,
   SheetContent,
@@ -21,7 +23,7 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet"
 
-export type PanelType = "swap" | "bridge" | "staking" | "portfolio" | "settings"
+export type PanelType = "swap" | "bridge" | "staking" | "portfolio" | "zakat calculator" | "qurban" | "settings" 
 
 interface SidebarProps {
   activePanel: PanelType
@@ -41,6 +43,8 @@ const navItems: NavItemDef[] = [
   { id: "bridge", label: "Bridge", icon: Layers },
   { id: "staking", label: "Staking", icon: Coins },
   { id: "portfolio", label: "Portfolio", icon: Wallet },
+  { id: "zakat calculator", label: "Zakat Calculator", icon: Calculator },
+  { id: "qurban", label: "Qurban", icon: HandHeart },
   { id: "settings", label: "Settings", icon: Settings },
 ]
 

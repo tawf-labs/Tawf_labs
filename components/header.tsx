@@ -29,15 +29,51 @@ export const Header = () => {
             <Logo className="w-[100px] md:w-[120px]" />
           </Link> */}
           <nav className="flex max-lg:hidden absolute left-1/2 -translate-x-1/2 items-center justify-center gap-x-10">
-            {["About", "Dapps", "Governance", "Team", "Contact"].map((item) => (
-              <Link
-                className="uppercase inline-block font-sans font-medium text-foreground/60 hover:text-foreground/100 duration-150 transition-colors ease-out"
-                href={item === "Team" ? "/team" : `/#${item.toLowerCase()}`}
-                key={item}
-              >
-                {item}
-              </Link>
-            ))}
+            {["About", "Dapps", "Transparency", "Team", "Contact"].map((item) => {
+              if (item === "Team") {
+                return (
+                  <Link
+                    className="uppercase inline-block font-sans font-medium text-foreground/60 hover:text-foreground/100 duration-150 transition-colors ease-out"
+                    href="/team"
+                    key={item}
+                  >
+                    {item}
+                  </Link>
+                )
+              }
+              if (item === "Transparency") {
+                return (
+                  <Link
+                    className="uppercase inline-block font-sans font-medium text-foreground/60 hover:text-foreground/100 duration-150 transition-colors ease-out"
+                    href="/transparency"
+                    key={item}
+                  >
+                    {item}
+                  </Link>
+                )
+              }
+              return (
+                <Link
+                  className="uppercase inline-block font-sans font-medium text-foreground/60 hover:text-foreground/100 duration-150 transition-colors ease-out"
+                  href={`/#${item.toLowerCase()}`}
+                  key={item}
+                >
+                  {item}
+                </Link>
+              )
+            })}
+            {/* <Link
+              className="uppercase inline-block font-sans font-medium text-foreground/60 hover:text-foreground/100 duration-150 transition-colors ease-out"
+              href="/dashboard"
+            >
+              Dashboard
+            </Link> */}
+            {/* <Link
+              className="uppercase inline-block font-sans font-medium text-foreground/60 hover:text-foreground/100 duration-150 transition-colors ease-out"
+              href="/transparency"
+            >
+              Transparency
+            </Link> */}
           </nav>
           {/* <Link
             className="uppercase max-lg:hidden transition-colors ease-out duration-150 font-sans font-medium text-primary hover:text-primary/80"
