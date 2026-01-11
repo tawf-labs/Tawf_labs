@@ -8,6 +8,7 @@ import { ChevronDown } from "lucide-react"
 export const Header = () => {
   const [scrolled, setScrolled] = useState(false)
   const [openDropdown, setOpenDropdown] = useState<string | null>(null)
+  const [dropdownTimeout, setDropdownTimeout] = useState<NodeJS.Timeout | null>(null)
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20)
@@ -16,62 +17,112 @@ export const Header = () => {
     return () => window.removeEventListener("scroll", onScroll)
   }, [])
 
+  const handleMouseEnter = (label: string) => {
+    // Clear any existing timeout when mouse enters
+    if (dropdownTimeout) {
+      clearTimeout(dropdownTimeout)
+      setDropdownTimeout(null)
+    }
+    setOpenDropdown(label)
+  }
+
+  const handleMouseLeave = () => {
+    // Set a timeout to close the dropdown after 500ms
+    const timeout = setTimeout(() => {
+      setOpenDropdown(null)
+    }, 500)
+    setDropdownTimeout(timeout)
+  }
+
   const navItems = [
-    {
-      label: "Discover",
-      href: "#",
-      hasDropdown: true,
-      dropdownItems: [
-        { label: "About Us", href: "/#about" },
-        { label: "Ecosystem", href: "/#ecosystem" },
-        { label: "DApps", href: "/#dapps" },
-        { label: "Governance", href: "/governance" },
-        { label: "Team", href: "/team" },
-        { label: "Transparency", href: "/transparency" },
-      ],
-    },
-    {
-      label: "Governance",
-      href: "#",
-      hasDropdown: true,
-      dropdownItems: [
-        { label: "Overview", href: "/#governance" },
-        { label: "Portal", href: "/governance" },
-        { label: "Sharia Council", href: "/governance/sharia" },
-        { label: "Treasury", href: "/governance/treasury" },
-      ],
-    },
-    {
-      label: "Business",
-      href: "#",
-      hasDropdown: true,
-      dropdownItems: [
-        { label: "Enterprise", href: "/#enterprise" },
-        { label: "Partners", href: "/#partners" },
-        { label: "Grant Program", href: "/#grants" },
-      ],
-    },
-    {
-      label: "Builders",
-      href: "#",
-      hasDropdown: true,
-      dropdownItems: [
-        { label: "Documentation", href: "/docs" },
-        { label: "GitHub", href: "https://github.com/tawf" },
-        { label: "Bugs & Feature Requests", href: "/#feedback" },
-      ],
-    },
-    {
-      label: "Community",
-      href: "#",
-      hasDropdown: true,
-      dropdownItems: [
-        { label: "Blog", href: "/blog" },
-        { label: "Forum", href: "/forum" },
-        { label: "Events", href: "/events" },
-      ],
-    },
-  ]
+  // ─────────────────────────────
+  // Discover — What is Tawf?
+  // ─────────────────────────────
+  {
+    label: "Discover",
+    hasDropdown: true,
+    dropdownItems: [
+      { label: "About Tawf", href: "/#about" },
+      { label: "Vision & Principles", href: "/#vision" },
+      { label: "How It Works", href: "/#how-it-works" },
+      { label: "Foundation & Legal", href: "/foundation" },
+      { label: "Transparency", href: "/transparency" },
+      { label: "Team", href: "/team" },
+    ],
+  },
+
+  // ─────────────────────────────
+  // Ecosystem — What exists?
+  // ─────────────────────────────
+  {
+    label: "Ecosystem",
+    hasDropdown: true,
+    dropdownItems: [
+      { label: "DApps", href: "/#dapps" },
+      { label: "Partners", href: "/#partners" },
+      { label: "Networks & Integrations", href: "/#ecosystem" },
+    ],
+  },
+
+  // ─────────────────────────────
+  // Governance — Decision making
+  // ─────────────────────────────
+  {
+    label: "Governance",
+    hasDropdown: true,
+    dropdownItems: [
+      { label: "Overview", href: "/#governance" },
+      { label: "Portal", href: "/governance" },
+      // Future expansion:
+      // { label: "Sharia Council", href: "/governance/sharia" },
+      // { label: "Treasury", href: "/governance/treasury" },
+    ],
+  },
+
+  // ─────────────────────────────
+  // Foundation — Institutional layer
+  // ─────────────────────────────
+  // {
+  //   label: "Foundation",
+  //   hasDropdown: true,
+  //   dropdownItems: [
+  //     { label: "About the Foundation", href: "/foundation" },
+  //     { label: "Legal & Compliance", href: "/foundation/legal" },
+  //     { label: "Partnerships", href: "/#partners" },
+  //     // Future:
+  //     // { label: "Grants Program", href: "/grants" },
+  //   ],
+  // },
+
+  // ─────────────────────────────
+  // Builders — Dev & research
+  // ─────────────────────────────
+  {
+    label: "Builders",
+    hasDropdown: true,
+    dropdownItems: [
+      { label: "Documentation", href: "/docs" },
+      { label: "GitHub", href: "https://github.com/tawf-labs" },
+      { label: "Research & Papers", href: "/research" },
+      { label: "Report Bugs & Requests", href: "/#feedback" },
+    ],
+  },
+
+  // ─────────────────────────────
+  // Community — Social & coordination
+  // ─────────────────────────────
+  // {
+  //   label: "Community",
+  //   hasDropdown: true,
+  //   dropdownItems: [
+  //     { label: "Discord", href: "https://discord.gg/yzYqgzkF" },
+  //     { label: "Forum", href: "/forum" },
+  //     { label: "Events", href: "/events" },
+  //     { label: "Blog & Updates", href: "/blog" },
+  //   ],
+  // },
+];
+
 
   return (
     <div className="fixed z-50 top-0 left-0 w-full">
@@ -92,22 +143,25 @@ export const Header = () => {
               <div
                 key={item.label}
                 className="relative group"
-                onMouseEnter={() => item.hasDropdown && setOpenDropdown(item.label)}
-                onMouseLeave={() => setOpenDropdown(null)}
+                onMouseEnter={() => item.hasDropdown && handleMouseEnter(item.label)}
+                onMouseLeave={handleMouseLeave}
               >
-                <Link
-                  href={item.href}
-                  className="flex items-center gap-1 px-4 py-2 font-sans font-medium uppercase text-foreground/60 hover:text-foreground duration-150 transition-colors ease-out"
+                <div
+                  className="flex items-center gap-1 px-4 py-2 font-sans font-medium uppercase text-foreground/60 hover:text-foreground duration-150 transition-colors ease-out cursor-pointer"
                 >
                   {item.label}
                   {item.hasDropdown && (
                     <ChevronDown className="w-4 h-4 transition-transform duration-200" />
                   )}
-                </Link>
+                </div>
 
                 {/* Dropdown Menu */}
                 {item.hasDropdown && openDropdown === item.label && (
-                  <div className="absolute top-full left-0 mt-2 w-56 rounded-lg bg-black/95 backdrop-blur-xl border border-white/10 shadow-2xl overflow-hidden">
+                  <div
+                    className="absolute top-full left-0 mt-2 w-56 rounded-lg bg-black/95 backdrop-blur-xl border border-white/10 shadow-2xl overflow-hidden"
+                    onMouseEnter={() => handleMouseEnter(item.label)}
+                    onMouseLeave={handleMouseLeave}
+                  >
                     <div className="py-2">
                       {item.dropdownItems?.map((dropdownItem) => (
                         <Link
