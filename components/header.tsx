@@ -1,87 +1,140 @@
 "use client"
 
 import Link from "next/link"
-import { Logo } from "./logo"
 import { MobileMenu } from "./mobile-menu"
 import { useEffect, useState } from "react"
+import { ChevronDown } from "lucide-react"
 
 export const Header = () => {
   const [scrolled, setScrolled] = useState(false)
+  const [openDropdown, setOpenDropdown] = useState<string | null>(null)
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20)
-    // run once to set initial state (useful if page is loaded scrolled)
     onScroll()
     window.addEventListener("scroll", onScroll, { passive: true })
     return () => window.removeEventListener("scroll", onScroll)
   }, [])
 
+  const navItems = [
+    {
+      label: "Discover",
+      href: "#",
+      hasDropdown: true,
+      dropdownItems: [
+        { label: "About Us", href: "/#about" },
+        { label: "Ecosystem", href: "/#ecosystem" },
+        { label: "DApps", href: "/#dapps" },
+        { label: "Governance", href: "/governance" },
+        { label: "Team", href: "/team" },
+        { label: "Transparency", href: "/transparency" },
+      ],
+    },
+    {
+      label: "Governance",
+      href: "#",
+      hasDropdown: true,
+      dropdownItems: [
+        { label: "Overview", href: "/#governance" },
+        { label: "Portal", href: "/governance" },
+        { label: "Sharia Council", href: "/governance/sharia" },
+        { label: "Treasury", href: "/governance/treasury" },
+      ],
+    },
+    {
+      label: "Business",
+      href: "#",
+      hasDropdown: true,
+      dropdownItems: [
+        { label: "Enterprise", href: "/#enterprise" },
+        { label: "Partners", href: "/#partners" },
+        { label: "Grant Program", href: "/#grants" },
+      ],
+    },
+    {
+      label: "Builders",
+      href: "#",
+      hasDropdown: true,
+      dropdownItems: [
+        { label: "Documentation", href: "/docs" },
+        { label: "GitHub", href: "https://github.com/tawf" },
+        { label: "Bugs & Feature Requests", href: "/#feedback" },
+      ],
+    },
+    {
+      label: "Community",
+      href: "#",
+      hasDropdown: true,
+      dropdownItems: [
+        { label: "Blog", href: "/blog" },
+        { label: "Forum", href: "/forum" },
+        { label: "Events", href: "/events" },
+      ],
+    },
+  ]
+
   return (
     <div className="fixed z-50 top-0 left-0 w-full">
-      {/* Blur background - now taller and behind everything */}
       {scrolled && (
-        <div className="absolute top-0 left-0 w-full h-28 backdrop-blur-sm bg-white/30 dark:bg-black/30 border-b border-white/5 pointer-events-none" />
+        <div className="absolute top-0 left-0 w-full h-20 backdrop-blur-md bg-black/80 border-b border-white/10 pointer-events-none" />
       )}
 
-      <div className="relative pt-8 md:pt-14 transition-colors duration-200 ease-out">
-        <header className="flex items-center justify-between container">
-          {/* <Link href="/">
-            <Logo className="w-[100px] md:w-[120px]" />
-          </Link> */}
-          <nav className="flex max-lg:hidden absolute left-1/2 -translate-x-1/2 items-center justify-center gap-x-10">
-            {["About", "Dapps", "Transparency", "Team", "Contact"].map((item) => {
-              if (item === "Team") {
-                return (
-                  <Link
-                    className="uppercase inline-block font-sans font-medium text-foreground/60 hover:text-foreground/100 duration-150 transition-colors ease-out"
-                    href="/team"
-                    key={item}
-                  >
-                    {item}
-                  </Link>
-                )
-              }
-              if (item === "Transparency") {
-                return (
-                  <Link
-                    className="uppercase inline-block font-sans font-medium text-foreground/60 hover:text-foreground/100 duration-150 transition-colors ease-out"
-                    href="/transparency"
-                    key={item}
-                  >
-                    {item}
-                  </Link>
-                )
-              }
-              return (
+      <div className="relative pt-0 md:pt-0 transition-colors duration-200 ease-out">
+        <header className="flex items-center justify-between max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8">
+          {/* Left: Logo */}
+          <Link href="/" className="flex-shrink-0">
+                <img src="/logos/tawflogo.png" alt="Tawf Logo" className="w-[80px] md:w-[100px] h-auto" />
+          </Link>
+
+          {/* Center: Navigation */}
+          <nav className="hidden lg:flex items-center justify-center flex-1 mx-12">
+            {navItems.map((item) => (
+              <div
+                key={item.label}
+                className="relative group"
+                onMouseEnter={() => item.hasDropdown && setOpenDropdown(item.label)}
+                onMouseLeave={() => setOpenDropdown(null)}
+              >
                 <Link
-                  className="uppercase inline-block font-sans font-medium text-foreground/60 hover:text-foreground/100 duration-150 transition-colors ease-out"
-                  href={`/#${item.toLowerCase()}`}
-                  key={item}
+                  href={item.href}
+                  className="flex items-center gap-1 px-4 py-2 font-sans font-medium uppercase text-foreground/60 hover:text-foreground duration-150 transition-colors ease-out"
                 >
-                  {item}
+                  {item.label}
+                  {item.hasDropdown && (
+                    <ChevronDown className="w-4 h-4 transition-transform duration-200" />
+                  )}
                 </Link>
-              )
-            })}
-            {/* <Link
-              className="uppercase inline-block font-sans font-medium text-foreground/60 hover:text-foreground/100 duration-150 transition-colors ease-out"
+
+                {/* Dropdown Menu */}
+                {item.hasDropdown && openDropdown === item.label && (
+                  <div className="absolute top-full left-0 mt-2 w-56 rounded-lg bg-black/95 backdrop-blur-xl border border-white/10 shadow-2xl overflow-hidden">
+                    <div className="py-2">
+                      {item.dropdownItems?.map((dropdownItem) => (
+                        <Link
+                          key={dropdownItem.label}
+                          href={dropdownItem.href}
+                          className="block px-4 py-2.5 font-sans font-medium text-foreground/70 hover:text-foreground hover:bg-white/5 duration-150 transition-colors ease-out"
+                        >
+                          {dropdownItem.label}
+                        </Link>
+                      ))}
+                    </div>
+                  </div>
+                )}
+              </div>
+            ))}
+          </nav>
+
+          {/* Right: Dashboard Button and Mobile Menu */}
+          <div className="flex items-center gap-4">
+            <Link
               href="/dashboard"
+              className="hidden lg:inline-flex items-center justify-center px-4 py-1.5 inline-block font-sans font-medium uppercase text-black bg-white rounded-full hover:bg-white/90 duration-150 transition-colors ease-out"
             >
               Dashboard
-            </Link> */}
-            {/* <Link
-              className="uppercase inline-block font-sans font-medium text-foreground/60 hover:text-foreground/100 duration-150 transition-colors ease-out"
-              href="/transparency"
-            >
-              Transparency
-            </Link> */}
-          </nav>
-          {/* <Link
-            className="uppercase max-lg:hidden transition-colors ease-out duration-150 font-sans font-medium text-primary hover:text-primary/80"
-            href="/#contact"
-          >
-            Contact
-          </Link> */}
-          <MobileMenu />
+            </Link>
+            <MobileMenu />
+          </div>
         </header>
       </div>
     </div>

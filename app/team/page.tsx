@@ -2,6 +2,7 @@
 
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card"
 import { Header } from "@/components/header"
+import { Footer } from "@/components/footer"
 import { Github, Twitter, Linkedin, Mail } from "lucide-react"
 import Link from "next/link"
 import Image from "next/image"
@@ -216,6 +217,7 @@ export default function LabsPage() {
           </div>
         </section>
       </div>
+      <Footer />
     </main>
   )
 }   

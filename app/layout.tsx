@@ -5,6 +5,7 @@ import "./globals.css"
 import { Providers } from "./providers"
 
 
+
 const inter = Inter({
   variable: "--font-inter",
   subsets: ["latin"],
@@ -78,7 +79,11 @@ export default function RootLayout({
         className={`${inter.variable} ${spaceGrotesk.variable} ${jetbrainsMono.variable} font-sans antialiased`}
         suppressHydrationWarning
       >
-        <Providers>{children}</Providers>
+        <Providers>
+          {/* <Header /> */}
+          {children}
+         
+        </Providers>
       </body>
     </html>
   )

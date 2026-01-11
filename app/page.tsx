@@ -8,6 +8,7 @@ import { GovernanceSection } from "@/components/sections/governance"
 import { ContactSection } from "@/components/sections/contact"
 import { EcosystemSection } from "@/components/sections/ecosystem"
 import { Header } from "@/components/header"
+import { Footer } from "@/components/footer"
 
 export default function Home() {
   return (
@@ -33,6 +34,7 @@ export default function Home() {
         </div>
       </div>
       <Leva hidden />
+      <Footer />
     </main>
   )
 }

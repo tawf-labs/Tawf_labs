@@ -4,6 +4,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Progress } from "@/components/ui/progress"
 import { Header } from "@/components/header"
 import { mockFundVaults } from "@/lib/governance"
+import { Footer } from "@/components/footer"
 
 export default function TransparencyPage() {
   const totalBalance = mockFundVaults.reduce((sum, vault) => sum + vault.balance, 0)
@@ -240,6 +241,8 @@ export default function TransparencyPage() {
           </CardContent>
         </Card>
       </div>
+    <div className="mt-22" />
+    <Footer />
     </div>
   )
 }

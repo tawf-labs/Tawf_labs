@@ -17,7 +17,6 @@ export const MobileMenu = ({ className }: MobileMenuProps) => {
     { name: "About", href: "#about" },
     { name: "Dapps", href: "#dapps" },
     { name: "Governance", href: "/governance" },
-    { name: "Dashboard", href: "/dashboard" },
     { name: "Transparency", href: "/transparency" },
     { name: "Team", href: "/team" },
     { name: "Contact", href: "#contact" },
@@ -64,15 +63,8 @@ export const MobileMenu = ({ className }: MobileMenuProps) => {
               </Link>
             ))}
 
-            {/* <div className="mt-6">
-              <Link
-                href="/#contact"
-                onClick={handleLinkClick}
-                className="inline-block text-xl font-display uppercase text-primary transition-colors ease-out duration-150 hover:text-primary/80 py-2"
-              >
-                Contact
-              </Link>
-            </div> */}
+            {/* Note: Dashboard button is intentionally excluded from mobile menu.
+                It's only visible on desktop (md+ breakpoint) in the main header. */}
           </nav>
         </Dialog.Content>
       </Dialog.Portal>
