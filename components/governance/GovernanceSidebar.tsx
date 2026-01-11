@@ -105,9 +105,11 @@ function SidebarContent({
       {/* Logo */}
       <div className="flex items-center justify-between p-4 border-b border-gray-800">
         <Link href="/" className="flex items-center group">
-          <div className="w-10 h-10 rounded-full bg-gradient-to-br from-amber-400 to-amber-600 shadow-lg shadow-amber-500/20 flex items-center justify-center transform group-hover:rotate-12 transition-transform duration-300">
-            <span className="text-amber-100 font-bold text-lg">T</span>
-          </div>
+          <img
+            src="/logos/tawflogo.png"
+            alt="TAWF Logo"
+            className="w-10 h-10 rounded-full shadow-lg shadow-amber-500/20 transform group-hover:rotate-12 transition-transform duration-300 object-contain"
+          />
           {showFullContent && (
             <span className="ml-3 text-xl font-bold bg-gradient-to-r from-amber-400 via-amber-300 to-amber-200 bg-clip-text text-transparent">
               Governance

@@ -13,6 +13,14 @@ import {
   Menu,
   Calculator,
   HandHeart,
+  Heart,
+  Newspaper,
+  User,
+  Grid3X3,
+  AppWindow,
+  ExternalLink,
+  Scale,
+  MessageSquare,
 } from "lucide-react"
 import type { LucideIcon } from "lucide-react"
 import {
@@ -23,7 +31,7 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet"
 
-export type PanelType = "swap" | "bridge" | "staking" | "portfolio" | "zakat calculator" | "qurban" | "settings" 
+export type PanelType = "swap" | "bridge" | "staking" | "portfolio" | "zakat calculator" | "qurban" | "support us" | "settings" | "news" | "profile" | "dapps" 
 
 interface SidebarProps {
   activePanel: PanelType
@@ -39,12 +47,16 @@ interface NavItemDef {
 }
 
 const navItems: NavItemDef[] = [
-  { id: "swap", label: "Swap", icon: ArrowLeftRight },
-  { id: "bridge", label: "Bridge", icon: Layers },
-  { id: "staking", label: "Staking", icon: Coins },
-  { id: "portfolio", label: "Portfolio", icon: Wallet },
-  { id: "zakat calculator", label: "Zakat Calculator", icon: Calculator },
-  { id: "qurban", label: "Qurban", icon: HandHeart },
+  // { id: "swap", label: "Swap", icon: ArrowLeftRight },
+  // { id: "bridge", label: "Bridge", icon: Layers },
+  // { id: "staking", label: "Staking", icon: Coins },
+  // { id: "portfolio", label: "Portfolio", icon: Wallet },
+  // { id: "zakat calculator", label: "Zakat Calculator", icon: Calculator },
+  // { id: "qurban", label: "Qurban", icon: HandHeart },
+  { id: "news", label: "News", icon: Newspaper },
+  { id: "profile", label: "Profile", icon: User },
+  { id: "dapps", label: "DApps", icon: AppWindow },
+  { id: "support us", label: "Support Us", icon: Heart },
   { id: "settings", label: "Settings", icon: Settings },
 ]
 
@@ -105,9 +117,11 @@ function SidebarContent({
       {/* Logo */}
       <div className="flex items-center justify-between p-4 border-b border-gray-800">
         <Link href="/" className="flex items-center group">
-          <div className="w-10 h-10 rounded-full bg-gradient-to-br from-amber-400 to-amber-600 shadow-lg shadow-amber-500/20 flex items-center justify-center transform group-hover:rotate-12 transition-transform duration-300">
-            <span className="text-amber-100 font-bold text-lg">T</span>
-          </div>
+          <img
+            src="/logos/tawflogo.png"
+            alt="TAWF Logo"
+            className="w-10 h-10 rounded-full shadow-lg shadow-amber-500/20 transform group-hover:rotate-12 transition-transform duration-300 object-contain"
+          />
           {!collapsed && (
             <span className="ml-3 text-xl font-bold bg-gradient-to-r from-amber-400 via-amber-300 to-amber-200 bg-clip-text text-transparent">
               TAWF
@@ -139,6 +153,52 @@ function SidebarContent({
             onClick={() => handleClick(item.id)}
           />
         ))}
+
+        {/* External Links Divider */}
+        {/* {!collapsed && (
+          <div className="pt-4 mt-4 border-t border-gray-800">
+            <p className="px-3 text-xs text-gray-600 font-medium mb-2">EXTERNAL</p>
+          </div>
+        )} */}
+
+        {/* External Links */}
+        <Link href="/governance" className="block">
+          <div
+            className={cn(
+              "flex items-center w-full px-3 py-3 rounded-lg transition-all duration-200 group",
+              "text-gray-400 hover:text-white hover:bg-gray-800/50"
+            )}
+          >
+            <Scale className="w-5 h-5 flex-shrink-0" />
+            {!collapsed && (
+              <>
+                <span className="ml-3 text-sm font-medium whitespace-nowrap flex-1 text-left">
+                  Governance
+                </span>
+                <ExternalLink className="w-3 h-3 text-gray-500 group-hover:text-amber-400 transition-colors" />
+              </>
+            )}
+          </div>
+        </Link>
+
+        <Link href="/forum" className="block">
+          <div
+            className={cn(
+              "flex items-center w-full px-3 py-3 rounded-lg transition-all duration-200 group",
+              "text-gray-400 hover:text-white hover:bg-gray-800/50"
+            )}
+          >
+            <MessageSquare className="w-5 h-5 flex-shrink-0" />
+            {!collapsed && (
+              <>
+                <span className="ml-3 text-sm font-medium whitespace-nowrap flex-1 text-left">
+                  Forum
+                </span>
+                <ExternalLink className="w-3 h-3 text-gray-500 group-hover:text-amber-400 transition-colors" />
+              </>
+            )}
+          </div>
+        </Link>
       </nav>
 
       {/* Footer */}

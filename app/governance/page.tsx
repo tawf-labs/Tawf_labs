@@ -205,7 +205,7 @@ export default function GovernancePage() {
                 <ChevronRight className="w-4 h-4 text-gray-500" />
               </div>
               <div className="text-2xl font-bold text-white mt-1">{formatNumber(mockDAOStats.totalMembers)}</div>
-              <div className="text-xs text-gray-500">{formatNumber(mockDAOStats.tokenHolders)} DID holders</div>
+              <div className="text-xs text-gray-500">{formatNumber(mockDAOStats.didHolders)} DID holders</div>
             </div>
 
             <div className="bg-gray-800/50 rounded-lg p-4 border border-gray-700 hover:border-gray-600 transition-colors cursor-pointer">

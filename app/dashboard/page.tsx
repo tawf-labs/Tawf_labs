@@ -13,11 +13,15 @@ import {
   PortfolioPanel,
   SettingsPanel,
   ZakatCalculatorPanel,
+  NewsPanel,
+  ProfilePanel,
+  DAppsPanel,
+  SupportUsPanel,
   type PanelType,
 } from "@/components/dashboard"
 
 export default function DashboardPage() {
-  const [activePanel, setActivePanel] = useState<PanelType>("swap")
+  const [activePanel, setActivePanel] = useState<PanelType>("support us")
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false)
 
   const { address, isConnected } = useAccount()
@@ -46,6 +50,14 @@ export default function DashboardPage() {
         return <PortfolioPanel connected={isConnected} onConnect={handleConnect} />
       case "zakat calculator":
         return <ZakatCalculatorPanel connected={isConnected} onConnect={handleConnect} />
+      case "support us":
+        return <SupportUsPanel connected={isConnected} />
+      case "news":
+        return <NewsPanel connected={isConnected} />
+      case "profile":
+        return <ProfilePanel connected={isConnected} account={address || null} />
+      case "dapps":
+        return <DAppsPanel connected={isConnected} />
       case "settings":
         return (
           <SettingsPanel
@@ -55,7 +67,7 @@ export default function DashboardPage() {
           />
         )
       default:
-        return <SwapPanel connected={isConnected} onConnect={handleConnect} />
+        return <SupportUsPanel connected={isConnected} />
     }
   }
 

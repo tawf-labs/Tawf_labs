@@ -88,7 +88,7 @@ export interface SpendingCategory {
 // DAO Stats for Tally-style header
 export interface DAOStats {
   totalMembers: number
-  tokenHolders: number
+  didHolders: number
   activeProposals: number
   totalProposals: number
   treasuryBalance: number
@@ -455,7 +455,7 @@ export const mockTreasuryPolicy: TreasuryPolicy = {
 // Mock DAO Stats
 export const mockDAOStats: DAOStats = {
   totalMembers: 7842,
-  tokenHolders: 8820,
+  didHolders: 8820,
   activeProposals: 2,
   totalProposals: 12,
   treasuryBalance: 2747000, // Sum of all vaults
