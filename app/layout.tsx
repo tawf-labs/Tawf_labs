@@ -80,9 +80,10 @@ export default function RootLayout({
         suppressHydrationWarning
       >
         <Providers>
-          {/* <Header /> */}
+          <div id="main-content" tabIndex={-1} className="sr-only">
+            Main content
+          </div>
           {children}
-         
         </Providers>
       </body>
     </html>

@@ -126,6 +126,47 @@
   body {
     @apply bg-background text-foreground;
   }
+
+  /* Better focus-visible styles for accessibility */
+  *:focus-visible {
+    outline-style: solid;
+    outline-width: 2px;
+    outline-offset: 2px;
+  }
+
+  /* Remove outline for mouse users, keep for keyboard */
+  *:focus:not(:focus-visible) {
+    outline: none;
+  }
+
+  /* Ensure skip link is visible on focus */
+  .skip-link {
+    position: absolute;
+    top: -100%;
+    left: 16px;
+    padding: 8px 16px;
+    background-color: hsl(var(--primary));
+    color: hsl(var(--primary-foreground));
+    text-decoration: none;
+    border-radius: 6px;
+    z-index: 9999;
+  }
+
+  .skip-link:focus {
+    top: 16px;
+  }
+
+  /* Improved focus for interactive elements */
+  a:focus-visible,
+  button:focus-visible,
+  [role="button"]:focus-visible,
+  input:focus-visible,
+  textarea:focus-visible,
+  select:focus-visible {
+    outline-color: hsl(var(--ring));
+    outline-width: 2px;
+    outline-offset: 2px;
+  }
 }
 
 @layer utilities {

@@ -12,8 +12,11 @@ export function ContactSection() {
             <p className="font-sans text-base sm:text-lg text-foreground/80 mb-6 sm:mb-8 max-w-2xl text-soft-glow leading-relaxed">
               Looking to launch a Sharia-aligned application or partner on governance design? Let's connect.
             </p>
-            <a href="mailto:mzidanfatonie@tawf.xyz">
-              <Button>[Chat with us]</Button>
+            <a
+              href="mailto:mzidanfatonie@tawf.xyz"
+              className="focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FFC700]/50 focus-visible:ring-offset-2 focus-visible:ring-offset-background rounded-md inline-block"
+            >
+              <Button aria-label="Send email to Tawf Labs">[Chat with us]</Button>
             </a>
           </div>
         </div>

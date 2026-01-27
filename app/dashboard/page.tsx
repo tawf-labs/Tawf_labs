@@ -79,9 +79,9 @@ export default function DashboardPage() {
           <div className="flex justify-center mb-6">
             <img src="/tawflogo.png" alt="TAWF Logo" className="w-16 h-16 rounded-full shadow-lg shadow-amber-500/20" />
           </div>
-          <h2 className="text-2xl md:text-3xl font-bold text-white mb-2">
+          <h1 className="text-2xl md:text-3xl font-bold text-white mb-2">
             Welcome to TAWF
-          </h2>
+          </h1>
           <p className="text-gray-400 mb-8">
             Connect your wallet to access the dashboard and start exploring
             Shariah-compliant DeFi
@@ -106,7 +106,7 @@ export default function DashboardPage() {
         />
 
         {/* Main Content */}
-        <main className="flex-1 overflow-y-auto bg-black/95">
+        <main id="main-content" className="flex-1 overflow-y-auto bg-black/95" tabIndex={-1}>
           {/* Mobile Header */}
           <div className="md:hidden flex items-center justify-between p-4 border-b border-gray-800">
             <MobileSidebarTrigger
@@ -134,9 +134,9 @@ export default function DashboardPage() {
           </div>
 
           {/* Desktop Header */}
-          <div className="hidden md:flex items-center justify-end p-4 border-b border-gray-800">
+          <header className="hidden md:flex items-center justify-end p-4 border-b border-gray-800">
             <ConnectButton />
-          </div>
+          </header>
 
           {/* Panel Content */}
           <div className="p-4 sm:p-6">{renderContent()}</div>

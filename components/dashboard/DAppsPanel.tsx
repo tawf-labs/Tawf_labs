@@ -11,19 +11,29 @@ import {
   ArrowUpRight,
   ExternalLink,
   TrendingUp,
+  Beef,
   Shield,
   Users,
   Wrench,
   Coins,
-  ArrowRight
+  ArrowRight,
+  Sheet,
+  Lock,
+  Vote,
+  MessageSquare,
+  Handshake,
+  Scale,
+  Star,
+  Landmark
 } from "lucide-react"
+import type { LucideIcon } from "lucide-react"
 
 interface DApp {
   id: string
   name: string
   description: string
   category: "DeFi" | "Identity" | "Governance" | "Utilities"
-  icon: string
+  icon: LucideIcon
   status: "live" | "beta" | "coming-soon"
   link: string
   tags: string[]
@@ -35,7 +45,7 @@ const mockDApps: DApp[] = [
     name: "zkt.app",
     description: "Calculate, verify, and distribute Zakat with auditability and privacy via ZK proofs.",
     category: "DeFi",
-    icon: "🕌",
+    icon: Sheet,
     status: "live",
     link: "https://zkt.app",
     tags: ["Zakat", "DeFi", "ZK Proofs"]
@@ -45,7 +55,7 @@ const mockDApps: DApp[] = [
     name: "qrbn.app",
     description: "End-to-end Qurbani procurement and proof-of-fulfillment using blockchain.",
     category: "Utilities",
-    icon: "🐑",
+    icon: Beef,
     status: "live",
     link: "https://qrbn.app",
     tags: ["Qurban", "Utilities", "Tracking"]
@@ -231,65 +241,73 @@ export function DAppsPanel({ connected }: { connected: boolean }) {
 
       {/* DApps Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-        {filteredDApps.map(dapp => (
-          <Card
-            key={dapp.id}
-            className="bg-gray-900/80 border border-gray-800 hover:border-gray-700 transition-all hover:scale-[1.02] group"
-          >
-            <CardHeader>
-              <div className="flex items-start justify-between mb-3">
-                <div className="flex items-center gap-3">
-                  <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-amber-400/20 to-amber-600/20 flex items-center justify-center text-2xl">
-                    {dapp.icon}
-                  </div>
-                  <div>
-                    <CardTitle className="text-white text-lg">{dapp.name}</CardTitle>
-                    <Badge className={`${getStatusColor(dapp.status)} text-xs mt-1`}>
-                      {dapp.status === "live" ? "● Live" :
-                       dapp.status === "beta" ? "β Beta" : "Coming Soon"}
-                    </Badge>
+        {filteredDApps.map(dapp => {
+          const Icon = dapp.icon
+          return (
+            <Card
+              key={dapp.id}
+              className="bg-gray-900/80 border border-gray-800 hover:border-gray-700 transition-all hover:scale-[1.02] group cursor-pointer focus-visible:ring-2 focus-visible:ring-[#FFC700]/50 focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+              interactive={true}
+            >
+              <CardHeader>
+                <div className="flex items-start justify-between mb-3">
+                  <div className="flex items-center gap-3">
+                    <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-amber-400/20 to-amber-600/20 flex items-center justify-center text-amber-400">
+                      <Icon className="w-6 h-6" aria-hidden="true" />
+                    </div>
+                    <div>
+                      <CardTitle className="text-white text-lg">{dapp.name}</CardTitle>
+                      <Badge className={`${getStatusColor(dapp.status)} text-xs mt-1`}>
+                        {dapp.status === "live" ? "● Live" :
+                         dapp.status === "beta" ? "β Beta" : "Coming Soon"}
+                      </Badge>
+                    </div>
                   </div>
                 </div>
-              </div>
-            </CardHeader>
-            <CardContent>
-              <p className="text-gray-400 text-sm mb-4 line-clamp-2">
-                {dapp.description}
-              </p>
+              </CardHeader>
+              <CardContent>
+                <p className="text-gray-400 text-sm mb-4 line-clamp-2">
+                  {dapp.description}
+                </p>
 
-              {/* Tags */}
-              <div className="flex flex-wrap gap-2 mb-4">
-                {dapp.tags.slice(0, 3).map(tag => (
-                  <span
-                    key={tag}
-                    className="px-2 py-1 bg-gray-800 text-gray-400 text-xs rounded"
+                {/* Tags */}
+                <div className="flex flex-wrap gap-2 mb-4">
+                  {dapp.tags.slice(0, 3).map(tag => (
+                    <span
+                      key={tag}
+                      className="px-2 py-1 bg-gray-800 text-gray-400 text-xs rounded"
+                    >
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+
+                {/* Action Button */}
+                {dapp.status !== "coming-soon" ? (
+                  <a
+                    href={dapp.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center justify-center w-full px-4 py-2 bg-amber-600 hover:bg-amber-700 text-white rounded-lg transition-colors group-hover:bg-amber-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-500 focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+                    aria-label={`Launch ${dapp.name} DApp`}
                   >
-                    {tag}
-                  </span>
-                ))}
-              </div>
-
-              {/* Action Button */}
-              {dapp.status !== "coming-soon" ? (
-                <a
-                  href={dapp.link}
-                  className="flex items-center justify-center w-full px-4 py-2 bg-amber-600 hover:bg-amber-700 text-white rounded-lg transition-colors group-hover:bg-amber-500"
-                >
-                  Launch DApp
-                  <ArrowUpRight className="w-4 h-4 ml-2 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
-                </a>
-              ) : (
-                <Button
-                  variant="outline"
-                  disabled
-                  className="w-full border-gray-700 text-gray-500"
-                >
-                  Coming Soon
-                </Button>
-              )}
-            </CardContent>
-          </Card>
-        ))}
+                    Launch DApp
+                    <ArrowUpRight className="w-4 h-4 ml-2 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" aria-hidden="true" />
+                  </a>
+                ) : (
+                  <Button
+                    variant="outline"
+                    disabled
+                    className="w-full border-gray-700 text-gray-500"
+                    aria-label={`${dapp.name} is coming soon`}
+                  >
+                    Coming Soon
+                  </Button>
+                )}
+              </CardContent>
+            </Card>
+          )
+        })}
       </div>
     </div>
   )

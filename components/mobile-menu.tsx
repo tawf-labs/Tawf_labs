@@ -30,8 +30,13 @@ export const MobileMenu = ({ className }: MobileMenuProps) => {
     <Dialog.Root modal={false} open={isOpen} onOpenChange={setIsOpen}>
       <Dialog.Trigger asChild>
         <button
-          className={cn("group lg:hidden p-2 text-foreground transition-colors", className)}
+          className={cn(
+            "group lg:hidden p-2 text-foreground transition-all duration-200 rounded-md",
+            "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring",
+            className
+          )}
           aria-label="Open menu"
+          aria-expanded={isOpen}
         >
           <Menu className="group-[[data-state=open]]:hidden" size={24} />
           <X className="hidden group-[[data-state=open]]:block" size={24} />
@@ -49,15 +54,16 @@ export const MobileMenu = ({ className }: MobileMenuProps) => {
           }}
           className="fixed top-0 left-0 w-full z-40 py-28 md:py-40"
         >
-          <Dialog.Title className="sr-only">Menu</Dialog.Title>
+          <Dialog.Title className="sr-only">Mobile Navigation Menu</Dialog.Title>
 
-          <nav className="flex flex-col space-y-6 container mx-auto">
-            {menuItems.map((item) => (
+          <nav className="flex flex-col space-y-6 container mx-auto" aria-label="Mobile navigation">
+            {menuItems.map((item, index) => (
               <Link
                 key={item.name}
                 href={item.href}
                 onClick={handleLinkClick}
-                className="text-xl font-display uppercase text-foreground/60 transition-colors ease-out duration-150 hover:text-foreground/100 py-2"
+                className="text-xl font-display uppercase text-foreground/60 transition-all duration-200 ease-out hover:text-foreground/100 py-2 px-4 rounded-md focus-visible:outline-none focus-visible:bg-white/10 focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-inset"
+                tabIndex={isOpen ? 0 : -1}
               >
                 {item.name}
               </Link>

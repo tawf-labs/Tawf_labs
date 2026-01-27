@@ -38,6 +38,8 @@ export const Footer = () => {
     { icon: Send, href: "https://t.me/tawf", label: "Telegram" },
   ]
 
+  const linkClassName = "text-sm text-foreground/60 hover:text-foreground transition-all duration-200 rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background py-1 px-1 -mx-1"
+
   return (
     <footer className="relative z-10 bg-black border-t border-white/10">
       <div className="mx-auto px-4 sm:px-6 lg:px-8 container">
@@ -45,8 +47,11 @@ export const Footer = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-12">
             {/* Logo and Description - spans 2 columns on large screens */}
             <div className="lg:col-span-2">
-              <Link href="/" className="inline-block mb-6">
-                <img src="/logos/tawflogo.png" alt="Tawf Logo" className="w-[80px] h-auto" />
+              <Link
+                href="/"
+                className="inline-block mb-6 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring rounded-md"
+              >
+                <img src="/logos/tawflogo.png" alt="Tawf Logo - Home" className="w-[80px] h-auto" />
               </Link>
               <p className="text-sm text-foreground/60 leading-relaxed max-w-sm">
                 Tawf is a Sharia-first Web3 ecosystem providing on-chain zakat, waqf, and qurban infrastructure, governed by a dual-layer DAO with zero-knowledge Sharia oversight.
@@ -61,7 +66,7 @@ export const Footer = () => {
                   <li key={link.label}>
                     <Link
                       href={link.href}
-                      className="text-sm text-foreground/60 hover:text-foreground transition-colors duration-200"
+                      className={linkClassName}
                     >
                       {link.label}
                     </Link>
@@ -78,7 +83,7 @@ export const Footer = () => {
                   <li key={link.label}>
                     <Link
                       href={link.href}
-                      className="text-sm text-foreground/60 hover:text-foreground transition-colors duration-200"
+                      className={linkClassName}
                     >
                       {link.label}
                     </Link>
@@ -95,7 +100,7 @@ export const Footer = () => {
                   <li key={link.label}>
                     <Link
                       href={link.href}
-                      className="text-sm text-foreground/60 hover:text-foreground transition-colors duration-200"
+                      className={linkClassName}
                     >
                       {link.label}
                     </Link>
@@ -112,7 +117,7 @@ export const Footer = () => {
                   <li key={link.label}>
                     <Link
                       href={link.href}
-                      className="text-sm text-foreground/60 hover:text-foreground transition-colors duration-200"
+                      className={linkClassName}
                     >
                       {link.label}
                     </Link>
@@ -129,7 +134,7 @@ export const Footer = () => {
                 © {new Date().getFullYear()} Tawf. All rights reserved.
               </p>
 
-              <div className="flex items-center gap-4">
+              <nav className="flex items-center gap-4" aria-label="Social media links">
                 {socialLinks.map((social) => {
                   const Icon = social.icon
                   return (
@@ -138,14 +143,14 @@ export const Footer = () => {
                       href={social.href}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="w-10 h-10 flex items-center justify-center rounded-full bg-white/5 hover:bg-white/10 text-foreground/60 hover:text-foreground transition-all duration-200"
-                      aria-label={social.label}
+                      className="w-10 h-10 flex items-center justify-center rounded-full bg-white/5 hover:bg-white/10 text-foreground/60 hover:text-foreground transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+                      aria-label={`Visit Tawf on ${social.label}`}
                     >
-                      <Icon className="w-5 h-5" />
+                      <Icon className="w-5 h-5" aria-hidden="true" />
                     </Link>
                   )
                 })}
-              </div>
+              </nav>
             </div>
           </div>
         </div>

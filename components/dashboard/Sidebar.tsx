@@ -77,16 +77,20 @@ function NavItem({
       onClick={onClick}
       className={cn(
         "flex items-center w-full px-3 py-3 rounded-lg transition-all duration-200 group",
+        "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FFC700]/50 focus-visible:ring-offset-2 focus-visible:ring-offset-background",
         active
           ? "bg-gradient-to-r from-[#FFC700]/20 to-[#ffe38a]/10 border border-[#FFC700]/30 text-white"
           : "text-gray-400 hover:text-white hover:bg-gray-800/50"
       )}
+      aria-current={active ? "page" : undefined}
+      aria-label={`${item.label} panel${active ? " (active)" : ""}`}
     >
       <Icon
         className={cn(
           "w-5 h-5 flex-shrink-0",
           active ? "text-[#FFC700]" : "text-gray-400 group-hover:text-white"
         )}
+        aria-hidden="true"
       />
       {!collapsed && (
         <span className="ml-3 text-sm font-medium whitespace-nowrap">

@@ -2,12 +2,20 @@ import * as React from 'react'
 
 import { cn } from '@/lib/utils'
 
-function Card({ className, ...props }: React.ComponentProps<'div'>) {
+export interface CardProps extends React.ComponentProps<'div'> {
+  /**
+   * Whether the card is interactive (clickable). Adds cursor-pointer and hover effects.
+   */
+  interactive?: boolean
+}
+
+function Card({ className, interactive, ...props }: CardProps) {
   return (
     <div
       data-slot="card"
       className={cn(
-        'bg-card text-card-foreground flex flex-col gap-6 rounded-xl border py-6 shadow-sm',
+        'bg-card text-card-foreground flex flex-col gap-6 rounded-xl border py-6 shadow-sm transition-all duration-200',
+        interactive && 'cursor-pointer hover:shadow-md hover:border-primary/50 focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 outline-none',
         className,
       )}
       {...props}

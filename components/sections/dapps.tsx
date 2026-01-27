@@ -41,14 +41,14 @@ export function DappsSection() {
             <h2 className="bg-clip-text bg-gradient-to-r from-[#FFC700] to-[#ffe38a] mb-8 sm:mb-10 font-display text-transparent text-3xl sm:text-4xl md:text-5xl">
               Dapps
             </h2>
-            <Smartphone className="-mt-8 w-12 h-12 text-foreground/80" />
+            <Smartphone className="-mt-8 w-12 h-12 text-foreground/80" aria-hidden="true" />
           </div>
 
           <div className="gap-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
             {apps.map((app) => (
               <Card
                 key={app.name}
-                className="bg-black/30 backdrop-blur border-border/60"
+                className="bg-black/30 backdrop-blur border-border/60 transition-all duration-200 hover:border-border/80 hover:shadow-lg focus-within:ring-2 focus-within:ring-[#FFC700]/50"
               >
                 <CardHeader>
                   <CardTitle className="font-display text-xl">
@@ -69,8 +69,9 @@ export function DappsSection() {
                         app.href.startsWith("http") ? "_blank" : undefined
                       }
                       rel="noopener noreferrer"
+                      className="focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FFC700]/50 focus-visible:ring-offset-2 focus-visible:ring-offset-background rounded-md"
                     >
-                      <Button>[Open]</Button>
+                      <Button aria-label={`Open ${app.name}`}>[Open]</Button>
                     </Link>
                   </div>
                 </CardContent>

@@ -144,7 +144,8 @@ export function EcosystemSection() {
                   href={partner.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group relative flex justify-center items-center bg-background/50 hover:shadow-[0_0_30px_rgba(255,199,0,0.2)] backdrop-blur-sm p-3 md:p-4 border hover:border-[#FFC700]/50 border-border/20 rounded-2xl w-24 sm:w-28 md:w-32 h-24 sm:h-28 md:h-32 transition-all duration-300"
+                  className="group relative flex justify-center items-center bg-background/50 hover:shadow-[0_0_30px_rgba(255,199,0,0.2)] backdrop-blur-sm p-3 md:p-4 border hover:border-[#FFC700]/50 border-border/20 rounded-2xl w-24 sm:w-28 md:w-32 h-24 sm:h-28 md:h-32 transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FFC700]/50 focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+                  aria-label={`Visit ${partner.name} website`}
                 >
                   <div className="relative w-full h-full">
                     <Image
@@ -156,7 +157,7 @@ export function EcosystemSection() {
                       sizes="(max-width: 640px) 80px, 100px"
                     />
                   </div>
-                  <span className="-bottom-7 absolute opacity-0 group-hover:opacity-100 text-foreground/70 text-xs sm:text-sm whitespace-nowrap transition-opacity duration-300">
+                  <span className="-bottom-7 absolute opacity-0 group-hover:opacity-100 text-foreground/70 text-xs sm:text-sm whitespace-nowrap transition-opacity duration-200" aria-hidden="true">
                     {partner.name}
                   </span>
                 </a>
@@ -165,17 +166,20 @@ export function EcosystemSection() {
           </div>
         </div>
 
-        <div className="flex justify-center gap-2 mt-8 sm:mt-12">
+        <div className="flex justify-center gap-2 mt-8 sm:mt-12" role="tablist" aria-label="Partner groups">
           {Array.from({ length: totalGroups }).map((_, i) => (
             <button
               key={i}
               onClick={() => setCurrentIndex(i)}
-              className={`h-2 rounded-full transition-all ${
+              className={`h-2 rounded-full transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FFC700]/50 focus-visible:ring-offset-2 focus-visible:ring-offset-background${
                 currentIndex === i
                   ? "bg-[#FFC700] w-8"
                   : "bg-foreground/20 w-3 hover:bg-foreground/40"
               }`}
-              aria-label={`Go to partner group ${i + 1}`}
+              aria-label={`Show partner group ${i + 1}`}
+              aria-selected={currentIndex === i}
+              role="tab"
+              tabIndex={currentIndex === i ? 0 : -1}
             />
           ))}
         </div>

@@ -32,12 +32,32 @@ export function ZakatCalculatorPanel({ connected, onConnect }: ZakatCalculatorPa
   const [peopleCount, setPeopleCount] = useState("")
   const [hasDeductions, setHasDeductions] = useState(false)
   const [expenses, setExpenses] = useState("")
+  const [errors, setErrors] = useState<{ monthlyIncome?: string; peopleCount?: string; expenses?: string }>({})
 
   // Zakat constants
   const goldPrice = 2650.0 // USD per oz
   const nisabThreshold = 7296.88 // USD (85g gold)
   const zakatRate = 2.5
   const fitrahPerPerson = 15 // USD equivalent
+
+  const validateInputs = () => {
+    const newErrors: typeof errors = {}
+
+    if (monthlyIncome && (isNaN(parseFloat(monthlyIncome)) || parseFloat(monthlyIncome) < 0)) {
+      newErrors.monthlyIncome = "Please enter a valid positive number"
+    }
+
+    if (peopleCount && (isNaN(parseFloat(peopleCount)) || parseFloat(peopleCount) < 1 || !Number.isInteger(parseFloat(peopleCount)))) {
+      newErrors.peopleCount = "Please enter a valid whole number (minimum 1)"
+    }
+
+    if (expenses && (isNaN(parseFloat(expenses)) || parseFloat(expenses) < 0)) {
+      newErrors.expenses = "Please enter a valid positive number"
+    }
+
+    setErrors(newErrors)
+    return Object.keys(newErrors).length === 0
+  }
 
   const calculateZakat = () => {
     if (!monthlyIncome || monthlyIncome.trim() === "") return 0
@@ -193,19 +213,31 @@ export function ZakatCalculatorPanel({ connected, onConnect }: ZakatCalculatorPa
 
                     {/* Income Input */}
                     <div>
-                      <label className="block text-sm font-medium text-gray-300 mb-2">
+                      <label htmlFor="monthly-income" className="block text-sm font-medium text-gray-300 mb-2">
                         {incomeType === "monthly" ? "Monthly Income*" : "Yearly Income*"}
                       </label>
                       <div className="relative">
-                        <span className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400">$</span>
+                        <span className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400" aria-hidden="true">$</span>
                         <Input
+                          id="monthly-income"
                           type="number"
                           value={monthlyIncome}
-                          onChange={(e) => setMonthlyIncome(e.target.value)}
+                          onChange={(e) => {
+                            setMonthlyIncome(e.target.value)
+                            if (errors.monthlyIncome) setErrors({ ...errors, monthlyIncome: undefined })
+                          }}
+                          onBlur={validateInputs}
                           placeholder={`Enter your ${incomeType} income in USD`}
                           className="pl-8 bg-gray-900/50 border-gray-700 text-white placeholder:text-gray-500 focus:border-[#FFC700] focus:ring-[#FFC700]/50"
+                          aria-invalid={errors.monthlyIncome ? "true" : undefined}
+                          aria-describedby={errors.monthlyIncome ? "monthly-income-error" : undefined}
                         />
                       </div>
+                      {errors.monthlyIncome && (
+                        <p id="monthly-income-error" className="text-red-400 text-xs mt-1" role="alert">
+                          {errors.monthlyIncome}
+                        </p>
+                      )}
                     </div>
 
                     {/* Advanced Options Toggle */}
@@ -240,24 +272,37 @@ export function ZakatCalculatorPanel({ connected, onConnect }: ZakatCalculatorPa
                         {/* Expenses Input */}
                         {hasDeductions && (
                           <div>
-                            <label className="block text-sm font-medium text-gray-300 mb-2">
+                            <label htmlFor="expenses-input" className="block text-sm font-medium text-gray-300 mb-2">
                               Expenses (USD)
                             </label>
                             <div className="relative">
-                              <span className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400">
+                              <span className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400" aria-hidden="true">
                                 $
                               </span>
                               <Input
+                                id="expenses-input"
                                 type="number"
                                 value={expenses}
-                                onChange={(e) => setExpenses(e.target.value)}
+                                onChange={(e) => {
+                                  setExpenses(e.target.value)
+                                  if (errors.expenses) setErrors({ ...errors, expenses: undefined })
+                                }}
+                                onBlur={validateInputs}
                                 placeholder="Enter your expenses in USD"
                                 className="pl-8 bg-gray-900/50 border-gray-700 text-white placeholder:text-gray-500 focus:border-[#FFC700] focus:ring-[#FFC700]/50"
+                                aria-invalid={errors.expenses ? "true" : undefined}
+                                aria-describedby={errors.expenses ? "expenses-error" : "expenses-help"}
                               />
                             </div>
-                            <p className="text-xs text-gray-500 mt-1">
-                              Optional: Enter your work-related or other deductible expenses
-                            </p>
+                            {errors.expenses ? (
+                              <p id="expenses-error" className="text-red-400 text-xs mt-1" role="alert">
+                                {errors.expenses}
+                              </p>
+                            ) : (
+                              <p id="expenses-help" className="text-xs text-gray-500 mt-1">
+                                Optional: Enter your work-related or other deductible expenses
+                              </p>
+                            )}
                           </div>
                         )}
                       </div>
@@ -326,17 +371,30 @@ export function ZakatCalculatorPanel({ connected, onConnect }: ZakatCalculatorPa
 
                 {/* People Count Input */}
                 <div>
-                  <label className="block text-sm font-medium text-gray-300 mb-2">
+                  <label htmlFor="people-count" className="block text-sm font-medium text-gray-300 mb-2">
                     Number of People
                   </label>
                   <Input
+                    id="people-count"
                     type="number"
                     value={peopleCount}
-                    onChange={(e) => setPeopleCount(e.target.value)}
+                    onChange={(e) => {
+                      setPeopleCount(e.target.value)
+                      if (errors.peopleCount) setErrors({ ...errors, peopleCount: undefined })
+                    }}
+                    onBlur={validateInputs}
                     placeholder="Enter number of people"
                     min="1"
+                    step="1"
                     className="bg-gray-900/50 border-gray-700 text-white placeholder:text-gray-500 focus:border-[#FFC700] focus:ring-[#FFC700]/50"
+                    aria-invalid={errors.peopleCount ? "true" : undefined}
+                    aria-describedby={errors.peopleCount ? "people-count-error" : undefined}
                   />
+                  {errors.peopleCount && (
+                    <p id="people-count-error" className="text-red-400 text-xs mt-1" role="alert">
+                      {errors.peopleCount}
+                    </p>
+                  )}
                 </div>
 
                 {/* Calculation Breakdown */}
