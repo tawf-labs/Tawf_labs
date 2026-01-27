@@ -26,7 +26,7 @@ export default function LabsPage() {
     {
       name: "Muhammad Zidan Fatonie",
       role: "Founder & CEO",
-      bio: "Cryptography researcher specializing in zero-knowledge proofs and privacy-preserving protocols for Islamic finance.",
+      bio: "Cryptography researcher focused on zero-knowledge proofs and privacy protocols for Islamic finance.",
       initials: "MZ",
       image: "/zidan.jpg",
       socials: {
@@ -36,51 +36,48 @@ export default function LabsPage() {
       },
     },
     {
-      name: "Brehmada",
+      name: "Bhremada Fevreano",
       role: "CTO & Co-Founder",
-      bio: "Islamic scholar and blockchain consultant ensuring all protocols align with Sharia principles and contemporary fiqh.",
-      initials: "FR",
+      bio: "Cybersecurity specialist with national CTF finalist experience, focused on blockchain security and smart contract auditing.",
+      initials: "BF",
+      image: "/bhre.jpg",
       socials: {
-        linkedin: "https://linkedin.com",
-        email: "mailto:fatima@tawf.app",
+        linkedin: "https://www.linkedin.com/in/bhremada-fevreano/",
       },
     },
     {
       name: "Marcellino Asanuddin",
       role: "Relations and Operations",
-      bio: "Full-stack blockchain developer building secure, scalable infrastructure for decentralized Islamic applications.",
-      initials: "OK",
+      bio: "Operations lead connecting partners and communities with Tawf's vision for Sharia-compliant Web3 infrastructure.",
+      initials: "MA",
       image: "/marcel.jpg",
       socials: {
-        github: "https://github.com",
-        twitter: "https://twitter.com",
+        linkedin: "https://www.linkedin.com/in/marcellino-asanuddin/",
       },
     },
     {
       name: "Maulana Asykari Muhammad",
       role: "CBO",
-      bio: "Solidity expert focused on developing auditable and transparent smart contracts for zakat and qurbani distribution.",
-      initials: "ZI",
+      bio: "Business strategist driving adoption of transparent smart contracts for zakat, qurbani, and Islamic charitable distribution.",
+      initials: "MA",
       image: "/maul.jpg",
       socials: {
-        github: "https://github.com",
         linkedin: "https://www.linkedin.com/in/maulanasykari",
       },
     },
     {
       name: "Abdul Latif",
       role: "Lead Designer",
-      bio: "Specialized in designing efficient zero-knowledge circuits for private wealth verification and compliance attestations.",
-      initials: "YM",
+      bio: "Designer crafting intuitive interfaces that make complex Web3 and zero-knowledge technology accessible to everyone.",
+      initials: "AL",
       socials: {
-        github: "https://github.com",
-        twitter: "https://twitter.com",
+        linkedin: "https://www.linkedin.com/in/abdul-latif-2999b6282/",
       },
     },
     {
       name: "Riyan Ainur Rahman",
       role: "Lead Developer",
-      bio: "Full-stack blockchain developer building secure, scalable infrastructure for decentralized Islamic applications.",
+      bio: "Full-stack developer architecting secure, scalable infrastructure for decentralized Islamic applications.",
       initials: "RR",
       image: "/riyan.jpg",
       socials: {
@@ -107,7 +104,7 @@ export default function LabsPage() {
                   Tawf Labs
                 </h1>
                 <p className="font-sans text-lg sm:text-xl text-foreground/80 max-w-3xl leading-relaxed">
-                  Meet the team advancing financial inclusion and religious obligation for the Ummah through privacy-preserving Web3 technology and Sharia-compliant innovation.
+                  Meet the team bridging Islamic finance and Web3 through Sharia-compliant web3 innovation.
                 </p>
               </div>
 

@@ -31,124 +31,94 @@ interface DApp {
 const mockDApps: DApp[] = [
   {
     id: "1",
-    name: "Zakat Calculator",
-    description: "Calculate and distribute Zakat according to Sharia principles with transparent tracking.",
+    name: "zkt.app",
+    description: "Calculate, verify, and distribute Zakat with auditability and privacy via ZK proofs.",
     category: "DeFi",
     icon: "🕌",
     status: "live",
-    link: "/zakat",
-    tags: ["Zakat", "DeFi", "Calculator"]
+    link: "https://zkt.app",
+    tags: ["Zakat", "DeFi", "ZK Proofs"]
   },
   {
     id: "2",
-    name: "Waqf Protocol",
-    description: "Create and manage perpetual charitable endowments on the blockchain.",
-    category: "DeFi",
-    icon: "🏛️",
-    status: "live",
-    link: "/waqf",
-    tags: ["Waqf", "DeFi", "Charity"]
-  },
-  {
-    id: "3",
-    name: "Qurban Platform",
-    description: "Register and manage Qurban sacrifices with verified beneficiaries and real-time tracking.",
+    name: "qrbn.app",
+    description: "End-to-end Qurbani procurement and proof-of-fulfillment using blockchain.",
     category: "Utilities",
     icon: "🐑",
     status: "live",
-    link: "/qurban",
+    link: "https://qrbn.app",
     tags: ["Qurban", "Utilities", "Tracking"]
   },
-  {
-    id: "4",
-    name: "Identity Verifier",
-    description: "Verify your identity with zkPassport while maintaining privacy.",
-    category: "Identity",
-    icon: "🔐",
-    status: "beta",
-    link: "/identity",
-    tags: ["Identity", "zkPassport", "Privacy"]
-  },
-  {
-    id: "5",
-    name: "Governance Portal",
-    description: "Participate in community governance and vote on proposals.",
-    category: "Governance",
-    icon: "🗳️",
-    status: "live",
-    link: "/governance",
-    tags: ["Governance", "Voting", "DAO"]
-  },
-  {
-    id: "6",
-    name: "Forum",
-    description: "Join community discussions, proposal deliberations, and delegate accountability threads.",
-    category: "Governance",
-    icon: "💬",
-    status: "live",
-    link: "/forum",
-    tags: ["Forum", "Discussion", "Community"]
-  },
-  {
-    id: "7",
-    name: "Delegation Manager",
-    description: "Delegate your TAWF Points to trusted representatives.",
-    category: "Governance",
-    icon: "🤝",
-    status: "beta",
-    link: "/delegation",
-    tags: ["Delegation", "Governance", "Voting"]
-  },
-  {
-    id: "8",
-    name: "Sharia Compliance Scanner",
-    description: "Verify if smart contracts and transactions comply with Sharia principles.",
-    category: "Utilities",
-    icon: "⚖️",
-    status: "coming-soon",
-    link: "#",
-    tags: ["Sharia", "Compliance", "Audit"]
-  },
-  {
-    id: "9",
-    name: "Treasury Dashboard",
-    description: "View and manage TAWF treasury across multiple chains.",
-    category: "DeFi",
-    icon: "💰",
-    status: "live",
-    link: "/treasury",
-    tags: ["Treasury", "DeFi", "Multi-chain"]
-  },
-  {
-    id: "10",
-    name: "Reputation Tracker",
-    description: "Track your on-chain reputation and participation metrics.",
-    category: "Identity",
-    icon: "⭐",
-    status: "beta",
-    link: "/reputation",
-    tags: ["Reputation", "Identity", "Analytics"]
-  },
-  {
-    id: "11",
-    name: "Notification Center",
-    description: "Manage your notifications and alerts from the TAWF ecosystem.",
-    category: "Utilities",
-    icon: "🔔",
-    status: "coming-soon",
-    link: "#",
-    tags: ["Notifications", "Utilities"]
-  },
-  {
-    id: "12",
-    name: "Cross-chain Bridge",
-    description: "Bridge assets across different supported blockchains.",
-    category: "DeFi",
-    icon: "🌉",
-    status: "live",
-    link: "/bridge",
-    tags: ["Bridge", "DeFi", "Multi-chain"]
-  }
+  // {
+  //   id: "4",
+  //   name: "Identity Verifier",
+  //   description: "Verify your identity with zkPassport while maintaining privacy.",
+  //   category: "Identity",
+  //   icon: "🔐",
+  //   status: "beta",
+  //   link: "/identity",
+  //   tags: ["Identity", "zkPassport", "Privacy"]
+  // },
+  // {
+  //   id: "5",
+  //   name: "Governance Portal",
+  //   description: "Participate in community governance and vote on proposals.",
+  //   category: "Governance",
+  //   icon: "🗳️",
+  //   status: "live",
+  //   link: "/governance",
+  //   tags: ["Governance", "Voting", "DAO"]
+  // },
+  // {
+  //   id: "6",
+  //   name: "Forum",
+  //   description: "Join community discussions, proposal deliberations, and delegate accountability threads.",
+  //   category: "Governance",
+  //   icon: "💬",
+  //   status: "live",
+  //   link: "/forum",
+  //   tags: ["Forum", "Discussion", "Community"]
+  // },
+  // {
+  //   id: "7",
+  //   name: "Delegation Manager",
+  //   description: "Delegate your TAWF Points to trusted representatives.",
+  //   category: "Governance",
+  //   icon: "🤝",
+  //   status: "beta",
+  //   link: "/delegation",
+  //   tags: ["Delegation", "Governance", "Voting"]
+  // },
+  // {
+  //   id: "8",
+  //   name: "Sharia Compliance Scanner",
+  //   description: "Verify if smart contracts and transactions comply with Sharia principles.",
+  //   category: "Utilities",
+  //   icon: "⚖️",
+  //   status: "coming-soon",
+  //   link: "#",
+  //   tags: ["Sharia", "Compliance", "Audit"]
+  // },
+  // {
+  //   id: "9",
+  //   name: "Treasury Dashboard",
+  //   description: "View and manage TAWF treasury across multiple chains.",
+  //   category: "DeFi",
+  //   icon: "💰",
+  //   status: "live",
+  //   link: "/treasury",
+  //   tags: ["Treasury", "DeFi", "Multi-chain"]
+  // },
+  // {
+  //   id: "10",
+  //   name: "Reputation Tracker",
+  //   description: "Track your on-chain reputation and participation metrics.",
+  //   category: "Identity",
+  //   icon: "⭐",
+  //   status: "beta",
+  //   link: "/reputation",
+  //   tags: ["Reputation", "Identity", "Analytics"]
+  // },
 ]
 
 const categories = ["All", "DeFi", "Identity", "Governance", "Utilities"]
@@ -226,7 +196,7 @@ export function DAppsPanel({ connected }: { connected: boolean }) {
       </div>
 
       {/* Stats */}
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <Card className="bg-gray-900/80 border border-gray-800">
           <CardContent className="p-4">
             <div className="flex items-center gap-3">
@@ -235,33 +205,7 @@ export function DAppsPanel({ connected }: { connected: boolean }) {
               </div>
               <div>
                 <p className="text-gray-400 text-xs">Live DApps</p>
-                <p className="text-white font-bold text-lg">6</p>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
-        <Card className="bg-gray-900/80 border border-gray-800">
-          <CardContent className="p-4">
-            <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-lg bg-blue-600/20 flex items-center justify-center">
-                <ExternalLink className="w-5 h-5 text-blue-400" />
-              </div>
-              <div>
-                <p className="text-gray-400 text-xs">In Beta</p>
-                <p className="text-white font-bold text-lg">3</p>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
-        <Card className="bg-gray-900/80 border border-gray-800">
-          <CardContent className="p-4">
-            <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-lg bg-gray-600/20 flex items-center justify-center">
-                <Grid3X3 className="w-5 h-5 text-gray-400" />
-              </div>
-              <div>
-                <p className="text-gray-400 text-xs">Coming Soon</p>
-                <p className="text-white font-bold text-lg">3</p>
+                <p className="text-white font-bold text-lg">2</p>
               </div>
             </div>
           </CardContent>
@@ -273,8 +217,8 @@ export function DAppsPanel({ connected }: { connected: boolean }) {
                 <Coins className="w-5 h-5 text-amber-400" />
               </div>
               <div>
-                <p className="text-gray-400 text-xs">Total TVL</p>
-                <p className="text-white font-bold text-lg">$2.4M</p>
+                <p className="text-gray-400 text-xs">Sharia-Compliant</p>
+                <p className="text-white font-bold text-lg">100%</p>
               </div>
             </div>
           </CardContent>
