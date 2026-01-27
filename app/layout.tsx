@@ -23,24 +23,24 @@ const jetbrainsMono = JetBrains_Mono({
 
 export async function generateMetadata(): Promise<Metadata> {
   return {
-    title: "Sharia-First Web3 Governance Layer",
+    title: "Tawf Sharia dApp Ecosystem",
     description:
-      "Tawf is a Sharia-first Web3 ecosystem providing on-chain zakat, waqf, and qurban infrastructure, governed by a dual-layer DAO with zero-knowledge Sharia oversight.",
+      "Sharia-compliant dapps, built for the Ummah.",
     icons: {
       icon: [{ url: "/tawflogo.png", type: "image/png" }],
       shortcut: "/tawflogo.png",
       apple: "/tawflogo.png",
     },
     openGraph: {
-      title: "Sharia-First Web3 Governance Layer",
+      title: "Tawf Sharia dApp Ecosystem",
       description:
-        "A Sharia-first Web3 governance layer for zakat, waqf, qurban, and community-led applications, secured by zero-knowledge Sharia oversight.",
+        "Tawf enables Muslims to fulfill Islamic obligations on-chain. Zakat at zkt.app, Qurbani at qrbn.app. Sharia-compliant with zero-knowledge privacy.",
       images: [
         {
           url: "/tawflogo.png",
           width: 1200,
           height: 630,
-          alt: "Sharia-First Web3 Governance Layer",
+          alt: "Tawf - Sharia dApp Ecosystem",
         },
       ],
       type: "website",
@@ -48,21 +48,23 @@ export async function generateMetadata(): Promise<Metadata> {
     },
     twitter: {
       card: "summary_large_image",
-      title: "Sharia-First Web3 Governance Layer",
+      title: "Tawf Sharia dApp Ecosystem",
       description:
-        "Sharia-first governance infrastructure for zakat, waqf, qurban, and ethical Web3 applications.",
+        "Sharia-compliant dapps for the Ummah. Zakat (zkt.app), Qurbani (qrbn.app). Privacy-preserving, verified by Islamic scholars.",
       images: ["/tawflogo.png"],
     },
     keywords: [
-      "Sharia Governance",
-      "Islamic DAO",
       "Zakat",
-      "Waqf",
+      "Zakat on-chain",
+      "Qurbani",
       "Qurban",
-      "Web3 Governance",
-      "Zero Knowledge",
+      "Sharia dApp",
+      "Islamic Crypto",
       "Islamic Finance",
-      "Onchain Governance",
+      "Zero Knowledge",
+      "zkt.app",
+      "qrbn.app",
+      "Sharia Compliance",
     ],
   }
 }
