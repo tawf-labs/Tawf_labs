@@ -32,16 +32,15 @@ interface ReputationMetric {
   label: string
   value: number
   max: number
-  icon: React.ElementType
+  icon: React.ComponentType<{ className?: string }>
   color: string
 }
 
 const mockEcosystemApps: EcosystemApp[] = [
-  { id: "1", name: "Zakat Calculator", category: "DeFi", connected: true, lastUsed: "2 hours ago" },
-  { id: "2", name: "Waqf Protocol", category: "DeFi", connected: true, lastUsed: "1 day ago" },
-  { id: "3", name: "Qurban Platform", category: "Utilities", connected: false, lastUsed: "Never" },
-  { id: "4", name: "Governance Portal", category: "Governance", connected: true, lastUsed: "5 hours ago" },
-  { id: "5", name: "Identity Verifier", category: "Identity", connected: false, lastUsed: "Never" }
+  { id: "1", name: "Zakat", category: "Islamic Obligations", connected: true, lastUsed: "2 hours ago" },
+  { id: "2", name: "Qurbani", category: "Islamic Obligations", connected: true, lastUsed: "1 day ago" },
+  { id: "3", name: "Governance", category: "Governance", connected: true, lastUsed: "5 hours ago" },
+  { id: "4", name: "Transparency", category: "Explorer", connected: true, lastUsed: "1 week ago" }
 ]
 
 const mockReputationMetrics: ReputationMetric[] = [
@@ -224,7 +223,7 @@ export function ProfilePanel({ connected, account }: { connected: boolean; accou
                 <CardContent className="p-4">
                   <div className="flex items-center gap-3 mb-3">
                     <div className={`w-10 h-10 rounded-lg ${metric.color}/20 flex items-center justify-center`}>
-                      <Icon className={`w-5 h-5 ${metric.color.replace('bg-', 'text-')}`} />
+                      <Icon className={`w-5 h-5 ${metric.color.replace('bg-', 'text-')}` as string} />
                     </div>
                     <div className="flex-1">
                       <p className="text-white font-medium">{metric.label}</p>

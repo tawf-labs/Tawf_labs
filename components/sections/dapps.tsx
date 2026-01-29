@@ -39,7 +39,7 @@ export function DappsSection() {
         <div className="mx-auto max-w-6xl">
           <div className="flex items-center gap-3">
             <h2 className="bg-clip-text bg-gradient-to-r from-[#FFC700] to-[#ffe38a] mb-8 sm:mb-10 font-display text-transparent text-3xl sm:text-4xl md:text-5xl">
-              Dapps
+              Applications
             </h2>
             <Smartphone className="-mt-8 w-12 h-12 text-foreground/80" aria-hidden="true" />
           </div>

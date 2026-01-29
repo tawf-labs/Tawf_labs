@@ -102,14 +102,14 @@ export function EcosystemSection() {
         <div className="mx-auto mb-12 px-4 max-w-4xl text-center">
           <div className="flex justify-center items-center gap-3">
             <h2 className="bg-clip-text bg-gradient-to-r from-[#FFC700] to-[#ffe38a] mb-6 font-display text-transparent text-3xl sm:text-4xl md:text-5xl">
-              Our Ecosystem
+              Infrastructure & Partnerships
             </h2>
             <Earth className="-mt-2 sm:-mt-4 md:-mt-6 w-12 h-12 text-foreground/80" />
           </div>
 
           <div className="inline-block bg-background/20 backdrop-blur-sm px-4 py-2 rounded-lg">
             <p className="mx-auto max-w-3xl font-sans text-foreground/80 text-soft-glow text-base sm:text-lg leading-relaxed">
-              Tawf leverages a robust multi-chain foundation, integrating leading EVM and non-EVM blockchain networks.
+              Tawf provides chain-agnostic infrastructure, integrating leading EVM and non-EVM blockchain networks to support Sharia dApps across the ecosystem.
             </p>
           </div>
         </div>

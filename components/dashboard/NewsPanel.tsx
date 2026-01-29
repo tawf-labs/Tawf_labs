@@ -32,10 +32,10 @@ const mockNews: NewsItem[] = [
   },
   {
     id: "2",
-    title: "Zakat Distribution Protocol v2.0 Now Live",
+    title: "Zakat Distribution System v1.0 Beta Live on Testnet",
     category: "update",
     date: "2025-01-08",
-    excerpt: "The upgraded zakat distribution protocol features automated calculations, enhanced transparency, and multi-asset support.",
+    excerpt: "The zakat distribution system features automated calculations, enhanced transparency, and multi-asset support.",
     link: "#"
   },
   {

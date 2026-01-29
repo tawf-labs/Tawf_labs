@@ -672,7 +672,7 @@ export default function GovernancePage() {
             <div>
               <p className="text-gray-300 text-sm font-medium">Governance ≠ Staking</p>
               <p className="text-gray-500 text-xs mt-1">
-                Governance is an institutional decision-making body for the TAWF protocol. 
+                Governance serves the Tawf ecosystem through institutional decision-making. 
                 Staking occurs on external networks and is a separate action. 
                 <Link href="/dashboard" className="text-amber-400 hover:text-amber-300 ml-1">
                   View External Network Staking →

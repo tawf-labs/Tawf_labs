@@ -80,44 +80,6 @@ export function SettingsPanel({
         <CardContent className="space-y-4">
           <div className="flex justify-between items-center">
             <div>
-              <Label className="text-gray-300">Slippage Tolerance</Label>
-              <div className="text-sm text-gray-400 mt-1">
-                Maximum price slippage for swaps
-              </div>
-            </div>
-            <div className="flex space-x-2">
-              {["0.5%", "1%", "2%"].map((val) => (
-                <Button
-                  key={val}
-                  variant="outline"
-                  size="sm"
-                  className={`border-gray-700 ${
-                    val === "1%"
-                      ? "bg-[#FFC700]/20 border-[#FFC700]/30 text-white"
-                      : "text-gray-300 hover:bg-gray-800"
-                  }`}
-                >
-                  {val}
-                </Button>
-              ))}
-            </div>
-          </div>
-          <Separator className="bg-gray-800" />
-          <div className="flex justify-between items-center">
-            <div>
-              <Label className="text-gray-300">Transaction Deadline</Label>
-              <div className="text-sm text-gray-400 mt-1">
-                Time limit for pending transactions
-              </div>
-            </div>
-            <div className="flex items-center space-x-2">
-              <span className="text-gray-300">30</span>
-              <span className="text-gray-400 text-sm">minutes</span>
-            </div>
-          </div>
-          <Separator className="bg-gray-800" />
-          <div className="flex justify-between items-center">
-            <div>
               <Label className="text-gray-300">Dark Mode</Label>
               <div className="text-sm text-gray-400 mt-1">
                 Toggle dark/light theme
