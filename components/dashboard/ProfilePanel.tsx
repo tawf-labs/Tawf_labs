@@ -88,7 +88,7 @@ export function ProfilePanel({ connected, account }: { connected: boolean; accou
                 <div className="flex-1">
                   <h4 className="text-white font-semibold mb-2">Create Your TAWF DID</h4>
                   <p className="text-gray-400 text-sm mb-4">
-                    Your Decentralized Identity (DID) is your unique identifier in the TAWF ecosystem. It's required for voting, delegation, and reputation tracking.
+                    Your Decentralized Identity (DID) is your unique identifier in the Sharia Web3 ecosystem. It's required for voting, delegation, and reputation tracking.
                   </p>
                   <Button variant="warning">
                     Create DID

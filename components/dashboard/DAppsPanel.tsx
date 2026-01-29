@@ -175,7 +175,7 @@ export function DAppsPanel({ connected }: { connected: boolean }) {
       {/* Header */}
       <div className="flex items-center justify-between">
         <div>
-          <h2 className="text-2xl font-bold text-white">TAWF Ecosystem</h2>
+          <h2 className="text-2xl font-bold text-white">Sharia Web3 Ecosystem</h2>
           <p className="text-gray-400 text-sm mt-1">Explore Sharia-compliant decentralized applications</p>
         </div>
       </div>

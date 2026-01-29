@@ -54,7 +54,7 @@ export const Footer = () => {
                 <img src="/logos/tawflogo.png" alt="Tawf Logo - Home" className="w-[80px] h-auto" />
               </Link>
               <p className="text-sm text-foreground/60 leading-relaxed max-w-sm">
-                Tawf is a Sharia-first Web3 ecosystem providing on-chain zakat, waqf, and qurban infrastructure, governed by a dual-layer DAO with zero-knowledge Sharia oversight.
+                Tawf serves the Ummah with Sharia-aligned infrastructure for on-chain zakat, waqf, and qurban, governed by a dual-layer DAO with zero-knowledge Sharia oversight.
               </p>
             </div>
 

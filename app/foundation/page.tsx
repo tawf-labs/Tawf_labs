@@ -114,7 +114,7 @@ export default function FoundationPage() {
                 Foundation & Governance
               </h1>
               <p className="font-sans text-lg sm:text-xl text-foreground/80 max-w-3xl mx-auto leading-relaxed">
-                Building trust through transparency, Sharia compliance, and community governance. The institutional foundation supporting Tawf's ecosystem.
+                Building trust through transparency, Sharia compliance, and community governance. The institutional foundation serving the Sharia Web3 ecosystem.
               </p>
             </motion.div>
           </div>
