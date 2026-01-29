@@ -71,7 +71,7 @@ const impactStats = [
 
 export function SupportUsPanel({ connected }: { connected: boolean }) {
   const [copiedAddress, setCopiedAddress] = useState(false)
-  const donationAddress = "0x1234567890abcdef1234567890abcdef12345678"
+  const donationAddress = "0x08956D82DaAB7f2c4e5076e241445253F7d38dFB"
 
   const handleCopyAddress = () => {
     navigator.clipboard.writeText(donationAddress)
