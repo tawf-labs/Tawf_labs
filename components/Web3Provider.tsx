@@ -7,7 +7,7 @@ import { XellarKitProvider, defaultConfig, darkTheme } from "@xellar/kit"
 import { baseSepolia, liskSepolia } from "viem/chains"
 
 const config = defaultConfig({
-  appName: "Tawf",
+  appName: "TAWF",
   walletConnectProjectId: process.env.NEXT_PUBLIC_WALLET_CONNECT_PROJECT_ID || "",
   xellarAppId: process.env.NEXT_PUBLIC_XELLAR_APP_ID || "",
   xellarEnv: "sandbox",

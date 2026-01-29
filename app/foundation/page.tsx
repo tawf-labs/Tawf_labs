@@ -134,7 +134,7 @@ export default function FoundationPage() {
                 Our Mission
               </h2>
               <p className="font-sans text-lg text-foreground/80 leading-relaxed">
-                Tawf Foundation exists to serve the Ummah by providing trustworthy, Sharia-compliant infrastructure for Islamic obligations on-chain. We bridge traditional Islamic scholarship with modern blockchain technology, enabling Muslims to fulfill zakat, qurbani, and other duties with confidence in the digital age.
+                TAWF Foundation exists to serve the Ummah by providing trustworthy, Sharia-compliant infrastructure for Islamic obligations on-chain. We bridge traditional Islamic scholarship with modern blockchain technology, enabling Muslims to fulfill zakat, qurbani, and other duties with confidence in the digital age.
               </p>
             </motion.div>
           </div>
@@ -206,7 +206,7 @@ export default function FoundationPage() {
                 </h2>
               </div>
               <p className="font-sans text-foreground/60 mb-12 max-w-2xl">
-                Tawf employs a dual-layer governance system ensuring both Sharia compliance and community-driven development.
+                TAWF employs a dual-layer governance system ensuring both Sharia compliance and community-driven development.
               </p>
 
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6">

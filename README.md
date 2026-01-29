@@ -1,4 +1,4 @@
-<h1 align="center">Tawf.xyz</h1>
+<h1 align="center">TAWF.xyz</h1>
 
 <p align="center">
   Shariah-compliant Web3 infrastructure for verified faith-based actions — bringing Islamic finance, philanthropy, and governance on-chain with transparency, auditability, and privacy-preservation.
@@ -36,7 +36,7 @@
 
 ## Overview
 
-Tawf.xyz is **not a single app**, but an **ecosystem of interoperable decentralized applications (dApps)** that follow **Islamic (Shariah) principles** — enabling Muslims to participate in blockchain without compromising their faith.
+TAWF.xyz is **not a single app**, but an **ecosystem of interoperable decentralized applications (dApps)** that follow **Islamic (Shariah) principles** — enabling Muslims to participate in blockchain without compromising their faith.
 
 ## Core Principles
 
@@ -288,20 +288,20 @@ pnpm start
 | ⬜ | IPFS document storage |
 | ⬜ | Production solver network |
 
-## Why Tawf?
+## Why TAWF?
 
-| Traditional Crypto | Tawf Approach |
+| Traditional Crypto | TAWF Approach |
 |-------------------|---------------|
 | Speculative | Purpose-driven |
 | Lacks accountability | Fully transparent on-chain |
 | Conflicts with Islamic finance | Shariah-compliant by design |
 | Hype-focused | Impact-focused |
 
-> **Tawf flips the narrative**: Purpose over speculation. Impact over hype. Faith-aligned design from day one.
+> **TAWF flips the narrative**: Purpose over speculation. Impact over hype. Faith-aligned design from day one.
 
 ## Community & Partners
 
-Tawf Labs works closely with:
+TAWF Labs works closely with:
 
 | Partner Type | Collaboration |
 |--------------|---------------|

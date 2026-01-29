@@ -21,7 +21,7 @@ const jetbrainsMono = JetBrains_Mono({
 export async function generateMetadata(): Promise<Metadata> {
   return {
     viewport: "width=device-width, initial-scale=1",
-    title: "Tawf - Bridging the Ummah to Web3",
+    title: "TAWF - Bridging the Ummah to Web3",
     description:
       "Serving the Ummah with open, community-driven infrastructure for the Sharia dApp ecosystem.",
     icons: {
@@ -30,7 +30,7 @@ export async function generateMetadata(): Promise<Metadata> {
       apple: "/tawflogo.png",
     },
     openGraph: {
-      title: "Tawf - Bridging the Ummah to Web3",
+      title: "TAWF - Bridging the Ummah to Web3",
       description:
         "Serving the Ummah through Sharia-compliant Web3 applications. Live at zkt.app and qrbn.app.",
       images: [
@@ -38,15 +38,15 @@ export async function generateMetadata(): Promise<Metadata> {
           url: "/tawflogo.png",
           width: 1200,
           height: 630,
-          alt: "Tawf - Sharia dApp Infrastructure",
+          alt: "TAWF - Sharia dApp Infrastructure",
         },
       ],
       type: "website",
-      siteName: "Tawf",
+      siteName: "TAWF",
     },
     twitter: {
       card: "summary_large_image",
-      title: "Tawf - Bridging the Ummah to Web3",
+      title: "TAWF - Bridging the Ummah to Web3",
       description:
         "Serving the Islamic digital economy. Live at zkt.app and qrbn.app.",
       images: ["/tawflogo.png"],

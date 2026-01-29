@@ -51,10 +51,10 @@ export const Footer = () => {
                 href="/"
                 className="inline-block mb-6 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring rounded-md"
               >
-                <img src="/logos/tawflogo.png" alt="Tawf Logo - Home" className="w-[80px] h-auto" />
+                <img src="/logos/tawflogo.png" alt="TAWF Logo - Home" className="w-[80px] h-auto" />
               </Link>
               <p className="text-sm text-foreground/60 leading-relaxed max-w-sm">
-                Tawf serves the Ummah with Sharia-aligned infrastructure for on-chain zakat, waqf, and qurban, governed by a dual-layer DAO with zero-knowledge Sharia oversight.
+                TAWF serves the Ummah with Sharia-aligned infrastructure for on-chain zakat, waqf, and qurban, governed by a dual-layer DAO with zero-knowledge Sharia oversight.
               </p>
             </div>
 
@@ -131,7 +131,7 @@ export const Footer = () => {
           <div className="mt-16 pt-8 border-t border-white/10">
             <div className="flex flex-col md:flex-row items-center justify-between gap-4">
               <p className="text-sm text-foreground/50">
-                © {new Date().getFullYear()} Tawf. All rights reserved.
+                © {new Date().getFullYear()} TAWF. All rights reserved.
               </p>
 
               <nav className="flex items-center gap-4" aria-label="Social media links">
@@ -144,7 +144,7 @@ export const Footer = () => {
                       target="_blank"
                       rel="noopener noreferrer"
                       className="w-10 h-10 flex items-center justify-center rounded-full bg-white/5 hover:bg-white/10 text-foreground/60 hover:text-foreground transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
-                      aria-label={`Visit Tawf on ${social.label}`}
+                      aria-label={`Visit TAWF on ${social.label}`}
                     >
                       <Icon className="w-5 h-5" aria-hidden="true" />
                     </Link>

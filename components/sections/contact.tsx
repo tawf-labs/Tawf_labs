@@ -8,7 +8,7 @@ export function ContactSection() {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="max-w-4xl mx-auto">
           <div className="rounded-lg border border-border/60 bg-black/30 p-6 sm:p-8 md:p-10 backdrop-blur">
-            <h3 className="font-display text-2xl sm:text-3xl md:text-4xl mb-3 sm:mb-4">Build with Tawf Labs</h3>
+            <h3 className="font-display text-2xl sm:text-3xl md:text-4xl mb-3 sm:mb-4">Build with TAWF Labs</h3>
             <p className="font-sans text-base sm:text-lg text-foreground/80 mb-6 sm:mb-8 max-w-2xl text-soft-glow leading-relaxed">
               Looking to launch a Sharia-aligned application or partner on governance design? Let's connect.
             </p>
@@ -16,7 +16,7 @@ export function ContactSection() {
               href="mailto:mzidanfatonie@tawf.xyz"
               className="focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FFC700]/50 focus-visible:ring-offset-2 focus-visible:ring-offset-background rounded-md inline-block"
             >
-              <Button aria-label="Send email to Tawf Labs">[Chat with us]</Button>
+              <Button aria-label="Send email to TAWF Labs">[Chat with us]</Button>
             </a>
           </div>
         </div>
@@ -30,7 +30,7 @@ export function ContactSection() {
 //     <section id="contact" className="relative py-20 md:py-28">
 //       <div className="container">
 //         <div className="rounded-lg border border-border/60 bg-black/30 p-8 md:p-10 backdrop-blur">
-//           <h3 className="font-display text-2xl md:text-3xl mb-3">Build with Tawf Labs</h3>
+//           <h3 className="font-display text-2xl md:text-3xl mb-3">Build with TAWF Labs</h3>
 //           <p className="font-sans text-foreground/80 mb-6 max-w-2xl text-soft-glow leading-relaxed">
 //             Looking to launch a halal-first zk application or partner on governance design? Let’s connect.
 //           </p>

@@ -15,7 +15,7 @@ export function AboutSection() {
           </div>
 
           <p className="max-w-3xl font-sans text-foreground/80 text-soft-glow text-base sm:text-lg leading-relaxed">
-            Tawf serves the Ummah by building the foundational infrastructure for Sharia-compliant Web3. We provide verification layers and zero-knowledge technology that enable Muslims to fulfill Islamic obligations on-chain, powering zakat, qurbani, and governance applications across the ecosystem.
+            TAWF serves the Ummah by building foundational infrastructure for Sharia-compliant Web3. We provide verification layers and zero-knowledge technology that enable Muslims to fulfill Islamic obligations on-chain, powering zakat, qurbani, and governance applications across the Web3 ecosystem.
           </p>
         </div>
       </div>

@@ -31,7 +31,7 @@ export default function DocsPage() {
     },
     {
       title: "Smart Contract Integration",
-      description: "Seamless integration with Tawf's smart contracts for Islamic finance operations.",
+      description: "Seamless integration with TAWF's smart contracts for Islamic finance operations.",
     },
     {
       title: "Wallet Connection",
@@ -42,13 +42,13 @@ export default function DocsPage() {
   const docSections: DocSection[] = [
     {
       title: "Getting Started",
-      description: "Quick start guide to begin building with Tawf. Learn about installation, configuration, and your first Sharia-compliant dApp.",
+      description: "Quick start guide to begin building with TAWF. Learn about installation, configuration, and your first Sharia-compliant dApp.",
       icon: BookOpen,
       status: "coming-soon",
     },
     {
       title: "API Reference",
-      description: "Complete API documentation for Tawf-SDK. Detailed reference for all methods, types, and interfaces.",
+      description: "Complete API documentation for TAWF-SDK. Detailed reference for all methods, types, and interfaces.",
       icon: Code2,
       status: "coming-soon",
     },
@@ -83,7 +83,7 @@ export default function DocsPage() {
     },
     {
       title: "Provide Feedback",
-      description: "Share your thoughts, report bugs, and request features to help improve Tawf.",
+      description: "Share your thoughts, report bugs, and request features to help improve TAWF.",
       icon: MessageCircle,
       href: "/#feedback",
       color: "text-white hover:text-[#FFC700]",
@@ -121,7 +121,7 @@ export default function DocsPage() {
                       </div>
                       <div>
                         <CardTitle className="font-display text-2xl sm:text-3xl text-foreground">
-                          Tawf-SDK
+                          TAWF-SDK
                         </CardTitle>
                         <div className="flex items-center gap-2 mt-1">
                           <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-amber-500/20 text-amber-300 border border-amber-500/30">
@@ -137,7 +137,7 @@ export default function DocsPage() {
 
                 <CardContent className="flex flex-col gap-6">
                   <p className="font-sans text-base text-foreground/80 leading-relaxed">
-                    We're building a comprehensive SDK for developers to integrate Sharia-compliant Web3 features into their applications. The Tawf-SDK will provide tools, libraries, and documentation to build Islamic finance dApps with confidence.
+                    We're building a comprehensive SDK for developers to integrate Sharia-compliant Web3 features into their applications. The TAWF-SDK will provide tools, libraries, and documentation to build Islamic finance dApps with confidence.
                   </p>
 
                   {/* SDK Features List */}

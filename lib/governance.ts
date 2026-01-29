@@ -142,7 +142,7 @@ export const mockProposals: Proposal[] = [
   {
     id: "prop-001",
     title: "Allocate 10% of Treasury to Zakat Education Initiative",
-    description: "This proposal seeks to allocate 10% of the Tawf Treasury funds towards developing educational materials and workshops about Zakat calculation and distribution, targeting both new Muslims and those unfamiliar with proper Zakat practices.",
+    description: "This proposal seeks to allocate 10% of the TAWF Treasury funds towards developing educational materials and workshops about Zakat calculation and distribution, targeting both new Muslims and those unfamiliar with proper Zakat practices.",
     category: "treasury",
     status: "active",
     author: "0x7890...abcd",
@@ -363,7 +363,7 @@ export const mockFundVaults: FundVault[] = [
   },
   {
     id: "vault-treasury",
-    name: "Tawf Treasury",
+    name: "TAWF Treasury",
     description: "Main treasury funded from ujrah (service fees). Used for operational costs, partnerships, and community-approved initiatives.",
     balance: 780000,
     currency: "USDC",
@@ -372,7 +372,7 @@ export const mockFundVaults: FundVault[] = [
   },
   {
     id: "vault-dev",
-    name: "Tawf Development Treasury",
+    name: "TAWF Development Treasury",
     description: "Reserved for protocol development, security audits, and infrastructure improvements. Allocations require community governance approval.",
     balance: 267000,
     currency: "USDC",
@@ -466,7 +466,7 @@ export const mockDAOStats: DAOStats = {
 export const mockTopContributors: TopContributor[] = [
   {
     address: "0x1234...5678",
-    displayName: "Tawf Team",
+    displayName: "TAWF Team",
     tawfPoints: 10330000,
     role: "maintainer",
   },
@@ -511,7 +511,7 @@ export function getRoleDisplayName(role: UserRole): string {
     case "ngo":
       return "NGO Partner"
     case "maintainer":
-      return "Tawf Labs Maintainer"
+      return "TAWF Labs Maintainer"
     case "sharia_council":
       return "Sharia Council Member"
     default:

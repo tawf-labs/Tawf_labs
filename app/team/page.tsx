@@ -48,7 +48,7 @@ export default function LabsPage() {
     {
       name: "Marcellino Asanuddin",
       role: "Relations and Operations",
-      bio: "Operations lead connecting partners and communities with Tawf's vision for Sharia-compliant Web3 infrastructure.",
+      bio: "Operations lead connecting partners and communities with TAWF's vision for Sharia-compliant Web3 infrastructure.",
       initials: "MA",
       image: "/marcel.jpg",
       socials: {
@@ -88,7 +88,7 @@ export default function LabsPage() {
     {
       name: "Muhammad Fazle Mawla",
       role: "Designer and Video Editor",
-      bio: "Creative designer and video editor crafting visual narratives that communicate Tawf's vision for Sharia-compliant Web3 solutions.",
+      bio: "Creative designer and video editor crafting visual narratives that communicate TAWF's vision for Sharia-compliant Web3 solutions.",
       initials: "FM",
       image: "/fazle.jpg",
       socials: {
@@ -111,7 +111,7 @@ export default function LabsPage() {
               {/* Header */}
               <div className="mb-12 sm:mb-16">
                 <h1 className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl mb-6 bg-gradient-to-r from-[#FFC700] to-[#ffe38a] bg-clip-text text-transparent">
-                  Tawf Labs
+                  TAWF Labs
                 </h1>
                 <p className="font-sans text-lg sm:text-xl text-foreground/80 max-w-3xl leading-relaxed">
                   Meet the team bridging Islamic finance and Web3 through Sharia-compliant web3 innovation.

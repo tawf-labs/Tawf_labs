@@ -257,7 +257,7 @@ export function PortfolioPanel({ connected, onConnect }: PortfolioPanelProps) {
         <CardContent>
           <div className="text-center py-8 text-gray-400">
             <p>No active staking positions</p>
-            <p className="text-xs text-gray-500 mt-2">Staking occurs on external networks. Tawf does not custody funds.</p>
+            <p className="text-xs text-gray-500 mt-2">Staking occurs on external networks. TAWF does not custody funds.</p>
             <Button
               variant="outline"
               className="mt-4 border-gray-700 text-white hover:bg-gray-800"

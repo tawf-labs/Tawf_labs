@@ -263,7 +263,7 @@ export default function TreasuryPolicyPage() {
                   <div className="text-2xl font-bold text-amber-400 mb-2">2</div>
                   <h4 className="font-medium text-white mb-1">Community Vote</h4>
                   <p className="text-xs text-gray-400">
-                    DID holders vote using their Tawf Points. Minimum quorum required for passage
+                    DID holders vote using their TAWF Points. Minimum quorum required for passage
                   </p>
                 </div>
                 

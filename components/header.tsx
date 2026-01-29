@@ -41,13 +41,13 @@ export const Header = () => {
 
   const navItems = [
   // ─────────────────────────────
-  // Discover — What is Tawf?
+  // Discover — What is TAWF?
   // ─────────────────────────────
   {
     label: "Discover",
     hasDropdown: true,
     dropdownItems: [
-      { label: "About Tawf", href: "/#about" },
+      { label: "About TAWF", href: "/#about" },
       { label: "Vision & Principles", href: "/#vision" },
       { label: "How It Works", href: "/#how-it-works" },
       { label: "Foundation & Legal", href: "/foundation" },
@@ -147,7 +147,7 @@ export const Header = () => {
 
           {/* Left: Logo */}
           <Link href="/" className="flex-shrink-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring rounded-md">
-                <img src="/logos/tawflogo.png" alt="Tawf Logo - Home" className="w-[80px] md:w-[100px] h-auto" />
+                <img src="/logos/tawflogo.png" alt="TAWF Logo - Home" className="w-[80px] md:w-[100px] h-auto" />
           </Link>
 
           {/* Center: Navigation */}

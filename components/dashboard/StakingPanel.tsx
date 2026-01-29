@@ -70,7 +70,7 @@ export function StakingPanel({ connected, onConnect }: StakingPanelProps) {
           <div>
             <p className="text-amber-200 text-sm font-medium">External Network Staking</p>
             <p className="text-amber-200/70 text-xs mt-1">
-              Staking occurs on external networks. Tawf does not custody funds. Returns are non-guaranteed protocol issuance rates, not interest or yield from lending.
+              Staking occurs on external networks. TAWF does not custody funds. Returns are non-guaranteed protocol issuance rates, not interest or yield from lending.
             </p>
           </div>
         </div>
@@ -202,7 +202,7 @@ export function StakingPanel({ connected, onConnect }: StakingPanelProps) {
                   <li>• Lending your tokens for interest</li>
                   <li>• Yield farming or liquidity provision</li>
                   <li>• Guaranteed returns (APY)</li>
-                  <li>• Custodied by Tawf platform</li>
+                  <li>• Custodied by TAWF platform</li>
                 </ul>
               </div>
             </div>

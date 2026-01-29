@@ -109,7 +109,7 @@ export function EcosystemSection() {
 
           <div className="inline-block bg-background/20 backdrop-blur-sm px-4 py-2 rounded-lg">
             <p className="mx-auto max-w-3xl font-sans text-foreground/80 text-soft-glow text-base sm:text-lg leading-relaxed">
-              Tawf provides chain-agnostic infrastructure, integrating leading EVM and non-EVM blockchain networks to support Sharia dApps across Web3.
+              TAWF provides chain-agnostic infrastructure, integrating leading EVM and non-EVM blockchain networks to support Sharia dApps across Web3.
             </p>
           </div>
         </div>

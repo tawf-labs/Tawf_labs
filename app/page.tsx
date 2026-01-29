@@ -19,7 +19,7 @@ export default function Home() {
         <div className="relative z-10">
           {/* Subtle, consistent dark gradients with a light amber tint for depth */}
           <section aria-labelledby="about-heading">
-            <span id="about-heading" className="sr-only">About Tawf</span>
+            <span id="about-heading" className="sr-only">About TAWF</span>
             <div className="bg-black/95">
               <AboutSection />
             </div>

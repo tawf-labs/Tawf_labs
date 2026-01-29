@@ -181,7 +181,7 @@ export default function ShariaCouncilPage() {
                 <Badge className="bg-amber-600 text-white">
                   {getRoleDisplayName(user.role)}
                 </Badge>
-                <p className="text-xs text-gray-400 mt-1">{user.points} Tawf Points</p>
+                <p className="text-xs text-gray-400 mt-1">{user.points} TAWF Points</p>
               </div>
               <ConnectButton />
             </div>

@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-Tawf is a Web3 platform built with Next.js 15 that bridges the Ummah to Web3 with Sharia-first zk dapps. The project features a sophisticated 3D particle system using React Three Fiber and Tailwind CSS for styling.
+TAWF is a Web3 platform built with Next.js 16 that bridges the Ummah to Web3 with Sharia-first zk dapps. The project features a sophisticated 3D particle system using React Three Fiber and Tailwind CSS for styling.
 
 ## Development Commands
 

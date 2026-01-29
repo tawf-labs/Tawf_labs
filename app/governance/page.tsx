@@ -255,7 +255,7 @@ export default function GovernancePage() {
                 </div>
                 
                 <div className="mb-4">
-                  <p className="text-gray-400 text-sm">My Tawf Points</p>
+                  <p className="text-gray-400 text-sm">My TAWF Points</p>
                   <div className="flex items-center justify-between">
                     <span className="text-2xl font-bold text-white">{formatNumber(user.points)} TP</span>
                     <Button variant="outline" size="sm" className="text-xs border-gray-700 text-gray-300">
@@ -656,7 +656,7 @@ export default function GovernancePage() {
                 <span className="text-amber-400">✓</span>
               </div>
               <div className="flex justify-between pt-2 border-t border-gray-700">
-                <span>Your Tawf Points</span>
+                <span>Your TAWF Points</span>
                 <span className="text-amber-400 font-semibold">{user.points} TP</span>
               </div>
             </CardContent>
@@ -672,7 +672,7 @@ export default function GovernancePage() {
             <div>
               <p className="text-gray-300 text-sm font-medium">Governance ≠ Staking</p>
               <p className="text-gray-500 text-xs mt-1">
-                Governance serves the Tawf ecosystem through institutional decision-making. 
+                Governance serves the TAWF ecosystem through institutional decision-making. 
                 Staking occurs on external networks and is a separate action. 
                 <Link href="/dashboard" className="text-amber-400 hover:text-amber-300 ml-1">
                   View External Network Staking →

@@ -15,7 +15,7 @@ export function GovernanceSection() {
           </div>
 
           <p className="text-foreground/70 text-lg mb-12 max-w-4xl">
-            Tawf operates a dual-layer DAO system that balances open community participation with Sharia integrity through transparent community governance and private ZK-enabled oversight.
+            TAWF operates a dual-layer DAO system that balances open community participation with Sharia integrity through transparent community governance and private ZK-enabled oversight.
           </p>
 
           {/* Bento Box Layout */}
