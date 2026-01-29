@@ -10,6 +10,12 @@ const buttonVariants = cva(
       variant: {
         default:
           "rounded-full tracking-wide text-[color:var(--btn-foreground)] bg-[image:linear-gradient(180deg,var(--btn-bg-start),var(--btn-bg-end))] border border-[color:var(--btn-border)] shadow-[0_6px_20px_rgba(0,0,0,0.25)] [filter:drop-shadow(0_12px_22px_var(--btn-drop))] hover:[filter:drop-shadow(0_18px_28px_var(--btn-drop-hover))] hover:shadow-[0_10px_30px_rgba(0,0,0,0.35)] hover:scale-[1.045] hover:-translate-y-0.5 focus-visible:ring-[var(--btn-glow)] will-change-transform after:content-[''] after:absolute after:-z-10 after:left-6 after:right-6 after:-bottom-2 after:h-6 after:rounded-full after:bg-[radial-gradient(ellipse_at_center,var(--btn-ellipse),rgba(0,0,0,0)_65%)] after:blur-xl after:opacity-80 hover:after:opacity-100",
+        success:
+          "rounded-full tracking-wide bg-green-600 hover:bg-green-700 text-white border border-green-500 shadow-[0_4px_14px_rgba(22,163,74,0.25)] hover:shadow-[0_6px_20px_rgba(22,163,74,0.35)] hover:scale-[1.03] hover:-translate-y-0.5 focus-visible:ring-green-500 after:content-[''] after:absolute after:-z-10 after:left-6 after:right-6 after:-bottom-2 after:h-6 after:rounded-full after:bg-[radial-gradient(ellipse_at_center,rgba(22,163,74,0.4),rgba(0,0,0,0)_65%)] after:blur-xl after:opacity-60 hover:after:opacity-80",
+        danger:
+          "rounded-full tracking-wide bg-red-600 hover:bg-red-700 text-white border border-red-500 shadow-[0_4px_14px_rgba(220,38,38,0.25)] hover:shadow-[0_6px_20px_rgba(220,38,38,0.35)] hover:scale-[1.03] hover:-translate-y-0.5 focus-visible:ring-red-500 after:content-[''] after:absolute after:-z-10 after:left-6 after:right-6 after:-bottom-2 after:h-6 after:rounded-full after:bg-[radial-gradient(ellipse_at_center,rgba(220,38,38,0.4),rgba(0,0,0,0)_65%)] after:blur-xl after:opacity-60 hover:after:opacity-80",
+        warning:
+          "rounded-full tracking-wide bg-amber-600 hover:bg-amber-700 text-white border border-amber-500 shadow-[0_4px_14px_rgba(217,119,6,0.25)] hover:shadow-[0_6px_20px_rgba(217,119,6,0.35)] hover:scale-[1.03] hover:-translate-y-0.5 focus-visible:ring-amber-500 after:content-[''] after:absolute after:-z-10 after:left-6 after:right-6 after:-bottom-2 after:h-6 after:rounded-full after:bg-[radial-gradient(ellipse_at_center,rgba(217,119,6,0.4),rgba(0,0,0,0)_65%)] after:blur-xl after:opacity-60 hover:after:opacity-80",
         outline:
           "border border-input bg-transparent hover:bg-accent hover:text-accent-foreground focus-visible:ring-ring",
         ghost:

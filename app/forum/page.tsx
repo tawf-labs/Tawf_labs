@@ -250,7 +250,7 @@ export default function ForumPage() {
               </div>
             </div>
             <Link href="/governance">
-              <Button className="bg-amber-600 hover:bg-amber-700 text-white">
+              <Button variant="warning">
                 Visit Governance
                 <ExternalLink className="w-4 h-4 ml-2" />
               </Button>
@@ -360,7 +360,7 @@ export default function ForumPage() {
             </div>
 
             {/* Create Thread Button */}
-            <Button className="w-full bg-amber-600 hover:bg-amber-700 text-white">
+            <Button variant="warning" className="w-full">
               <Plus className="w-4 h-4 mr-2" />
               New Thread
             </Button>

@@ -85,6 +85,16 @@ export default function LabsPage() {
         linkedin: "https://www.linkedin.com/in/riyanarhm",
       },
     },
+    {
+      name: "Muhammad Fazle Mawla",
+      role: "Designer and Video Editor",
+      bio: "Creative designer and video editor crafting visual narratives that communicate Tawf's vision for Sharia-compliant Web3 solutions.",
+      initials: "FM",
+      image: "/fazle.jpg",
+      socials: {
+        linkedin: "https://www.linkedin.com/in/muhammad-fazle-mawla-b86a77246/",
+      },
+    },
   ]
 
   return (

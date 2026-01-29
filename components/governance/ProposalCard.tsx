@@ -153,31 +153,31 @@ export function ProposalCard({
           <div className="flex gap-2 pt-3 border-t border-gray-700">
             <Button
               onClick={() => onVote?.("for", "for")}
-              variant={userVote === "for" ? "default" : "outline"}
+              variant={userVote === "for" ? "success" : "outline"}
               size="sm"
               className={`flex-1 ${
                 userVote === "for"
-                  ? "bg-green-600 hover:bg-green-700 text-white"
-                  : "border-gray-600 text-gray-300 hover:border-green-500"
+                  ? ""
+                  : "border-gray-600 text-gray-300 hover:border-green-500 hover:text-green-400"
               }`}
             >
               For
             </Button>
             <Button
               onClick={() => onVote?.("against", "against")}
-              variant={userVote === "against" ? "default" : "outline"}
+              variant={userVote === "against" ? "danger" : "outline"}
               size="sm"
               className={`flex-1 ${
                 userVote === "against"
-                  ? "bg-red-600 hover:bg-red-700 text-white"
-                  : "border-gray-600 text-gray-300 hover:border-red-500"
+                  ? ""
+                  : "border-gray-600 text-gray-300 hover:border-red-500 hover:text-red-400"
               }`}
             >
               Against
             </Button>
             <Button
               onClick={() => onVote?.("abstain", "abstain")}
-              variant={userVote === "abstain" ? "default" : "outline"}
+              variant={userVote === "abstain" ? "ghost" : "outline"}
               size="sm"
               className={`flex-1 ${
                 userVote === "abstain"
@@ -272,7 +272,7 @@ function DiscussionSection({
             <Button
               onClick={handlePostComment}
               disabled={!newComment.trim() || isPosting}
-              className="bg-amber-600 hover:bg-amber-700 text-white"
+              variant="warning"
               size="sm"
             >
               {isPosting ? "Posting..." : "Post Comment"}

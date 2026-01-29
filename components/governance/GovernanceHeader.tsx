@@ -47,7 +47,8 @@ export function GovernanceHeader({ user, onConnectDID }: GovernanceHeaderProps) 
                 {!user.did && (
                   <Button
                     onClick={onConnectDID}
-                    className="w-full bg-amber-600 hover:bg-amber-700 text-white text-sm"
+                    variant="warning"
+                    className="w-full text-sm"
                   >
                     Connect DID to Vote
                   </Button>
@@ -69,7 +70,8 @@ export function GovernanceHeader({ user, onConnectDID }: GovernanceHeaderProps) 
               <p className="text-gray-300 mb-3">Connect wallet to participate</p>
               <Button
                 onClick={onConnectDID}
-                className="w-full bg-amber-600 hover:bg-amber-700 text-white"
+                variant="warning"
+                className="w-full"
               >
                 Connect Wallet
               </Button>

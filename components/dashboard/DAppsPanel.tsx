@@ -284,16 +284,21 @@ export function DAppsPanel({ connected }: { connected: boolean }) {
 
                 {/* Action Button */}
                 {dapp.status !== "coming-soon" ? (
-                  <a
-                    href={dapp.link}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center justify-center w-full px-4 py-2 bg-amber-600 hover:bg-amber-700 text-white rounded-lg transition-colors group-hover:bg-amber-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-500 focus-visible:ring-offset-2 focus-visible:ring-offset-background"
-                    aria-label={`Launch ${dapp.name} DApp`}
+                  <Button
+                    variant="warning"
+                    className="w-full as-child"
+                    asChild
                   >
-                    Launch DApp
-                    <ArrowUpRight className="w-4 h-4 ml-2 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" aria-hidden="true" />
-                  </a>
+                    <a
+                      href={dapp.link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label={`Launch ${dapp.name} DApp`}
+                    >
+                      Launch DApp
+                      <ArrowUpRight className="w-4 h-4 ml-2 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" aria-hidden="true" />
+                    </a>
+                  </Button>
                 ) : (
                   <Button
                     variant="outline"

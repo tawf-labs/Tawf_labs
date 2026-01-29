@@ -103,14 +103,15 @@ export function ShariaProposalCard({
           <div className="flex gap-2 pt-3 border-t border-gray-700">
             <Button
               onClick={() => onApprove?.(proposal.id)}
-              className="flex-1 bg-green-600 hover:bg-green-700 text-white"
+              variant="success"
+              className="flex-1"
             >
               Approve Ruling
             </Button>
             <Button
               onClick={() => onReject?.(proposal.id)}
               variant="outline"
-              className="flex-1 border-red-600/30 text-red-400 hover:bg-red-600/10"
+              className="flex-1 border-red-600/30 text-red-400 hover:bg-red-600/10 hover:border-red-500"
             >
               Reject Ruling
             </Button>

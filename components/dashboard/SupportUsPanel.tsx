@@ -174,10 +174,9 @@ export function SupportUsPanel({ connected }: { connected: boolean }) {
                   ))}
                 </ul>
                 <Button
+                  variant={tier.popular ? "warning" : "ghost"}
                   className={`w-full ${
-                    tier.popular
-                      ? "bg-amber-600 hover:bg-amber-700 text-white"
-                      : "bg-gray-800 hover:bg-gray-700 text-white"
+                    tier.popular ? "" : "bg-gray-800 hover:bg-gray-700 text-white"
                   }`}
                   onClick={() => {
                     /* Handle donation */

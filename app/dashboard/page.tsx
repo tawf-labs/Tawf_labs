@@ -21,7 +21,7 @@ import {
 } from "@/components/dashboard"
 
 export default function DashboardPage() {
-  const [activePanel, setActivePanel] = useState<PanelType>("support us")
+  const [activePanel, setActivePanel] = useState<PanelType>("news")
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false)
 
   const { address, isConnected } = useAccount()

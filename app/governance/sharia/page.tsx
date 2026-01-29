@@ -412,7 +412,8 @@ export default function ShariaCouncilPage() {
                         <div className="flex gap-3 pt-4 border-t border-gray-700">
                           <Button
                             onClick={(e) => { e.stopPropagation(); handleApprove(proposal.id); }}
-                            className="flex-1 bg-green-600 hover:bg-green-700 text-white"
+                            variant="success"
+                            className="flex-1"
                           >
                             <CheckCircle className="w-4 h-4 mr-2" />
                             Approve - Sharia Compliant

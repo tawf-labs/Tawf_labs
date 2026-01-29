@@ -91,7 +91,7 @@ export function ProfilePanel({ connected, account }: { connected: boolean; accou
                   <p className="text-gray-400 text-sm mb-4">
                     Your Decentralized Identity (DID) is your unique identifier in the TAWF ecosystem. It's required for voting, delegation, and reputation tracking.
                   </p>
-                  <Button className="bg-amber-600 hover:bg-amber-700 text-white">
+                  <Button variant="warning">
                     Create DID
                   </Button>
                 </div>
@@ -136,7 +136,7 @@ export function ProfilePanel({ connected, account }: { connected: boolean; accou
         </div>
 
         {/* zkPassport Demo */}
-        <Card className="bg-gradient-to-br from-purple-900/20 to-blue-600/10 border-purple-600/30">
+        <Card className="bg-gradient-to-br from-amber-900/20 to-orange-600/10 border-amber-600/30">
           <CardHeader>
             <CardTitle className="text-white flex items-center gap-2">
               <Shield className="w-5 h-5" />
@@ -148,10 +148,10 @@ export function ProfilePanel({ connected, account }: { connected: boolean; accou
               Experience privacy-preserving identity verification with zkPassport. Generate zero-knowledge proofs to verify your identity without revealing sensitive information.
             </p>
             <div className="flex gap-3">
-              <Button variant="outline" className="border-purple-600/50 text-purple-400">
+              <Button variant="outline" className="border-amber-600/50 text-amber-400 hover:bg-amber-600/10">
                 Try Demo
               </Button>
-              <Button variant="link" className="text-purple-400 p-0 h-auto">
+              <Button variant="link" className="text-amber-400 p-0 h-auto">
                 Learn More <ExternalLink className="w-3 h-3 ml-1" />
               </Button>
             </div>

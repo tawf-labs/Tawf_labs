@@ -50,7 +50,8 @@ export function DIDConnectPrompt({ onConnect }: DIDConnectPromptProps) {
 
           <Button
             onClick={onConnect}
-            className="w-full bg-amber-600 hover:bg-amber-700 text-white font-semibold py-6 text-base"
+            variant="warning"
+            className="w-full py-6 text-base"
           >
             Connect DID Now
           </Button>

@@ -278,7 +278,7 @@ export default function TreasuryPolicyPage() {
 
               <div className="flex gap-4 mt-6">
                 <Link href="/governance">
-                  <Button className="bg-amber-600 hover:bg-amber-700 text-white">
+                  <Button variant="warning">
                     View Treasury Proposals
                   </Button>
                 </Link>

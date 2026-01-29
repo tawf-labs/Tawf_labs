@@ -270,7 +270,8 @@ export default function GovernancePage() {
                 {!didConnected && (
                   <Button
                     onClick={handleConnectDID}
-                    className="w-full bg-amber-600 hover:bg-amber-700 text-white text-sm"
+                    variant="warning"
+                    className="w-full text-sm"
                   >
                     Connect DID to Vote
                   </Button>
@@ -511,7 +512,7 @@ export default function GovernancePage() {
                                 <Button
                                   onClick={(e) => { e.stopPropagation(); handleAddDiscussion(proposal.id); }}
                                   disabled={!newDiscussionContent[proposal.id]?.trim()}
-                                  className="bg-amber-600 hover:bg-amber-700 text-white"
+                                  variant="warning"
                                   size="sm"
                                 >
                                   Post Comment
@@ -527,11 +528,11 @@ export default function GovernancePage() {
                               <div className="flex gap-3">
                                 <Button
                                   onClick={(e) => { e.stopPropagation(); handleVote(proposal.id, "for"); }}
-                                  variant={userVotes[proposal.id] === "for" ? "default" : "outline"}
+                                  variant={userVotes[proposal.id] === "for" ? "success" : "outline"}
                                   className={`flex-1 ${
-                                    userVotes[proposal.id] === "for" 
-                                      ? "bg-green-600 hover:bg-green-700 text-white" 
-                                      : "border-green-600 text-green-400 hover:bg-green-600/20"
+                                    userVotes[proposal.id] !== "for"
+                                      ? "border-green-600 text-green-400 hover:bg-green-600/20"
+                                      : ""
                                   }`}
                                 >
                                   <CheckCircle className="w-4 h-4 mr-2" />
@@ -539,11 +540,11 @@ export default function GovernancePage() {
                                 </Button>
                                 <Button
                                   onClick={(e) => { e.stopPropagation(); handleVote(proposal.id, "against"); }}
-                                  variant={userVotes[proposal.id] === "against" ? "default" : "outline"}
+                                  variant={userVotes[proposal.id] === "against" ? "danger" : "outline"}
                                   className={`flex-1 ${
-                                    userVotes[proposal.id] === "against" 
-                                      ? "bg-red-600 hover:bg-red-700 text-white" 
-                                      : "border-red-600 text-red-400 hover:bg-red-600/20"
+                                    userVotes[proposal.id] !== "against"
+                                      ? "border-red-600 text-red-400 hover:bg-red-600/20"
+                                      : ""
                                   }`}
                                 >
                                   <XCircle className="w-4 h-4 mr-2" />
@@ -551,10 +552,10 @@ export default function GovernancePage() {
                                 </Button>
                                 <Button
                                   onClick={(e) => { e.stopPropagation(); handleVote(proposal.id, "abstain"); }}
-                                  variant={userVotes[proposal.id] === "abstain" ? "default" : "outline"}
+                                  variant={userVotes[proposal.id] === "abstain" ? "ghost" : "outline"}
                                   className={`flex-1 ${
-                                    userVotes[proposal.id] === "abstain" 
-                                      ? "bg-gray-600 hover:bg-gray-700 text-white" 
+                                    userVotes[proposal.id] === "abstain"
+                                      ? "bg-gray-600 hover:bg-gray-700 text-white"
                                       : "border-gray-600 text-gray-400 hover:bg-gray-600/20"
                                   }`}
                                 >
