@@ -43,19 +43,19 @@ export function Hero() {
             </Button>
           </Link>
 
-          <Link className="max-sm:hidden" href={process.env.NODE_ENV === 'production' ? 'https://transparency.tawf.xyz' : 'http://transparency.localhost:3000'}>
+          <Link className="max-sm:hidden" href="https://docs.tawf.xyz">
             <Button variant="outline" onMouseEnter={() => setHovering(true)} onMouseLeave={() => setHovering(false)}>
-              [View Transparency]
+              [View Docs]
             </Button>
           </Link>
-          <Link className="sm:hidden" href={process.env.NODE_ENV === 'production' ? 'https://transparency.tawf.xyz' : 'http://transparency.localhost:3000'}>
+          <Link className="sm:hidden" href="https://docs.tawf.xyz">
             <Button
               size="sm"
               variant="outline"
               onMouseEnter={() => setHovering(true)}
               onMouseLeave={() => setHovering(false)}
             >
-              [View Transparency]
+              [View Docs]
             </Button>
           </Link>
         </div>

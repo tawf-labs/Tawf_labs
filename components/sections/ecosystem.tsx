@@ -104,7 +104,7 @@ export function EcosystemSection() {
             <h2 className="bg-clip-text bg-gradient-to-r from-[#FFC700] to-[#ffe38a] mb-6 font-display text-transparent text-3xl sm:text-4xl md:text-5xl">
               Infrastructure & Partnerships
             </h2>
-            <Earth className="-mt-2 sm:-mt-4 md:-mt-6 w-12 h-12 text-foreground/80" />
+            <Earth className="-mt-2 sm:-mt-4 md:-mt-6 w-12 h-12 text-foreground/80 icon-float" />
           </div>
 
           <div className="inline-block bg-background/20 backdrop-blur-sm px-4 py-2 rounded-lg">

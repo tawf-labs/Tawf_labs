@@ -41,7 +41,7 @@ export function DappsSection() {
             <h2 className="bg-clip-text bg-gradient-to-r from-[#FFC700] to-[#ffe38a] mb-8 sm:mb-10 font-display text-transparent text-3xl sm:text-4xl md:text-5xl">
               Applications
             </h2>
-            <Smartphone className="-mt-8 w-12 h-12 text-foreground/80" aria-hidden="true" />
+            <Smartphone className="-mt-8 w-12 h-12 text-foreground/80 icon-float" aria-hidden="true" />
           </div>
 
           <div className="gap-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">

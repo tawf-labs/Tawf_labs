@@ -4,6 +4,7 @@ import { useEffect, useState } from "react"
 import { useAccount, useChainId } from "wagmi"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
+import { Skeleton } from "@/components/ui/skeleton"
 import { RefreshCw, Loader2 } from "lucide-react"
 import { fetchAllTokens, getNetworkName, clearTokenCache } from "@/lib/tokenService"
 import type { PortfolioToken } from "@/lib/types"
@@ -116,12 +117,20 @@ export function PortfolioPanel({ connected, onConnect }: PortfolioPanelProps) {
       <Card className="bg-black/95 border border-gray-800 mb-6">
         <CardHeader>
           <CardTitle className="text-white">Total Portfolio Value</CardTitle>
-          <div className="text-4xl font-bold bg-gradient-to-r from-[#FFC700] to-[#ffe38a] bg-clip-text text-transparent">
-            ${totalValue.toFixed(2)}
-          </div>
-          <div className="text-sm text-gray-400">
-            {tokens.length} {tokens.length === 1 ? 'asset' : 'assets'} on {getNetworkName(chainId)}
-          </div>
+          {isLoading ? (
+            <Skeleton variant="text" className="w-48 h-10 mt-2" />
+          ) : (
+            <div className="text-4xl font-bold bg-gradient-to-r from-[#FFC700] to-[#ffe38a] bg-clip-text text-transparent">
+              ${totalValue.toFixed(2)}
+            </div>
+          )}
+          {isLoading ? (
+            <Skeleton variant="text-sm" className="w-32 mt-2" />
+          ) : (
+            <div className="text-sm text-gray-400">
+              {tokens.length} {tokens.length === 1 ? 'asset' : 'assets'} on {getNetworkName(chainId)}
+            </div>
+          )}
         </CardHeader>
       </Card>
 
@@ -136,8 +145,20 @@ export function PortfolioPanel({ connected, onConnect }: PortfolioPanelProps) {
           </CardHeader>
           <CardContent>
             {isLoading ? (
-              <div className="flex items-center justify-center py-8">
-                <Loader2 className="w-6 h-6 animate-spin text-amber-500" />
+              <div className="space-y-4 py-4">
+                {[...Array(5)].map((_, i) => (
+                  <div key={i} className="flex items-center space-x-3 p-3">
+                    <Skeleton variant="avatar" />
+                    <div className="flex-1 space-y-2">
+                      <Skeleton variant="text" className="w-24" />
+                      <Skeleton variant="text-sm" />
+                    </div>
+                    <div className="text-right space-y-2">
+                      <Skeleton variant="text" className="w-20 ml-auto" />
+                      <Skeleton variant="text-sm" className="w-16 ml-auto" />
+                    </div>
+                  </div>
+                ))}
               </div>
             ) : error ? (
               <div className="text-center py-8">

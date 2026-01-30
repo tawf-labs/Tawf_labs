@@ -110,7 +110,7 @@ export function NewsPanel({ connected }: { connected: boolean }) {
       </div>
 
       {/* Featured News */}
-      <Card className="bg-gradient-to-br from-amber-900/20 to-amber-600/10 border-amber-600/30">
+      <Card variant="gradient">
         <CardContent className="p-6">
           <div className="flex items-start gap-4">
             <div className="flex-1">
@@ -143,7 +143,7 @@ export function NewsPanel({ connected }: { connected: boolean }) {
         {mockNews.slice(1).map(item => {
           const Icon = getCategoryIcon(item.category)
           return (
-            <Card key={item.id} className="bg-gray-900/80 border border-gray-800 hover:border-gray-700 transition-colors">
+            <Card key={item.id} variant="glass" interactive>
               <CardHeader>
                 <div className="flex items-center justify-between mb-2">
                   <Badge className={`${getCategoryColor(item.category)} text-xs`}>
@@ -166,7 +166,7 @@ export function NewsPanel({ connected }: { connected: boolean }) {
       </div>
 
       {/* Quick Links */}
-      <Card className="bg-gray-900/80 border border-gray-800">
+      <Card variant="glass">
         <CardHeader>
           <CardTitle className="text-white">Quick Links</CardTitle>
         </CardHeader>

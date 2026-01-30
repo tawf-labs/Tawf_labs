@@ -1,22 +1,49 @@
 import * as React from 'react'
-
+import { cva, type VariantProps } from 'class-variance-authority'
 import { cn } from '@/lib/utils'
 
-export interface CardProps extends React.ComponentProps<'div'> {
+const cardVariants = cva(
+  'flex flex-col gap-6 rounded-xl border py-6 shadow-sm transition-all duration-200',
+  {
+    variants: {
+      variant: {
+        default: 'bg-card text-card-foreground border-border',
+        glass: 'glass-card glass-card-hover',
+        gradient: 'bg-gradient-to-br from-amber-900/20 to-amber-600/10 border-amber-600/30',
+      },
+      interactive: {
+        true: 'cursor-pointer hover:shadow-md focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 outline-none',
+        false: '',
+      },
+    },
+    defaultVariants: {
+      variant: 'default',
+      interactive: false,
+    },
+  }
+)
+
+export interface CardProps
+  extends React.ComponentProps<'div'>,
+    VariantProps<typeof cardVariants> {
   /**
    * Whether the card is interactive (clickable). Adds cursor-pointer and hover effects.
    */
   interactive?: boolean
+  /**
+   * Visual variant of the card
+   */
+  variant?: 'default' | 'glass' | 'gradient'
 }
 
-function Card({ className, interactive, ...props }: CardProps) {
+function Card({ className, variant, interactive, ...props }: CardProps) {
   return (
     <div
       data-slot="card"
       className={cn(
-        'bg-card text-card-foreground flex flex-col gap-6 rounded-xl border py-6 shadow-sm transition-all duration-200',
-        interactive && 'cursor-pointer hover:shadow-md hover:border-primary/50 focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 outline-none',
-        className,
+        cardVariants({ variant, interactive: interactive ? true : false }),
+        interactive && 'hover:border-primary/50',
+        className
       )}
       {...props}
     />
@@ -29,7 +56,7 @@ function CardHeader({ className, ...props }: React.ComponentProps<'div'>) {
       data-slot="card-header"
       className={cn(
         '@container/card-header grid auto-rows-min grid-rows-[auto_auto] items-start gap-1.5 px-6 has-data-[slot=card-action]:grid-cols-[1fr_auto] [.border-b]:pb-6',
-        className,
+        className
       )}
       {...props}
     />
@@ -62,7 +89,7 @@ function CardAction({ className, ...props }: React.ComponentProps<'div'>) {
       data-slot="card-action"
       className={cn(
         'col-start-2 row-span-2 row-start-1 self-start justify-self-end',
-        className,
+        className
       )}
       {...props}
     />

@@ -169,16 +169,6 @@
   }
 }
 
-@layer utilities {
-  .text-soft-glow {
-    text-shadow: 0 1px 0 rgba(0, 0, 0, 0.35), 0 0 8px rgba(235, 184, 0, 0.08);
-  }
-  
-  .animate-pulse-green {
-    animation: pulse-green 2s infinite;
-  }
-}
-
 @keyframes pulse-green {
   0%, 50% {
     background-color: #22c55e; /* Green */
@@ -228,15 +218,559 @@
   }
 }
 
+/* ============================================
+   BACKGROUND TEXTURES & OVERLAYS
+   ============================================ */
+
+/* SVG Noise Filter - defined but hidden */
+#noise-filter {
+  position: absolute;
+  width: 0;
+  height: 0;
+  pointer-events: none;
+}
+
+/* Landing Page Background Container */
+.landing-background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* Noise Texture Overlay */
+.noise-overlay {
+  position: absolute;
+  inset: 0;
+  opacity: 0.04;
+  pointer-events: none;
+  filter: url(#noiseFilter);
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  mix-blend-mode: overlay;
+}
+
+/* Gold Grid Pattern */
+.gold-grid-overlay {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image:
+    linear-gradient(rgba(235, 184, 0, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(235, 184, 0, 0.03) 1px, transparent 1px);
+  background-size: 60px 60px;
+  mask-image: radial-gradient(
+    ellipse 80% 70% at 50% 50%,
+    rgba(0, 0, 0, 1) 0%,
+    rgba(0, 0, 0, 0.8) 40%,
+    rgba(0, 0, 0, 0.4) 70%,
+    rgba(0, 0, 0, 0) 100%
+  );
+  -webkit-mask-image: radial-gradient(
+    ellipse 80% 70% at 50% 50%,
+    rgba(0, 0, 0, 1) 0%,
+    rgba(0, 0, 0, 0.8) 40%,
+    rgba(0, 0, 0, 0.4) 70%,
+    rgba(0, 0, 0, 0) 100%
+  );
+}
+
 #webgl {
   top: 0;
   left: 0;
   position: fixed;
-  height: 100svh;
+  height: 100vh;
   width: 100%;
+  z-index: 1;
 }
 
 #webgl canvas {
   width: 100%;
   height: 100%;
+}
+
+/* ============================================
+   UTILITY CLASSES - GLASS & GOLD EFFECTS
+   ============================================ */
+
+@layer utilities {
+  .text-soft-glow {
+    text-shadow: 0 1px 0 rgba(0, 0, 0, 0.35), 0 0 8px rgba(235, 184, 0, 0.08);
+  }
+
+  .animate-pulse-green {
+    animation: pulse-green 2s infinite;
+  }
+
+  /* Glass Card Effect */
+  .glass-card {
+    background: rgba(17, 17, 17, 0.6);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(235, 184, 0, 0.1);
+  }
+
+  /* Glass Card Hover Lift */
+  .glass-card-hover {
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+  }
+
+  .glass-card-hover:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 40px rgba(235, 184, 0, 0.1);
+    border-color: rgba(235, 184, 0, 0.2);
+  }
+
+  /* Gold Glow Effect */
+  .gold-glow {
+    box-shadow: 0 0 20px rgba(235, 184, 0, 0.15),
+                0 0 40px rgba(235, 184, 0, 0.1);
+  }
+
+  .gold-glow-subtle {
+    box-shadow: 0 0 12px rgba(235, 184, 0, 0.08);
+  }
+
+  /* Text Gold Glow */
+  .text-gold-glow {
+    text-shadow: 0 0 10px rgba(235, 184, 0, 0.3),
+                 0 0 20px rgba(235, 184, 0, 0.15);
+  }
+
+  /* Gradient Border */
+  .gradient-border-gold {
+    position: relative;
+    background: linear-gradient(135deg, rgba(235, 184, 0, 0.1), rgba(235, 184, 0, 0.02));
+    border: 1px solid transparent;
+    background-clip: padding-box;
+  }
+
+  .gradient-border-gold::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    padding: 1px;
+    background: linear-gradient(135deg, rgba(235, 184, 0, 0.3), transparent);
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+  }
+
+  /* Skeleton Loading */
+  .skeleton {
+    background: linear-gradient(
+      90deg,
+      rgba(255, 255, 255, 0.03) 0%,
+      rgba(255, 255, 255, 0.08) 50%,
+      rgba(255, 255, 255, 0.03) 100%
+    );
+    background-size: 200% 100%;
+    animation: skeleton-shimmer 1.5s ease-in-out infinite;
+    border-radius: 0.375rem;
+  }
+
+  .skeleton-text {
+    height: 1rem;
+    width: 100%;
+  }
+
+  .skeleton-text-sm {
+    height: 0.75rem;
+    width: 60%;
+  }
+
+  .skeleton-avatar {
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 50%;
+  }
+
+  .skeleton-card {
+    height: 100%;
+    min-height: 120px;
+  }
+
+  /* Dashboard Background */
+  .dashboard-bg {
+    background:
+      radial-gradient(ellipse 80% 50% at 50% -20%, rgba(235, 184, 0, 0.08) 0%, transparent 50%),
+      radial-gradient(ellipse 60% 40% at 100% 50%, rgba(235, 184, 0, 0.04) 0%, transparent 40%),
+      radial-gradient(ellipse 50% 40% at 0% 80%, rgba(235, 184, 0, 0.03) 0%, transparent 40%),
+      #000;
+  }
+
+  /* Gold Orb Accent */
+  .gold-orb {
+    position: absolute;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(235, 184, 0, 0.15) 0%, transparent 70%);
+    filter: blur(40px);
+    pointer-events: none;
+  }
+
+  .gold-orb-sm {
+    width: 200px;
+    height: 200px;
+  }
+
+  .gold-orb-md {
+    width: 400px;
+    height: 400px;
+  }
+
+  .gold-orb-lg {
+    width: 600px;
+    height: 600px;
+  }
+}
+
+@keyframes skeleton-shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+/* ============================================
+   3D CSS ILLUSTRATIONS - Governance Section
+   ============================================ */
+
+/* Float Animation for Crystal */
+@keyframes float-3d {
+  0%, 100% {
+    transform: translateY(0) rotateY(0deg);
+  }
+  50% {
+    transform: translateY(-8px) rotateY(5deg);
+  }
+}
+
+/* Sway Animation for Scales */
+@keyframes sway-3d {
+  0%, 100% {
+    transform: rotateZ(-2deg);
+  }
+  50% {
+    transform: rotateZ(2deg);
+  }
+}
+
+/* Float Animation for Icons */
+@keyframes icon-float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
+}
+
+/* Glow pulse for crystal */
+@keyframes emerald-pulse {
+  0%, 100% {
+    box-shadow: 0 0 20px rgba(52, 211, 153, 0.3),
+                0 0 40px rgba(52, 211, 153, 0.1);
+  }
+  50% {
+    box-shadow: 0 0 30px rgba(52, 211, 153, 0.4),
+                0 0 60px rgba(52, 211, 153, 0.15);
+  }
+}
+
+/* Glow pulse for scales */
+@keyframes gold-pulse {
+  0%, 100% {
+    box-shadow: 0 0 20px rgba(251, 191, 36, 0.3),
+                0 0 40px rgba(251, 191, 36, 0.1);
+  }
+  50% {
+    box-shadow: 0 0 30px rgba(251, 191, 36, 0.4),
+                0 0 60px rgba(251, 191, 36, 0.15);
+  }
+}
+
+/* 3D Crystal Container */
+.crystal-3d {
+  position: relative;
+  width: 70px;
+  height: 90px;
+  perspective: 1000px;
+  transform-style: preserve-3d;
+}
+
+/* Crystal Base Layer */
+.crystal-base {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 50px;
+  height: 10px;
+  background: linear-gradient(135deg, rgba(52, 211, 153, 0.5), rgba(16, 185, 129, 0.2));
+  border-radius: 4px;
+  filter: blur(3px);
+}
+
+/* Crystal Body - Hexagonal Layers */
+.crystal-layer {
+  position: absolute;
+  left: 8%;
+  transform: translateX(-50%);
+  background: linear-gradient(180deg, rgba(52, 211, 153, 0.9) 0%, rgba(5, 150, 105, 0.95) 50%, rgba(6, 95, 70, 0.9) 100%);
+  clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+  animation: float-3d 4s ease-in-out infinite;
+}
+
+.crystal-layer-1 {
+  bottom: 15px;
+  width: 44px;
+  height: 55px;
+  z-index: 3;
+  animation-delay: 0s;
+  box-shadow: inset 0 0 10px rgba(255, 255, 255, 0.2);
+}
+
+.crystal-layer-2 {
+  bottom: 11px;
+  width: 48px;
+  height: 59px;
+  opacity: 0.4;
+  z-index: 2;
+  animation-delay: 0.1s;
+}
+
+.crystal-layer-3 {
+  bottom: 7px;
+  width: 52px;
+  height: 63px;
+  opacity: 0.2;
+  z-index: 1;
+  animation-delay: 0.2s;
+}
+
+/* Crystal Highlight */
+.crystal-highlight {
+  position: absolute;
+  top: 18px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 6px;
+  height: 18px;
+  border-radius: 50%;
+  z-index: 4;
+}
+
+/* Crystal Glow Container */
+.crystal-glow {
+  padding: 8px;
+  /* border-radius: 50%; */
+  /* animation: emerald-pulse 3s ease-in-out infinite; */
+}
+
+/* 3D Scales Container */
+.scales-3d {
+  position: relative;
+  width: 90px;
+  height: 75px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+}
+
+/* Scales Base/Stand */
+.scales-stand {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 6px;
+  height: 45px;
+  background: linear-gradient(90deg, rgba(245, 158, 11, 0.8), rgba(251, 191, 36, 0.95), rgba(245, 158, 11, 0.8));
+  border-radius: 3px;
+  z-index: 1;
+}
+
+.scales-base {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 32px;
+  height: 5px;
+  background: linear-gradient(90deg, rgba(217, 119, 6, 0.6), rgba(251, 191, 36, 0.8), rgba(217, 119, 6, 0.6));
+  border-radius: 3px;
+  z-index: 1;
+}
+
+/* Scales Balance Beam - wraps everything that sways */
+.scales-beam-assembly {
+  position: absolute;
+  top: 15px;
+  left: 8%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 45px;
+  animation: sway-3d 5s ease-in-out infinite;
+  transform-origin: center 20px;
+  z-index: 2;
+}
+
+/* The horizontal beam bar */
+.scales-beam {
+  position: absolute;
+  top: 8px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 70px;
+  height: 4px;
+  background: linear-gradient(90deg, rgba(217, 119, 6, 0.7), rgba(251, 191, 36, 1), rgba(217, 119, 6, 0.7));
+  border-radius: 2px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* Left side assembly (chains + pan) */
+.scales-left {
+  position: absolute;
+  top: 10px;
+  left: 3px;
+  width: 24px;
+  height: 32px;
+}
+
+/* Right side assembly (chains + pan) */
+.scales-right {
+  position: absolute;
+  top: 10px;
+  right: 3px;
+  width: 24px;
+  height: 32px;
+}
+
+/* Pan Chains - using SVG-like divs */
+.scales-chain {
+  position: absolute;
+  top: 0;
+  width: 2px;
+  height: 14px;
+  background: linear-gradient(180deg, rgba(251, 191, 36, 0.9), rgba(217, 119, 6, 0.6));
+}
+
+.scales-left .scales-chain-1 {
+  left: 4px;
+}
+
+.scales-left .scales-chain-2 {
+  right: 4px;
+}
+
+.scales-right .scales-chain-1 {
+  left: 4px;
+}
+
+.scales-right .scales-chain-2 {
+  right: 4px;
+}
+
+/* Scales Pans - the dishes */
+.scales-pan {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 20px;
+  height: 10px;
+  background: linear-gradient(180deg, rgba(251, 191, 36, 0.9), rgba(217, 119, 6, 0.7));
+  border-radius: 0 0 10px 10px;
+  box-shadow: inset 0 -2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.scales-pan::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 22px;
+  height: 3px;
+  background: linear-gradient(90deg, rgba(217, 119, 6, 0.6), rgba(251, 191, 36, 0.8), rgba(217, 119, 6, 0.6));
+  border-radius: 2px;
+}
+
+/* Scales Glow Container */
+.scales-glow {
+  padding: 8px;
+  /* background: radial-gradient(ellipse at center, rgba(251, 191, 36, 0.15) 0%, transparent 70%); */
+  /* animation: gold-pulse 3s ease-in-out infinite; */
+}
+
+/* Scale Center Jewel */
+.scales-jewel {
+  position: absolute;
+  top: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 10px;
+  height: 10px;
+  background: linear-gradient(135deg, rgba(251, 191, 36, 0.9), rgba(217, 119, 6, 0.7));
+  border-radius: 50%;
+  z-index: 2;
+}
+
+/* ============================================
+   MINIMAL LIST STYLING
+   ============================================ */
+
+@layer utilities {
+  /* Minimal list with styled bullets */
+  .list-minimal {
+    list-style: none;
+    padding-left: 0;
+  }
+
+  .list-minimal li {
+    position: relative;
+    padding-left: 1.5rem;
+  }
+
+  .list-minimal li::before {
+    content: '•';
+    position: absolute;
+    left: 0;
+    font-size: 1.25rem;
+    line-height: 1.5rem;
+  }
+
+  .list-minimal-emerald li::before {
+    color: rgb(52, 211, 153); /* emerald-400 */
+  }
+
+  .list-minimal-gold li::before {
+    color: rgb(251, 191, 36); /* amber-400 */
+  }
+
+  .list-minimal-numbered {
+    counter-reset: list-counter;
+  }
+
+  .list-minimal-numbered li {
+    counter-increment: list-counter;
+  }
+
+  .list-minimal-numbered li::before {
+    content: counter(list-counter) '.';
+    font-weight: 500;
+    font-size: 0.875rem;
+  }
+
+  /* Floating animation for icons */
+  .icon-float {
+    animation: icon-float 3s ease-in-out infinite;
+  }
 }

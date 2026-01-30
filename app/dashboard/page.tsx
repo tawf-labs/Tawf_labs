@@ -74,7 +74,10 @@ export default function DashboardPage() {
   // Show connect screen if not connected (optional - can remove if you want access without connection)
   if (!isConnected) {
     return (
-      <div className="min-h-screen bg-black/95 flex flex-col items-center justify-center p-6 text-center">
+      <div className="min-h-screen dashboard-bg flex flex-col items-center justify-center p-6 text-center relative overflow-hidden">
+        {/* Gold Orb Accents */}
+        <div className="gold-orb gold-orb-md top-20 left-20" />
+        <div className="gold-orb gold-orb-sm bottom-40 right-32" />
         <div className="max-w-md w-full bg-gray-900/80 backdrop-blur-sm rounded-2xl p-8 border border-gray-800 shadow-2xl">
           <div className="flex justify-center mb-6">
             <img src="/tawflogo.png" alt="TAWF Logo" className="w-16 h-16 rounded-full shadow-lg shadow-amber-500/20" />
@@ -95,8 +98,13 @@ export default function DashboardPage() {
   }
 
   return (
-    <div className="relative min-h-screen bg-black/95 text-white">
-      <div className="w-full flex h-screen">
+    <div className="relative min-h-screen dashboard-bg text-white overflow-hidden">
+      {/* Gold Orb Accents */}
+      <div className="gold-orb gold-orb-lg -top-32 -left-32 opacity-60" />
+      <div className="gold-orb gold-orb-md top-1/3 right-0 opacity-40" />
+      <div className="gold-orb gold-orb-sm bottom-20 left-1/4 opacity-30" />
+
+      <div className="relative w-full flex h-screen">
         {/* Desktop Sidebar */}
         <Sidebar
           activePanel={activePanel}
