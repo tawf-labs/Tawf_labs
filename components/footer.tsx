@@ -33,7 +33,7 @@ export const Footer = () => {
 
   const socialLinks = [
     { icon: Github, href: "https://github.com/tawf-labs", label: "GitHub" },
-    { icon: Twitter, href: "https://x.com/tawfecosystem", label: "Twitter" },
+    { icon: Twitter, href: "https://x.com/tawfprotocol", label: "Twitter" },
     { icon: MessageCircle, href: "https://discord.gg/s7K59wE4qc", label: "Discord" },
     { icon: Send, href: "https://t.me/tawf", label: "Telegram" },
   ]

@@ -313,7 +313,7 @@ TAWF Labs works closely with:
 ## Connect With Us
 
 <p align="center">
-  <a href="https://x.com/tawfecosystem">
+  <a href="https://x.com/tawfprotocol">
     <img src="https://img.shields.io/badge/Twitter-@tawfecosystem-1DA1F2?style=flat-square&logo=twitter&logoColor=white" alt="Twitter">
   </a>
   <a href="https://linkedin.com/company/tawf-labs">
