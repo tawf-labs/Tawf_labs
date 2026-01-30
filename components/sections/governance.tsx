@@ -73,7 +73,7 @@ export function GovernanceSection() {
           {/* Bento Box Layout */}
           <div className="grid md:grid-cols-2 gap-6">
             {/* Community DAO Card */}
-            <div className="group relative bg-gradient-to-br from-white/5 to-white/[0.02] rounded-2xl border border-white/10 p-8 hover:border-emerald-500/30 transition-all duration-300">
+            <div className="group relative bg-gradient-to-br from-white/5 to-white/[0.02] rounded-2xl border border-white/10 p-8 transition-all duration-300">
               <div className="flex items-center gap-5 mb-6">
                 <Crystal3D />
                 <div className="flex-1 pt-1">
@@ -96,7 +96,7 @@ export function GovernanceSection() {
             </div>
 
             {/* ZK Sharia Council Card */}
-            <div className="group relative bg-gradient-to-br from-white/5 to-white/[0.02] rounded-2xl border border-white/10 p-8 hover:border-amber-500/30 transition-all duration-300">
+            <div className="group relative bg-gradient-to-br from-white/5 to-white/[0.02] rounded-2xl border border-white/10 p-8 transition-all duration-300">
               <div className="flex items-center gap-5 mb-6">
                 <Scales3D />
                 <div className="flex-1 pt-1">
