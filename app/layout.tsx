@@ -23,7 +23,7 @@ export async function generateMetadata(): Promise<Metadata> {
     viewport: "width=device-width, initial-scale=1",
     title: "TAWF - Bridging the Ummah to Web3",
     description:
-      "Serving the Ummah with open, community-driven infrastructure for the Sharia dApp ecosystem.",
+      "Chain-agnostic trust infrastructure serving the Sharia dApp ecosystem",
     icons: {
       icon: [{ url: "/tawflogo.png", type: "image/png" }],
       shortcut: "/tawflogo.png",
@@ -32,7 +32,7 @@ export async function generateMetadata(): Promise<Metadata> {
     openGraph: {
       title: "TAWF - Bridging the Ummah to Web3",
       description:
-        "Serving the Ummah through Sharia-compliant Web3 applications. Live at zkt.app and qrbn.app.",
+        "Chain-agnostic trust and compliance infrastructure for Sharia-compliant Web3",
       images: [
         {
           url: "/tawflogo.png",
@@ -48,7 +48,7 @@ export async function generateMetadata(): Promise<Metadata> {
       card: "summary_large_image",
       title: "TAWF - Bridging the Ummah to Web3",
       description:
-        "Serving the Islamic digital economy. Live at zkt.app and qrbn.app.",
+        "Chain-agnostic trust and compliance infrastructure for Sharia-compliant Web3",
       images: ["/tawflogo.png"],
     },
     keywords: [

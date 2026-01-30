@@ -1,10 +1,11 @@
 "use client"
 
-import { motion } from "framer-motion"
+import { motion, AnimatePresence } from "framer-motion"
 import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
-import { BookOpen, Shield, FileText, Users, Code2, Globe, Scale, Sparkles } from "lucide-react"
+import { BookOpen, Shield, FileText, Users, Code2, Globe, Scale, Sparkles, Download, ExternalLink, X } from "lucide-react"
 import Link from "next/link"
+import { useState } from "react"
 
 const researchAreas = [
   {
@@ -66,6 +67,19 @@ const publications = [
   },
 ]
 
+const whitepapers = [
+  {
+    id: "tawf-protocol",
+    title: "Tawf Protocol Whitepaper",
+    description: "A comprehensive overview of the Tawf Protocol, detailing our Sharia-first approach to zero-knowledge decentralized applications, governance framework, and technical architecture.",
+    category: "Protocol",
+    year: "2025",
+    pages: 42,
+    file: "/research/Tawf Protocol White Paper.pdf",
+    icon: FileText,
+  },
+]
+
 const containerVariants = {
   hidden: { opacity: 0 },
   visible: {
@@ -88,6 +102,14 @@ const itemVariants = {
 }
 
 export default function ResearchPage() {
+  const [selectedWhitepaper, setSelectedWhitepaper] = useState<typeof whitepapers[0] | null>(null)
+  const [isViewerOpen, setIsViewerOpen] = useState(false)
+
+  const openViewer = (paper: typeof whitepapers[0]) => {
+    setSelectedWhitepaper(paper)
+    setIsViewerOpen(true)
+  }
+
   return (
     <main className="relative min-h-screen">
       <Header />
@@ -166,6 +188,83 @@ export default function ResearchPage() {
                   </motion.div>
                 )
               })}
+            </motion.div>
+          </div>
+        </section>
+
+        {/* Whitepapers */}
+        <section className="relative py-16 md:py-24">
+          <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+              className="max-w-4xl mx-auto"
+            >
+              <div className="flex items-center gap-3 mb-6">
+                <FileText className="w-8 h-8 text-[#FFC700]" />
+                <h2 className="font-display text-3xl md:text-4xl text-foreground">
+                  Whitepapers
+                </h2>
+              </div>
+              <p className="font-sans text-foreground/60 mb-12 max-w-2xl">
+                Comprehensive protocol documentation and technical specifications for the Tawf ecosystem.
+              </p>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                {whitepapers.map((paper, index) => {
+                  const IconComponent = paper.icon
+                  return (
+                    <motion.div
+                      key={paper.id}
+                      initial={{ opacity: 0, y: 20 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ duration: 0.4, delay: index * 0.1 }}
+                      className="group flex flex-col bg-black/40 backdrop-blur border border-border/60 rounded-2xl p-6 hover:border-[#FFC700]/30 transition-all duration-300"
+                    >
+                      <div className="flex items-start justify-between mb-4">
+                        <div className="flex items-center justify-center w-14 h-14 bg-[#FFC700]/10 rounded-xl group-hover:bg-[#FFC700]/20 transition-colors">
+                          <IconComponent className="w-7 h-7 text-[#FFC700]" />
+                        </div>
+                        <span className="px-3 py-1 rounded-full text-xs font-medium bg-[#FFC700]/20 text-[#FFC700]">
+                          {paper.category}
+                        </span>
+                      </div>
+                      <h3 className="font-display text-lg font-semibold text-foreground mb-2">
+                        {paper.title}
+                      </h3>
+                      <p className="font-sans text-sm text-foreground/60 leading-relaxed mb-4 flex-1">
+                        {paper.description}
+                      </p>
+                      <div className="flex items-center justify-between pt-4 border-t border-border/40">
+                        <div className="flex items-center gap-3 text-sm text-foreground/60">
+                          <span>{paper.pages} pages</span>
+                          <span className="text-foreground/40">•</span>
+                          <span>{paper.year}</span>
+                        </div>
+                        <div className="flex items-center gap-2">
+                          <button
+                            onClick={() => openViewer(paper)}
+                            className="inline-flex items-center gap-2 px-4 py-2 bg-[#FFC700]/10 hover:bg-[#FFC700]/20 text-[#FFC700] font-sans text-sm font-medium rounded-lg transition-colors duration-200"
+                          >
+                            <ExternalLink className="w-4 h-4" />
+                            View
+                          </button>
+                          <a
+                            href={paper.file}
+                            download
+                            className="inline-flex items-center justify-center w-9 h-9 bg-white/5 hover:bg-white/10 text-foreground rounded-lg transition-colors duration-200"
+                          >
+                            <Download className="w-4 h-4" />
+                          </a>
+                        </div>
+                      </div>
+                    </motion.div>
+                  )
+                })}
+              </div>
             </motion.div>
           </div>
         </section>
@@ -266,6 +365,74 @@ export default function ResearchPage() {
           </div>
         </section>
       </div>
+
+      {/* PDF Viewer Modal */}
+      <AnimatePresence>
+        {isViewerOpen && selectedWhitepaper && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-8"
+            onClick={() => setIsViewerOpen(false)}
+          >
+            {/* Backdrop */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="absolute inset-0 bg-black/80 backdrop-blur-sm"
+            />
+
+            {/* Modal Content */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95, y: 20 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.95, y: 20 }}
+              transition={{ type: "spring", duration: 0.3 }}
+              className="relative w-full max-w-6xl h-[85vh] bg-black border border-border/60 rounded-2xl overflow-hidden flex flex-col"
+              onClick={(e) => e.stopPropagation()}
+            >
+              {/* Header */}
+              <div className="flex items-center justify-between px-6 py-4 border-b border-border/40 bg-black/50">
+                <div className="flex items-center gap-3">
+                  <FileText className="w-5 h-5 text-[#FFC700]" />
+                  <h3 className="font-display text-lg font-semibold text-foreground">
+                    {selectedWhitepaper.title}
+                  </h3>
+                </div>
+                <div className="flex items-center gap-2">
+                  <a
+                    href={selectedWhitepaper.file}
+                    download
+                    className="inline-flex items-center gap-2 px-3 py-1.5 bg-[#FFC700]/10 hover:bg-[#FFC700]/20 text-[#FFC700] font-sans text-sm font-medium rounded-lg transition-colors duration-200"
+                    onClick={(e) => e.stopPropagation()}
+                  >
+                    <Download className="w-4 h-4" />
+                    Download
+                  </a>
+                  <button
+                    onClick={() => setIsViewerOpen(false)}
+                    className="inline-flex items-center justify-center w-9 h-9 bg-white/5 hover:bg-white/10 text-foreground rounded-lg transition-colors duration-200"
+                  >
+                    <X className="w-5 h-5" />
+                  </button>
+                </div>
+              </div>
+
+              {/* PDF iframe */}
+              <div className="flex-1 w-full overflow-hidden">
+                <iframe
+                  src={`${selectedWhitepaper.file}#view=FitH`}
+                  className="w-full h-full border-0"
+                  title={selectedWhitepaper.title}
+                />
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
       <Footer />
     </main>
   )
